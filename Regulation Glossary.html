@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Regulatory Glossary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f0eeee;
+            margin-top: 280px; /* Adjust based on nav height */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .navigation {
+            background: linear-gradient(135deg, #900d3f, #64092c);
+            color: white;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #900d3f, #64092c);
+        }
+
+        .nav-brand {
+            flex: 1;
+            text-align: center; /* Center the title and subtitle */
+        }
+
+        .nav-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 0;
+            color: white;
+        }
+
+        .nav-subtitle {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin: 0;
+            color: white;
+        }
+
+        .hamburger {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            position: absolute; /* Position hamburger absolutely */
+            right: 20px; /* Keep it on the right side */
+        }
+
+        .hamburger:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .nav-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 20px;
+            text-align: center; /* Center all navigation content */
+        }
+
+        .nav-content.expanded {
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 0 20px 20px 20px;
+        }
+
+        .nav-section-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin: 15px 0 10px 0;
+            color: white;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 5px;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section h3 {
+            font-size: 1em;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center; /* Center the navigation links */
+        }
+
+        .nav-links a {
+            background: #FDEDF3;
+            color: #000000;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            min-width: 40px;
+            text-align: center;
+            display: inline-block;
+            font-size: 0.9em;
+        }
+
+        .nav-links a:hover {
+            background: #F7EACE;
+            color: #000000;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Adjust body margin for collapsed nav */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f0eeee;
+            margin-top: 90px; /* Much smaller since nav is collapsed by default */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        /* Remove scroll offset since nav is now fixed and collapsible */
+        .letter-section,
+        .section {
+            scroll-margin-top: 0;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #000000;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #64092c;
+            position: relative;
+        }
+
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 20px; /* Add extra top margin to content */
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #000000;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #64092c;
+            position: relative;
+            scroll-margin-top: 300px; /* Add scroll margin to section titles */
+        }
+
+        .letter-section {
+            margin-bottom: 30px;
+            margin-top: 40px; /* Add more space above each letter section */
+        }
+
+        .letter-title {
+            font-size: 1.5em;
+            color: #64092c;
+            margin-bottom: 15px;
+            padding: 15px; /* Increase padding */
+            background: #FDEDF3;
+            border-left: 4px solid #64092c;
+            border-radius: 5px;
+        }
+
+        .term {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 3px solid #f3dfb5;
+            background: #fbf4e6;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .term-name {
+            font-weight: bold;
+            color: #000000;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .term-definition {
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        .back-to-top {
+            display: inline-block;
+            background: #64092c;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .back-to-top:hover {
+            background: #900d3f;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .acronym-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .acronym-item {
+            background: #fbf4e6;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #f3dfb5;
+        }
+
+        .acronym-name {
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .nav-title {
+                font-size: 1.4em;
+            }
+            
+            .nav-subtitle {
+                font-size: 0.8em;
+            }
+            
+            .nav-links {
+                justify-content: center;
+                gap: 4px;
+            }
+            
+            .nav-links a {
+                padding: 6px 8px;
+                min-width: 35px;
+                font-size: 0.85em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-title {
+                font-size: 1.2em;
+            }
+            
+            .nav-subtitle {
+                font-size: 0.75em;
+            }
+            
+            .nav-links a {
+                padding: 5px 7px;
+                min-width: 32px;
+                font-size: 0.8em;
+            }
+            
+            .nav-links {
+                gap: 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation" id="navigation">
+            <div class="nav-header">
+                <div class="nav-brand">
+                    <h1 class="nav-title">Comprehensive Regulatory Glossary</h1>
+                    <p class="nav-subtitle">Navigate regulatory terminology with ease</p>
+                </div>
+                <button class="hamburger" onclick="toggleNav()" aria-label="Toggle navigation menu">
+                    <span id="hamburger-icon">☰</span>
+                </button>
+            </div>
+            
+            <div class="nav-content" id="nav-content">
+                <div class="nav-section">
+                    <h3 class="nav-section-title">Alphabetical Terms</h3>
+                    <div class="nav-links">
+                        <a href="#letter-a" onclick="closeNav()">A</a>
+                        <a href="#letter-b" onclick="closeNav()">B</a>
+                        <a href="#letter-c" onclick="closeNav()">C</a>
+                        <a href="#letter-d" onclick="closeNav()">D</a>
+                        <a href="#letter-e" onclick="closeNav()">E</a>
+                        <a href="#letter-f" onclick="closeNav()">F</a>
+                        <a href="#letter-g" onclick="closeNav()">G</a>
+                        <a href="#letter-i" onclick="closeNav()">I</a>
+                        <a href="#letter-j" onclick="closeNav()">J</a>
+                        <a href="#letter-l" onclick="closeNav()">L</a>
+                        <a href="#letter-m" onclick="closeNav()">M</a>
+                        <a href="#letter-n" onclick="closeNav()">N</a>
+                        <a href="#letter-o" onclick="closeNav()">O</a>
+                        <a href="#letter-p" onclick="closeNav()">P</a>
+                        <a href="#letter-q" onclick="closeNav()">Q</a>
+                        <a href="#letter-r" onclick="closeNav()">R</a>
+                        <a href="#letter-s" onclick="closeNav()">S</a>
+                        <a href="#letter-t" onclick="closeNav()">T</a>
+                        <a href="#letter-u" onclick="closeNav()">U</a>
+                        <a href="#letter-w" onclick="closeNav()">W</a>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-section-title">Regional Sections</h3>
+                    <div class="nav-links">
+                        <a href="#us-terms" onclick="closeNav()">US Terms</a>
+                        <a href="#canadian-terms" onclick="closeNav()">Canadian Terms</a>
+                        <a href="#eu-terms" onclick="closeNav()">EU Terms</a>
+                        <a href="#acronyms" onclick="closeNav()">Acronyms</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title" id="general-terms">General Regulatory Terms</h2>
+
+                <div class="letter-section" id="letter-a">
+                    <h3 class="letter-title">A</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Accreditation</div>
+                        <div class="term-definition">A formal process by which an authorized body assesses and recognizes an organization, program, group, or individual as meeting established requirements or standards.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Administrative Agency</div>
+                        <div class="term-definition">A government entity created by law to administer and enforce regulatory frameworks governing public programs or professions.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Administrative Law</div>
+                        <div class="term-definition">The body of law that determines how regulatory bodies operate and the scope of their authority, including statutes, rules, regulations, orders, and decisions.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Administrative Penalty</div>
+                        <div class="term-definition">A financial or non-financial sanction imposed by a regulatory agency for non-compliance with laws or regulations.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Adjudication</div>
+                        <div class="term-definition">A legal process by which a court or authorized body resolves a dispute or decides an issue based on evidence presented.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Advisory Opinion</div>
+                        <div class="term-definition">A non-binding statement issued by a regulatory body providing guidance on how rules or laws may apply to specific situations.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Allegation/Complaint</div>
+                        <div class="term-definition">A formal claim or assertion that an act, event, or result has (or has not) occurred, often leading to an investigation by the regulatory body.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Alternative Dispute Resolution (ADR)</div>
+                        <div class="term-definition">Methods used to resolve conflicts outside of formal adjudication, such as mediation or arbitration.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Appeal</div>
+                        <div class="term-definition">A request for a higher authority to review and reconsider a decision made by a regulatory body or court.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Appellate Body</div>
+                        <div class="term-definition">A higher-level body or committee that reviews decisions made by a lower-level regulatory body or committee.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Audit</div>
+                        <div class="term-definition">A systematic review or examination of records, processes, or practices to verify compliance with regulations or standards.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Autonomous Agency</div>
+                        <div class="term-definition">A government agency that operates independently, usually with its own statutory authority and governance structure, and is not directly controlled by a ministry or department. These agencies often have significant discretion in their operations and decision-making.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-b">
+                    <h3 class="letter-title">B</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Best Practice</div>
+                        <div class="term-definition">A method or technique that has consistently shown results superior to those achieved with other means, and thus used as a benchmark.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Board</div>
+                        <div class="term-definition">A group of individuals appointed to oversee, regulate, and make decisions regarding a profession or industry.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Bylaws</div>
+                        <div class="term-definition">Rules adopted by an organization for its internal governance and operation.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-c">
+                    <h3 class="letter-title">C</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Case Management</div>
+                        <div class="term-definition">The process of organizing, tracking, and overseeing complaints or investigations from initiation to resolution.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Certification</div>
+                        <div class="term-definition">The process by which an authorized body recognizes an individual, institution, or program as meeting specific standards or requirements.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Cease and Desist Order</div>
+                        <div class="term-definition">A directive from a regulatory body requiring an individual or organization to stop engaging in a specific activity.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Charter</div>
+                        <div class="term-definition">A document outlining the purpose, structure, and powers of an organization or regulatory body.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Code of Conduct</div>
+                        <div class="term-definition">A set of rules outlining the ethical and legal duties and obligations of members of a profession or organization.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Code of Ethics</div>
+                        <div class="term-definition">A set of principles and guidelines intended to help professionals conduct their business honestly and with integrity.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Competency Assessment</div>
+                        <div class="term-definition">A process used to evaluate whether a professional has the necessary knowledge, skills, and abilities to practice safely and effectively.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Compliance</div>
+                        <div class="term-definition">The act of following laws, regulations, guidelines, and specifications relevant to a profession or organization.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Conflict of Interest</div>
+                        <div class="term-definition">A situation in which a person's private interests could improperly influence their official duties or decisions.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Conflict Resolution</div>
+                        <div class="term-definition">The process of resolving a dispute or disagreement between parties, often through mediation or negotiation.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Consent Order</div>
+                        <div class="term-definition">A formal agreement between parties, approved by a regulatory body or court, to resolve a complaint by taking specific actions (e.g., ceasing an activity, paying a fine).</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Continuing Competence</div>
+                        <div class="term-definition">The ongoing demonstration that a professional maintains the necessary knowledge, skills, and abilities to practice safely and effectively.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Continuing Education</div>
+                        <div class="term-definition">Ongoing professional development required to maintain licensure or certification.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-d">
+                    <h3 class="letter-title">D</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Declaration of Interest</div>
+                        <div class="term-definition">A formal statement in which an individual discloses any personal, financial, or other interests that could influence their official duties.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Delegated Authority</div>
+                        <div class="term-definition">The power granted by a regulatory body to another entity or individual to perform certain regulatory functions.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Delegation of Authority</div>
+                        <div class="term-definition">The act of assigning decision-making powers to another person or group within the organization.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Disciplinary Action</div>
+                        <div class="term-definition">Measures taken by a regulatory body in response to professional misconduct or non-compliance, such as warnings, fines, or suspension.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Disciplinary Committee</div>
+                        <div class="term-definition">A committee responsible for reviewing complaints, conducting hearings, and recommending disciplinary actions.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Due Diligence</div>
+                        <div class="term-definition">The investigation or exercise of care that a reasonable person would undertake before entering into an agreement or transaction.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Due Process</div>
+                        <div class="term-definition">The legal requirement that regulatory bodies must follow fair procedures and respect individuals' rights when making decisions that affect them.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-e">
+                    <h3 class="letter-title">E</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Enforcement</div>
+                        <div class="term-definition">The process of ensuring that individuals or organizations follow the laws, regulations, and standards set by regulatory bodies.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Ethics Committee</div>
+                        <div class="term-definition">A group responsible for reviewing ethical issues and providing guidance on ethical conduct within the organization.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Ex Officio Member</div>
+                        <div class="term-definition">A member of a board or committee by virtue of their office or position, rather than through election or appointment as a regular member.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Ex Parte Communication</div>
+                        <div class="term-definition">Communication between a decision-maker and one party without the knowledge or participation of other parties, generally discouraged in regulatory proceedings.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Examination</div>
+                        <div class="term-definition">A formal test or assessment used to determine if an individual meets the qualifications required to practice a profession.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-f">
+                    <h3 class="letter-title">F</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Fair Hearing</div>
+                        <div class="term-definition">A legal proceeding in which all parties have an opportunity to present evidence and arguments before an impartial decision-maker.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Fiduciary Duty</div>
+                        <div class="term-definition">A legal obligation to act in the best interest of another party, especially in financial or trust matters.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Freedom of Information (FOI/FOIA)</div>
+                        <div class="term-definition">Laws or policies that provide the public with access to government records and information.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-g">
+                    <h3 class="letter-title">G</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Good Governance</div>
+                        <div class="term-definition">The set of policies, processes, and behaviors that ensure an organization operates in a transparent, accountable, and ethical manner.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Good Standing</div>
+                        <div class="term-definition">A status indicating that a professional or organization is compliant with all regulatory requirements and is authorized to practice or operate.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Governance</div>
+                        <div class="term-definition">The act, process, or power of exercising authority or control within an organization, including setting policies and ensuring accountability.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-i">
+                    <h3 class="letter-title">I</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Impaired Professional</div>
+                        <div class="term-definition">A professional whose ability to practice safely is compromised, typically due to substance abuse, illness, or other factors.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Impartiality</div>
+                        <div class="term-definition">The principle that decisions should be made without bias or favoritism.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">In Camera Session</div>
+                        <div class="term-definition">A private session, closed to the public, often used for discussing sensitive or confidential matters.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Inquiry</div>
+                        <div class="term-definition">A formal process to investigate a specific issue or complaint.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Interim Order</div>
+                        <div class="term-definition">A temporary order issued by a regulatory body to address urgent issues while a full investigation or hearing is pending.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Investigative Report</div>
+                        <div class="term-definition">A formal document summarizing the findings of an investigation into alleged misconduct or non-compliance.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-j">
+                    <h3 class="letter-title">J</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Jurisdiction</div>
+                        <div class="term-definition">The official power or authority of a regulatory body to make, interpret, and enforce laws or regulations within a defined area or over a specific group.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-l">
+                    <h3 class="letter-title">L</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Legal Counsel</div>
+                        <div class="term-definition">An attorney or law firm providing legal advice and representation to the regulatory body.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Legislative Framework</div>
+                        <div class="term-definition">The collection of laws and statutes that provide the legal basis for regulatory activities.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Legislative Oversight</div>
+                        <div class="term-definition">The periodic review of government agencies by a legislative committee or division to ensure proper administration and accountability.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">License/Registration</div>
+                        <div class="term-definition">Official recognition by a regulatory body that an individual or organization is qualified and authorized to practice a profession or operate a business.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Licensure by Endorsement</div>
+                        <div class="term-definition">A process by which a regulatory body grants a license to an individual already licensed in another jurisdiction, based on certain criteria.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-m">
+                    <h3 class="letter-title">M</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Mandate</div>
+                        <div class="term-definition">The official authority or mission of a regulatory body as defined by law or policy.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Mandatory Reporting</div>
+                        <div class="term-definition">The requirement for certain professionals to report specific incidents (such as abuse or misconduct) to the appropriate authorities.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Minutes</div>
+                        <div class="term-definition">A written record of the proceedings and decisions made during a meeting.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Moral Character Requirement</div>
+                        <div class="term-definition">A standard used to assess whether an individual's past conduct and behavior make them suitable to practice a profession.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-n">
+                    <h3 class="letter-title">N</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Non-Compliance</div>
+                        <div class="term-definition">Failure to meet legal or regulatory requirements.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Notice of Hearing</div>
+                        <div class="term-definition">A formal notification to all parties involved about the time, place, and subject of a hearing.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-o">
+                    <h3 class="letter-title">O</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Ombudsman</div>
+                        <div class="term-definition">An official appointed to investigate complaints against public authorities and seek resolutions.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Open Meeting</div>
+                        <div class="term-definition">A meeting conducted in public, allowing for transparency and public participation.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-p">
+                    <h3 class="letter-title">P</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Parliamentary Procedure</div>
+                        <div class="term-definition">Rules for orderly conduct of meetings, often based on Robert's Rules of Order.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Peer Review</div>
+                        <div class="term-definition">A process in which professionals within the same field evaluate each other's work for quality, accuracy, or compliance with standards.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Policy</div>
+                        <div class="term-definition">A set of principles or rules adopted by a regulatory body to guide decision-making and operations.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Policy Development</div>
+                        <div class="term-definition">The process of creating, reviewing, and updating policies that guide the organization's operations.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Procedural Fairness</div>
+                        <div class="term-definition">The principle that all parties involved in a regulatory process are treated justly and given a fair opportunity to present their case.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Procedural Rules</div>
+                        <div class="term-definition">Guidelines that govern the processes and conduct of meetings, hearings, and other official activities.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Professional Member</div>
+                        <div class="term-definition">A member of a board, committee, or regulatory body who is a licensed or certified professional in the field being regulated.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Promulgate</div>
+                        <div class="term-definition">To officially issue and publicize a law, rule, or regulation, making it effective.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Proposed Rule</div>
+                        <div class="term-definition">A regulation published by an agency for public review and comment before adoption.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Provision</div>
+                        <div class="term-definition">A requirement or stipulation set forth in a statute or regulation.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Public Comment</div>
+                        <div class="term-definition">The process of gathering feedback from the public on proposed laws, rules, or regulations before they are finalized.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Public Member</div>
+                        <div class="term-definition">A member of a board or committee who is not a licensed professional in the field being regulated, often representing the public interest.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Public Interest</div>
+                        <div class="term-definition">The welfare or well-being of the general public, often a guiding principle in regulatory decisions.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Public Record</div>
+                        <div class="term-definition">Information or documents that are available for public inspection.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-q">
+                    <h3 class="letter-title">Q</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">QA (Quality Assurance)</div>
+                        <div class="term-definition">Processes ensuring that products or services meet specified requirements.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">QC (Quality Control)</div>
+                        <div class="term-definition">Procedures to ensure that a product or service adheres to defined quality criteria.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Quasi-Judicial</div>
+                        <div class="term-definition">Activities in which a regulatory body acts like a court, making judgments and issuing decisions that affect the rights and obligations of individuals or organizations.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Quorum</div>
+                        <div class="term-definition">The minimum number of members required to be present to conduct official business.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-r">
+                    <h3 class="letter-title">R</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Recusal</div>
+                        <div class="term-definition">The act of withdrawing from participation in a decision due to a conflict of interest.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Registrar</div>
+                        <div class="term-definition">The official responsible for maintaining records and administering regulatory processes.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Regulation</div>
+                        <div class="term-definition">A rule or mechanism established by a government or other authority to control, guide, or limit behavior within a profession or industry.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Regulatory Framework</div>
+                        <div class="term-definition">The structure of laws, regulations, and policies that govern a profession or industry.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Reinstatement</div>
+                        <div class="term-definition">The process of restoring a license or registration after it has been suspended or revoked, typically following specific requirements.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Remedial Action</div>
+                        <div class="term-definition">Steps taken to correct non-compliance or address issues identified during an investigation.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Revocation</div>
+                        <div class="term-definition">The removal of a license or registration, prohibiting an individual or organization from practicing a profession or operating a business.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Risk Assessment</div>
+                        <div class="term-definition">A process used to identify, evaluate, and prioritize risks to public safety or professional standards.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Risk Management</div>
+                        <div class="term-definition">The process of identifying, assessing, and controlling risks to the organization.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Rules of Evidence</div>
+                        <div class="term-definition">Guidelines that determine what evidence is admissible in hearings or legal proceedings.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-s">
+                    <h3 class="letter-title">S</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Sanction</div>
+                        <div class="term-definition">A penalty imposed by a regulatory body as a result of a disciplinary process.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Sanction Guidelines</div>
+                        <div class="term-definition">Policies that outline the types and severity of sanctions that may be imposed for violations.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Secretariat</div>
+                        <div class="term-definition">The administrative office or staff that supports the activities of a regulatory body.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Scope of Practice</div>
+                        <div class="term-definition">The range of responsibilities and activities that a professional is permitted to perform, as defined by law or regulation.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Semi-Autonomous Agency</div>
+                        <div class="term-definition">A government agency that operates with a degree of independence from direct political control but is still ultimately accountable to a parent ministry or department. Semi-autonomous agencies often have their own governing boards and decision-making authority within defined limits.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Self-Regulation</div>
+                        <div class="term-definition">A system in which members of a profession themselves, rather than an external body, set and enforce standards of practice.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Standard of Practice</div>
+                        <div class="term-definition">The minimum level of performance expected from professionals to ensure safe, high-quality services.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Statute</div>
+                        <div class="term-definition">A law enacted by a legislative body that governs conduct within its scope.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Statutory Authority</div>
+                        <div class="term-definition">The legal power granted to a regulatory body by legislation to make and enforce rules and regulations.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Statutory Obligation</div>
+                        <div class="term-definition">A duty or responsibility required by law.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Subpoena</div>
+                        <div class="term-definition">A legal order requiring a person to appear before a regulatory body or court to provide testimony or evidence.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Sunset Review</div>
+                        <div class="term-definition">A periodic review process to determine whether a regulatory body or program should continue, be modified, or be terminated.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Sunshine Law</div>
+                        <div class="term-definition">Laws requiring government agencies to conduct business in public view.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Supervision</div>
+                        <div class="term-definition">Oversight of professionals or organizations to ensure compliance with regulations.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-t">
+                    <h3 class="letter-title">T</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Task Force</div>
+                        <div class="term-definition">A temporary group formed to address a specific issue or project.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Transparency</div>
+                        <div class="term-definition">The principle of being open, clear, and accountable in regulatory processes and decision-making.</div>
+                    </div>
+
+                    <div class="term">
+                        <div class="term-name">Tribunal</div>
+                        <div class="term-definition">A body established to adjudicate disputes or appeals.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-u">
+                    <h3 class="letter-title">U</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Umbrella Agency</div>
+                        <div class="term-definition">A larger administrative organization that oversees and coordinates multiple smaller agencies or departments, providing centralized support and sometimes governance.</div>
+                    </div>
+                </div>
+
+                <div class="letter-section" id="letter-w">
+                    <h3 class="letter-title">W</h3>
+                    
+                    <div class="term">
+                        <div class="term-name">Whistleblower</div>
+                        <div class="term-definition">An individual who reports misconduct, fraud, or illegal activities within an organization.</div>
+                    </div>
+                </div>
+
+                <a href="#navigation" class="back-to-top">Back to Top</a>
+            </div>
+
+            <div class="section" id="us-terms">
+                <h2 class="section-title">US-Specific Terms</h2>
+
+                <div class="term">
+                    <div class="term-name">Advance Notice of Proposed Rulemaking (ANPRM/ANPR)</div>
+                    <div class="term-definition">A document issued by an agency before a formal rule proposal, seeking public input on potential regulatory changes at an early stage.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Administrative Procedure Act (APA)</div>
+                    <div class="term-definition">A federal law establishing the procedures federal agencies must follow when making regulations, including requirements for public notice and comment.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Authorizing Statute (Enabling Statute)</div>
+                    <div class="term-definition">A law passed by Congress that grants authority to an agency to regulate a specific area and may outline procedural requirements for rulemaking.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Code of Federal Regulations (CFR)</div>
+                    <div class="term-definition">The codification of the general and permanent regulations promulgated by executive departments and agencies of the US federal government, divided into 50 subject-matter titles.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Federal Register</div>
+                    <div class="term-definition">The official daily publication for rules, proposed rules, and notices of US federal agencies and organizations, as well as executive orders and other presidential documents.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Federalism</div>
+                    <div class="term-definition">The relationship between the federal government and state, local, and tribal governments, including issues of preemption and consultation.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Information Collection Request (ICR)</div>
+                    <div class="term-definition">A formal request by a federal agency to collect information from the public, subject to approval under the Paperwork Reduction Act.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Informal Rulemaking</div>
+                    <div class="term-definition">A process under the APA involving notice and comment, used for most federal regulations.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Office of Information and Regulatory Affairs (OIRA)</div>
+                    <div class="term-definition">An office within the Office of Management and Budget that reviews federal regulations and information collection requests for compliance with laws and executive orders.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Office of Management and Budget (OMB)</div>
+                    <div class="term-definition">A federal agency that oversees the implementation of the President's vision across the Executive Branch, including regulatory review and federalism oversight.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Organic Statute</div>
+                    <div class="term-definition">A law that establishes a federal agency and its authority to issue regulations; also known as an enabling statute.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Paperwork Reduction Act (PRA)</div>
+                    <div class="term-definition">A law requiring federal agencies to obtain approval before collecting information from the public and to minimize public burden.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Regulatory Flexibility Act (RFA)</div>
+                    <div class="term-definition">A law requiring federal agencies to assess the impact of regulations on small businesses and consider alternatives that minimize economic impact.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Unfunded Mandates Reform Act (UMRA)</div>
+                    <div class="term-definition">A law limiting the ability of federal agencies to impose unfunded mandates on state, local, or tribal governments.</div>
+                </div>
+
+                <a href="#navigation" class="back-to-top">Back to Top</a>
+            </div>
+
+            <div class="section" id="canadian-terms">
+                <h2 class="section-title">Canadian-Specific Terms</h2>
+
+                <div class="term">
+                    <div class="term-name">Agreement on Internal Trade (AIT)</div>
+                    <div class="term-definition">An intergovernmental agreement aimed at promoting labour mobility and mutual recognition of credentials among Canadian provinces and territories.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">C.R.C. (Consolidated Regulations of Canada, 1978)</div>
+                    <div class="term-definition">The official compilation of federal regulations in force in Canada as of 1978.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">DAO/DAA (Delegated Administrative Organization/Authority)</div>
+                    <div class="term-definition">A corporation that, through an administrative agreement with a ministry, is responsible for administering an act and associated regulations on behalf of the provincial government.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Professional Code (Quebec)</div>
+                    <div class="term-definition">The umbrella statute in Quebec that sets out which occupations are deemed professions and the basic regulatory framework for all professions.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Provincial Jurisdiction</div>
+                    <div class="term-definition">The constitutional authority for professional regulation lies with the provinces in Canada, not the federal government.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">R.S. (Revised Statutes)</div>
+                    <div class="term-definition">Refers to revised statutes, such as the Revised Statutes of Canada (1985) or earlier, which are updated compilations of federal laws.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">SI (Statutory Instruments)</div>
+                    <div class="term-definition">A formal legal document made in exercise of a statutory power.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">SOR (Statutory Orders and Regulations)</div>
+                    <div class="term-definition">The official way to refer to regulations that are made by the Governor in Council under the authority of an Act of Parliament.</div>
+                </div>
+
+                <a href="#navigation" class="back-to-top">Back to Top</a>
+            </div>
+
+            <div class="section" id="eu-terms">
+                <h2 class="section-title">EU-Specific Terms</h2>
+
+                <div class="term">
+                    <div class="term-name">Adverse Event</div>
+                    <div class="term-definition">Any untoward medical occurrence in the context of a clinical investigation or product use.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">CE Mark (Conformité Européenne)</div>
+                    <div class="term-definition">A mandatory conformity marking for certain products sold in the European Economic Area, indicating conformity with health, safety, and environmental protection standards.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Clinical Trial (CT)</div>
+                    <div class="term-definition">Any investigation in human subjects intended to discover or verify clinical effects or safety of investigational products.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Competent Authority</div>
+                    <div class="term-definition">The national body responsible for implementing and enforcing EU regulations in each member state (e.g., for medicines, medical devices).</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Conformity Assessment</div>
+                    <div class="term-definition">The process of demonstrating whether the requirements of a regulation relating to a product have been fulfilled.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Conformity Assessment Body</div>
+                    <div class="term-definition">An organization that performs third-party conformity assessment activities, such as testing, certification, and inspection.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Decision</div>
+                    <div class="term-definition">A binding act addressed to specific parties, such as a country or company.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Directive</div>
+                    <div class="term-definition">A legislative act that sets out a goal for EU countries to achieve, leaving it to each country to determine how to reach it.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">MDR (Medical Devices Regulation)</div>
+                    <div class="term-definition">Regulation governing medical devices in the European Union.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Notified Body</div>
+                    <div class="term-definition">An organization designated by an EU country to assess the conformity of certain products before being placed on the market (notably for medical devices).</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Regulation (EU)</div>
+                    <div class="term-definition">A binding legislative act that must be applied in its entirety across the EU.</div>
+                </div>
+
+                <a href="#navigation" class="back-to-top">Back to Top</a>
+            </div>
+
+            <div class="section" id="acronyms">
+                <h2 class="section-title">Common Regulatory Acronyms</h2>
+
+                <div class="acronym-grid">
+                    <div class="acronym-item">
+                        <div class="acronym-name">ADR: Alternative Dispute Resolution</div>
+                        <div class="term-definition">Methods for resolving disputes without formal litigation.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">ANPR/ANPRM: Advance Notice of Proposed Rulemaking</div>
+                        <div class="term-definition">Early-stage notice seeking public input on potential regulatory changes (US).</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">APA: Administrative Procedure Act</div>
+                        <div class="term-definition">US law governing federal agency rulemaking procedures.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">CFR: Code of Federal Regulations</div>
+                        <div class="term-definition">Official compilation of US federal regulations.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">DAO/DAA: Delegated Administrative Organization/Authority (Canada)</div>
+                        <div class="term-definition">Body responsible for administering/enforcing regulations under agreement.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">EU: European Union</div>
+                        <div class="term-definition"></div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">FDA: Food and Drug Administration (US)</div>
+                        <div class="term-definition">Agency for drug, device, and food safety.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">FTC: Federal Trade Commission (US)</div>
+                        <div class="term-definition">Regulates commerce and protects consumers.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">GDPR: General Data Protection Regulation</div>
+                        <div class="term-definition">EU regulation on data protection and privacy.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">GMP: Good Manufacturing Practice</div>
+                        <div class="term-definition">Guidelines for product quality.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">HIPAA: Health Insurance Portability and Accountability Act (US)</div>
+                        <div class="term-definition">Protects patient health information.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">ISO: International Organization for Standardization</div>
+                        <div class="term-definition">Develops international standards.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">LRA: Legislative Regulatory Authority</div>
+                        <div class="term-definition">Legal body empowered to make regulations (context-dependent).</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">MDR: Medical Devices Regulation (EU)</div>
+                        <div class="term-definition">Regulation for medical devices.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">NCA: National Competent Authority (EU)</div>
+                        <div class="term-definition">National body enforcing EU regulations.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">NB: Notified Body (EU)</div>
+                        <div class="term-definition">Assesses product conformity for the EU market.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">OSHA: Occupational Safety and Health Administration (US)</div>
+                        <div class="term-definition">Regulates workplace safety.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">PRA: Paperwork Reduction Act (US)</div>
+                        <div class="term-definition">Requires agency approval for information collection.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">QA: Quality Assurance</div>
+                        <div class="term-definition">Ensures products/services meet requirements.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">QC: Quality Control</div>
+                        <div class="term-definition">Ensures product/service quality.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">SOR: Statutory Orders and Regulations (Canada)</div>
+                        <div class="term-definition">Official Canadian federal regulations.</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">TGA: Therapeutic Goods Administration (Australia)</div>
+                        <div class="term-definition">Regulates therapeutic goods (sometimes referenced internationally).</div>
+                    </div>
+
+                    <div class="acronym-item">
+                        <div class="acronym-name">WHO: World Health Organization</div>
+                        <div class="term-definition">United Nations agency for international public health.</div>
+                    </div>
+                </div>
+
+                <a href="#navigation" class="back-to-top">Back to Top</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hamburger menu functionality
+        function toggleNav() {
+            const navContent = document.getElementById('nav-content');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            
+            if (navContent.classList.contains('expanded')) {
+                navContent.classList.remove('expanded');
+                hamburgerIcon.textContent = '☰';
+            } else {
+                navContent.classList.add('expanded');
+                hamburgerIcon.textContent = '✕';
+            }
+        }
+
+        function closeNav() {
+            const navContent = document.getElementById('nav-content');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            
+            navContent.classList.remove('expanded');
+            hamburgerIcon.textContent = '☰';
+        }
+
+        // Smooth scrolling with offset for fixed navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = 90; // Height of collapsed nav
+                    const targetPosition = target.offsetTop - navHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Close nav when clicking outside of it
+        document.addEventListener('click', function(event) {
+            const nav = document.getElementById('navigation');
+            const navContent = document.getElementById('nav-content');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            
+            if (!nav.contains(event.target) && navContent.classList.contains('expanded')) {
+                navContent.classList.remove('expanded');
+                hamburgerIcon.textContent = '☰';
+            }
+        });
+
+        // Close nav when pressing Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const navContent = document.getElementById('nav-content');
+                const hamburgerIcon = document.getElementById('hamburger-icon');
+                
+                if (navContent.classList.contains('expanded')) {
+                    navContent.classList.remove('expanded');
+                    hamburgerIcon.textContent = '☰';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
