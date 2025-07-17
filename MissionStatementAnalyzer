@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Statement Principles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Open Sans', sans-serif; background: #f5f5f5; margin: 0; padding: 20px;">
+
+<!-- Instructions Section -->
+    <div style="max-width: 900px; margin: 0 auto; overflow: hidden;">
+    <div style="padding-left: 10px; padding-right: 10px;">
+        <div style="background: #fafbfc; border-radius: 20px; padding: 30px; margin: 25px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.25); position: relative; overflow: hidden;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%);">
+            </div>
+            <h2 style="margin: 0 0 20px 0; text-align: center; font-size: 1.5rem;">📚 Activity Instructions</h2>
+            
+            <div style="display: grid; gap: 15px; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="background: #E8E8E8; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">1</div>
+                    <p style="margin: 0; line-height: 1.4;"><strong>Read the mission statement</strong> carefully in the gray box</p>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="background: #E8E8E8; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">2</div>
+                    <p style="margin: 0; line-height: 1.4;"><strong>Rate each criterion</strong> by clicking on the icons:</p>
+                </div>
+                
+                <div style="margin-left: 55px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 1.5rem;">✅</span>
+                        <span style="font-size: 0.9rem;">Excellent</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 1.5rem;">⚠️</span>
+                        <span style="font-size: 0.9rem;">Needs improvement</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 1.5rem;">❌</span>
+                        <span style="font-size: 0.9rem;">Poor</span>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="background: #E8E8E8; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">3</div>
+                    <p style="margin: 0; line-height: 1.4;"><strong>Click "Show Feedback"</strong> to see the correct answers and explanations</p>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="background: #E8E8E8; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">4</div>
+                    <p style="margin: 0; line-height: 1.4;"><strong>Compare your ratings</strong> with the expert analysis to learn</p>
+                </div>
+            </div>
+            
+            <div style="background: #E8E8E8; box-shadow: 0 4px 6px rgba(0,0,0,0.25); border-radius: 8px; padding: 15px; margin-top: 20px;">
+                <p style="margin: 0; font-size: 0.9rem; text-align: center; opacity: 0.9;">
+                    💡 <strong>Tip:</strong> Try rating all criteria before viewing the feedback to test your understanding!
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Examples Section -->
+    <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
+        <h2 style="text-align: center; margin-bottom: 30px;">Now let's see these principles in action:</h2>
+        
+        <!-- Example 1 -->
+        <div style="background: white; border-radius: 15px; padding: 2rem; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <h3 style="color: #333; margin-bottom: 15px;">Analyze This Example:</h3>
+            <div style="background: #E8E8E8; box-shadow: 0 4px 6px rgba(0,0,0,0.25); border-radius: 8px; padding: 15px; margin: 20px;">
+                <p style="margin: 0; text-align: center; opacity: 0.9;"><em><strong>"Protecting the public by promoting safe nursing practice."</strong></em></p>
+            </div>
+            
+            <div style="display: grid; gap: 15px;">
+                <!-- Public Benefit First -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                    <span style="font-weight: bold;">Public Benefit First:</span>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="selectRating('ex1-benefit', 'pass')" id="ex1-benefit-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
+                        <button onclick="selectRating('ex1-benefit', 'warning')" id="ex1-benefit-warning" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">⚠️</button>
+                        <button onclick="selectRating('ex1-benefit', 'fail')" id="ex1-benefit-fail" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">❌</button>
+                    </div>
+                </div>
+                
+                <!-- Simple Language -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                    <span style="font-weight: bold;">Simple Language:</span>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="selectRating('ex1-language', 'pass')" id="ex1-language-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
+                        <button onclick="selectRating('ex1-language', 'warning')" id="ex1-language-warning" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">⚠️</button>
+                        <button onclick="selectRating('ex1-language', 'fail')" id="ex1-language-fail" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">❌</button>
+                    </div>
+                </div>
+                
+                <!-- Specific Connection -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                    <span style="font-weight: bold;">Specific Connection:</span>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="selectRating('ex1-connection', 'pass')" id="ex1-connection-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
+                        <button onclick="selectRating('ex1-connection', 'warning')" id="ex1-connection-warning" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">⚠️</button>
+                        <button onclick="selectRating('ex1-connection', 'fail')" id="ex1-connection-fail" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">❌</button>
+                    </div>
+                </div>
+                
+                <!-- Memorable Length -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                    <span style="font-weight: bold;">Memorable Length:</span>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="selectRating('ex1-length', 'pass')" id="ex1-length-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
+                        <button onclick="selectRating('ex1-length', 'warning')" id="ex1-length-warning" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">⚠️</button>
+                        <button onclick="selectRating('ex1-length', 'fail')" id="ex1-length-fail" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">❌</button>
+                    </div>
+                </div>
+            </div>
+            
+            <button onclick="handleFeedbackButton('ex1')" id="feedback-btn-ex1"
+                style="margin-top: 20px; padding: 12px 24px; background: #64092c; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; transition: all 0.3s; box-shadow: 0 4px 8px rgba(0,0,0,0.3); user-select: none;"
+                onmouseover="if(!this.classList.contains('clicked')) this.style.boxShadow='0 0 0 rgba(0,0,0,0)'"
+                onmouseout="if(!this.classList.contains('clicked')) this.style.boxShadow='0 4px 8px rgba(0,0,0,0.3)'">Show Feedback</button>
+            
+            <div id="ex1-feedback" style="display: none; margin-top: 20px; padding: 20px; background: #e8f5e8; border-radius: 8px; border-left: 5px solid #28a745;">
+                <div style="margin-bottom: 15px;">
+                    <strong>✅ Public Benefit First:</strong> Starts with "Protecting the public"
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <strong>✅ Simple Language:</strong> Uses everyday words
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <strong>✅ Specific Connection:</strong> Links to "nursing practice"
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <strong>✅ Memorable Length:</strong> Only 8 words
+                </div>
+                <div style="font-weight: bold; color: #28a745; font-size: 1.1rem;">
+                    Score: Excellent - This follows all four principles effectively.
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 2 -->
+        <div style="background: white; border-radius: 15px; padding: 2rem; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <h3 style="color: #333; margin-bottom: 15px;">Analyze This Example:</h3>
+            <div style="background: #E8E8E8; box-shadow: 0 4px 6px rgba(0,0,0,0.25); border-radius: 8px; padding: 15px; margin: 20px;">
+                <p style="margin: 0; text-align: center; opacity: 0.9;"><em><strong>"Protects the interest of the public by regulating the practice of social workers and social service workers and promoting ethical and professional practice."</strong></em></p>
+            </div>
+            
+            <div style="display: grid; gap: 15px;">
+                <!-- Public Benefit First -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                    <span style="font-weight: bold;">Public Benefit First:</span>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="selectRating('ex2-benefit', 'pass')" id="ex2-benefit-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
+                        <button onclick="selectRating('ex2-benefit', 'warning')" id="ex2-benefit-warning" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">⚠️</button>
+                        <button onclick="selectRating('ex2-benefit', 'fail')" id="ex2-benefit-fail" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">❌</button>
+                    </div>
+                </div>
+                
+                <!-- Simple Language -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                    <span style="font-weight: bold;">Simple Language:</span>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="selectRating('ex2-language', 'pass')" id="ex2-language-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
+                        <button onclick="selectRating('ex2-language', 'warning')" id="ex2-language-warning" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">⚠️</button>
+                        <button onclick="selectRating('ex2-language', 'fail')" id="ex2-language-fail" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">❌</button>
+                    </div>
+                </div>
+                
+                <!-- Specific Connection -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                    <span style="font-weight: bold;">Specific Connection:</span>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="selectRating('ex2-connection', 'pass')" id="ex2-connection-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
+                        <button onclick="selectRating('ex2-connection', 'warning')" id="ex2-connection-warning" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">⚠️</button>
+                        <button onclick="selectRating('ex2-connection', 'fail')" id="ex2-connection-fail" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">❌</button>
+                    </div>
+                </div>
+                
+                <!-- Memorable Length -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                    <span style="font-weight: bold;">Memorable Length:</span>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="selectRating('ex2-length', 'pass')" id="ex2-length-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
+                        <button onclick="selectRating('ex2-length', 'warning')" id="ex2-length-warning" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">⚠️</button>
+                        <button onclick="selectRating('ex2-length', 'fail')" id="ex2-length-fail" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">❌</button>
+                    </div>
+                </div>
+            </div>
+            
+            <button onclick="handleFeedbackButton('ex2')" id="feedback-btn-ex2"
+                style="margin-top: 20px; padding: 12px 24px; background: #64092c; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; transition: all 0.3s; box-shadow: 0 4px 8px rgba(0,0,0,0.3); user-select: none;"
+                onmouseover="if(!this.classList.contains('clicked')) this.style.boxShadow='0 0 0 rgba(0,0,0,0)'"
+                onmouseout="if(!this.classList.contains('clicked')) this.style.boxShadow='0 4px 8px rgba(0,0,0,0.3)'">Show Feedback</button>
+            
+            <div id="ex2-feedback" style="display: none; margin-top: 20px; padding: 20px; background: #fff3cd; border-radius: 8px; border-left: 5px solid #ffc107;">
+                <div style="margin-bottom: 15px;">
+                    <strong>✅ Public Benefit First:</strong> Starts with public interest
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <strong>⚠️ Simple Language:</strong> "Regulating the practice" is jargon-heavy
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <strong>✅ Specific Connection:</strong> Names the professions
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <strong>❌ Memorable Length:</strong> 25 words - too long
+                </div>
+                <div style="font-weight: bold; color: #856404; font-size: 1.1rem;">
+                    Score: Good but could improve - Could be shorter and use simpler language.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function selectRating(criteriaId, rating) {
+            // Remove selection from all buttons in this criteria
+            const buttons = document.querySelectorAll(`[id^="${criteriaId}-"]`);
+            buttons.forEach(button => {
+                button.style.background = 'none';
+                button.style.transform = 'scale(1)';
+            });
+            
+            // Highlight selected button
+            const selectedButton = document.getElementById(`${criteriaId}-${rating}`);
+            selectedButton.style.background = rating === 'pass' ? '#d4edda' : rating === 'warning' ? '#fff3cd' : '#f8d7da';
+            selectedButton.style.transform = 'scale(1.2)';
+        }
+
+        function handleFeedbackButton(exampleId) {
+            const button = document.getElementById(`feedback-btn-${exampleId}`);
+            const feedback = document.getElementById(`${exampleId}-feedback`);
+            
+            if (button.innerText === 'Show Feedback') {
+                // Show feedback and check if user got anything wrong
+                const correctCount = showFeedback(exampleId);
+                
+                // If user got anything wrong, change button to "Try Again"
+                if (correctCount < 4) {
+                    button.innerText = 'Try Again';
+                    button.style.backgroundColor = '#dda839';
+                    button.style.color = 'black';
+                    button.style.boxShadow = '0 0 0 rgba(0,0,0,0)';
+                    button.classList.add('clicked');
+                }
+            } else {
+                // Hide feedback and reset button to "Show Feedback"
+                feedback.style.display = 'none';
+                button.innerText = 'Show Feedback';
+                button.style.backgroundColor = '#64092c';
+                button.style.color = 'white';
+                button.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
+                button.classList.remove('clicked');
+            }
+        }
+
+        function showFeedback(exampleId) {
+            const feedback = document.getElementById(`${exampleId}-feedback`);
+            
+            // Get user selections
+            const selections = {};
+            ['benefit', 'language', 'connection', 'length'].forEach(criterion => {
+                const selected = document.querySelector(`#${exampleId}-${criterion}-pass[style*="scale(1.2)"]`) ? 'pass' :
+                              document.querySelector(`#${exampleId}-${criterion}-warning[style*="scale(1.2)"]`) ? 'warning' :
+                              document.querySelector(`#${exampleId}-${criterion}-fail[style*="scale(1.2)"]`) ? 'fail' : null;
+                selections[criterion] = selected;
+            });
+            
+            // Correct answers
+            const correct = {
+                ex1: { benefit: 'pass', language: 'pass', connection: 'pass', length: 'pass' },
+                ex2: { benefit: 'pass', language: 'warning', connection: 'pass', length: 'fail' }
+            };
+            
+            const explanations = {
+                ex1: {
+                    benefit: 'Starts with "Protecting the public"',
+                    language: 'Uses everyday words',
+                    connection: 'Links to "nursing practice"',
+                    length: 'Only 8 words'
+                },
+                ex2: {
+                    benefit: 'Starts with public interest',
+                    language: '"Regulating the practice" is jargon-heavy',
+                    connection: 'Names the professions',
+                    length: '25 words - too long'
+                }
+            };
+            
+            // Generate feedback
+            let correctCount = 0;
+            let feedbackHTML = '';
+            
+            ['benefit', 'language', 'connection', 'length'].forEach(criterion => {
+                const correctRating = correct[exampleId][criterion];
+                const userRating = selections[criterion];
+                const isCorrect = userRating === correctRating;
+                if (isCorrect) correctCount++;
+                
+                const icon = correctRating === 'pass' ? '✅' : correctRating === 'warning' ? '⚠️' : '❌';
+                const labels = { benefit: 'Public Benefit First', language: 'Simple Language', connection: 'Specific Connection', length: 'Memorable Length' };
+                
+                feedbackHTML += `<div style="margin-bottom: 15px;"><strong>${icon} ${labels[criterion]}:</strong> ${explanations[exampleId][criterion]}`;
+                if (!isCorrect && userRating) {
+                    const userIcon = userRating === 'pass' ? '✅' : userRating === 'warning' ? '⚠️' : '❌';
+                    feedbackHTML += ` <span style="color: #dc3545;">(You selected: ${userIcon})</span>`;
+                }
+                feedbackHTML += '</div>';
+            });
+            
+            // Add score
+            let scoreText, color, bgColor;
+            if (correctCount === 4) {
+                scoreText = 'Perfect! You correctly identified all four criteria.';
+                color = '#28a745'; bgColor = '#e8f5e8';
+            } else if (correctCount === 3) {
+                scoreText = 'Good job! You got 3 out of 4 criteria correct.';
+                color = '#28a745'; bgColor = '#e8f5e8';
+            } else if (correctCount === 2) {
+                scoreText = 'Not bad! You got 2 out of 4 criteria correct.';
+                color = '#856404'; bgColor = '#fff3cd';
+            } else {
+                scoreText = 'Keep practicing! Review the principles and try again.';
+                color = '#dc3545'; bgColor = '#f8d7da';
+            }
+            
+            feedbackHTML += `<div style="font-weight: bold; color: ${color}; font-size: 1.1rem;">${scoreText}</div>`;
+            
+            feedback.innerHTML = feedbackHTML;
+            feedback.style.background = bgColor;
+            feedback.style.borderLeft = `5px solid ${color}`;
+            feedback.style.display = 'block';
+            feedback.style.animation = 'fadeIn 0.5s ease-in';
+            
+            return correctCount;
+        }
+
+        // Add hover effects to rating buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const ratingButtons = document.querySelectorAll('button[id*="-pass"], button[id*="-warning"], button[id*="-fail"]');
+            
+            ratingButtons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    if (this.style.background === 'none' || this.style.background === '') {
+                        this.style.background = 'rgba(0,0,0,0.1)';
+                    }
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    if (this.style.transform !== 'scale(1.2)') {
+                        this.style.background = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
