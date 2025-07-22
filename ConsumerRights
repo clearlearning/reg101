@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fundamental Consumer Rights - Interactive Guide</title>
+    <meta name="description" content="Interactive guide to fundamental consumer rights for regulatory professionals">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .button-row {
+                flex-direction: column !important;
+            }
+            
+            .rights-button {
+                min-width: auto !important;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); overflow: hidden;">
+        <!-- Content -->
+        <div style="padding: 2.5rem 2rem;">
+            <!-- Main Title Section -->
+            <div style="margin-bottom: 3rem;">
+                <h1 style="text-align: center; margin-bottom: 1.5rem;">Fundamental Consumer Rights</h1>
+                <p style="text-align: justify; margin-bottom: 2rem;">These six fundamental consumer rights guide regulatory decision-making and policy development. As regulatory professionals, understanding these rights helps you evaluate current regulations, identify protection gaps, and make informed enforcement decisions.</p>
+                <p style="text-align: justify;">Think of these rights as your "consumer protection compass"—they help navigate complex marketplace situations and ensure regulatory actions serve the public interest. Each right addresses specific consumer vulnerabilities, from physical safety to privacy concerns.</p>
+            </div>
+
+            <!-- Rights Buttons -->
+            <div style="margin-bottom: 2rem;">
+                <!-- First Row -->
+                <div class="button-row" style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; justify-content: center;">
+                    <button class="rights-button" onclick="showRight('safety')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">🦺</span>
+                        <span style="font-weight: bold; color: black;">Safety Rights</span>
+                    </button>
+                    <button class="rights-button" onclick="showRight('information')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">📋</span>
+                        <span style="font-weight: bold; color: black;">Information Rights</span>
+                    </button>
+                    <button class="rights-button" onclick="showRight('choice')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">🔄</span>
+                        <span style="font-weight: bold; color: black;">Choice Rights</span>
+                    </button>
+                </div>
+                <!-- Second Row -->
+                <div class="button-row" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                    <button class="rights-button" onclick="showRight('redress')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">⚖️</span>
+                        <span style="font-weight: bold; color: black;">Redress Rights</span>
+                    </button>
+                    <button class="rights-button" onclick="showRight('basic')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">🏠</span>
+                        <span style="font-weight: bold; color: black;">Basic Needs</span>
+                    </button>
+                    <button class="rights-button" onclick="showRight('privacy')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">🔐</span>
+                        <span style="font-weight: bold; color: black;">Privacy Rights</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content Display Area -->
+            <div id="rightsContent" style="margin-bottom: 0px;">
+                <div style="background: #f8f9fa; border-radius: 15px; padding: 2rem; text-align: center; color: #6c757d; border: 2px dashed #dee2e6;">
+                    <p style="margin: 0; font-style: italic;">Click on a consumer right above to view detailed information</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const rightsData = {
+            safety: {
+                color: '#64092c',
+                lightColor: '#fcf6f8',
+                emoji: '🦺',
+                title: 'Safety Rights',
+                description: 'The right to protection from products, services, or practices that could cause harm to health, safety, or well-being.',
+                example: 'Expecting a licensed electrician to follow safety codes and use proper materials to prevent electrical hazards in your home.'
+            },
+            information: {
+                color: '#B4851F',
+                lightColor: '#fefcf7',
+                emoji: '📋',
+                title: 'Information Rights',
+                description: 'The right to receive accurate, complete information needed to make informed decisions about purchases and services.',
+                example: 'A licensed physician must clearly explain treatment options, risks, and costs, and provide prescription information with proper dosage instructions.'
+            },
+            choice: {
+                color: '#484848',
+                lightColor: '#f8f8f8',
+                emoji: '🔄',
+                title: 'Choice Rights',
+                description: 'The right to access a variety of products and services at competitive prices without unfair restrictions.',
+                example: 'Being able to choose from multiple licensed contractors for home repairs, with transparent pricing and service options.'
+            },
+            redress: {
+                color: '#084d78',
+                lightColor: '#f7f9fc',
+                emoji: '⚖️',
+                title: 'Redress Rights',
+                description: 'The right to seek fair resolution when products or services fail to meet reasonable expectations or cause harm.',
+                example: 'Having access to a licensing board\'s complaint process if a licensed professional provides substandard service or violates professional standards.'
+            },
+            basic: {
+                color: '#64092c',
+                lightColor: '#fcf6f8',
+                emoji: '🏠',
+                title: 'Basic Needs',
+                description: 'The right to access essential goods and services necessary for health, safety, and well-being.',
+                example: 'Access to licensed healthcare providers, legal representation, and essential home services regardless of economic status.'
+            },
+            privacy: {
+                color: '#B4851F',
+                lightColor: '#fefcf7',
+                emoji: '🔐',
+                title: 'Privacy Rights',
+                description: 'The right to control how personal information is collected, used, and shared in commercial transactions.',
+                example: 'A licensed accountant must protect your financial information and only share it with your explicit consent or as required by law.'
+            }
+        };
+
+        function showRight(rightType) {
+            const contentDiv = document.getElementById('rightsContent');
+            const right = rightsData[rightType];
+            
+            // Reset ALL button styles to original state
+            document.querySelectorAll('.rights-button').forEach(btn => {
+                btn.style.background = 'transparent';
+                btn.style.transform = 'none';
+                // Reset text color to black for all buttons
+                const textSpan = btn.querySelectorAll('span')[1];
+                if (textSpan) {
+                    textSpan.style.color = 'black';
+                }
+            });
+            
+            // Highlight selected button
+            const clickedButton = event.target.closest('button');
+            clickedButton.style.background = right.color;
+            clickedButton.style.transform = 'translateY(-2px)';
+            // Set text to white for selected button only
+            const selectedTextSpan = clickedButton.querySelectorAll('span')[1];
+            if (selectedTextSpan) {
+                selectedTextSpan.style.color = 'white';
+            }
+            
+            // Display content with enhanced styling
+            contentDiv.innerHTML = `
+                <div style="background: transparent; border-radius: 15px; padding: 2rem; border-left: 5px solid ${right.color}; transition: all 0.3s ease; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div style="background: transparent; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 40px; flex-shrink: 0;">${right.emoji}</div>
+                        <div style="flex: 1;">
+                            <h3 style="margin: 0 0 15px 0; color: ${right.color}; font-size: 1.4em;">${right.title}</h3>
+                            <p style="text-align: justify; margin-bottom: 15px; color: #333; line-height: 1.6;">${right.description}</p>
+                            <p style="text-align: justify; margin: 0; color: #333; line-height: 1.6;"><strong style="color: ${right.color};">Example:</strong> ${right.example}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Smooth scroll to content if needed (helpful on mobile)
+            contentDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Add hover effects for better interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.rights-button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    if (this.style.background === 'transparent') {
+                        this.style.transform = 'translateY(-1px)';
+                        this.style.boxShadow = '0 6px 15px rgba(0,0,0,0.2)';
+                    }
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    if (this.style.background === 'transparent') {
+                        this.style.transform = 'none';
+                        this.style.boxShadow = '0 4px 10px rgba(0,0,0,0.15)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
