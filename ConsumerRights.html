@@ -250,6 +250,24 @@
                 });
             });
         });
+
+        // Add before closing </body> tag in ConsumerRights.html
+function optimizeForIframe() {
+    document.body.style.margin = '0';
+    document.body.style.padding = '10px';
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        body { overflow-x: hidden; }
+        img, video { max-width: 100% !important; height: auto !important; }
+        @media (max-width: 768px) {
+            body { font-size: 14px !important; padding: 5px !important; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+window.addEventListener('load', optimizeForIframe);
     </script>
 </body>
 </html>
