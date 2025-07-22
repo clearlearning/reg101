@@ -75,7 +75,7 @@
             
             <div style="display: grid; gap: 15px;">
                 <!-- Public Benefit First -->
-                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                <div class="criteria-row" style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
                     <span style="font-weight: bold;">Public Benefit First:</span>
                     <div style="display: flex; gap: 10px;">
                         <button onclick="selectRating('ex1-benefit', 'pass')" id="ex1-benefit-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
@@ -85,7 +85,7 @@
                 </div>
                 
                 <!-- Simple Language -->
-                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                <div class="criteria-row" style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
                     <span style="font-weight: bold;">Simple Language:</span>
                     <div style="display: flex; gap: 10px;">
                         <button onclick="selectRating('ex1-language', 'pass')" id="ex1-language-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
@@ -95,7 +95,7 @@
                 </div>
                 
                 <!-- Specific Connection -->
-                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                <div class="criteria-row" style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
                     <span style="font-weight: bold;">Specific Connection:</span>
                     <div style="display: flex; gap: 10px;">
                         <button onclick="selectRating('ex1-connection', 'pass')" id="ex1-connection-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
@@ -105,7 +105,7 @@
                 </div>
                 
                 <!-- Memorable Length -->
-                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                <div class="criteria-row" style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
                     <span style="font-weight: bold;">Memorable Length:</span>
                     <div style="display: flex; gap: 10px;">
                         <button onclick="selectRating('ex1-length', 'pass')" id="ex1-length-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
@@ -148,7 +148,7 @@
             
             <div style="display: grid; gap: 15px;">
                 <!-- Public Benefit First -->
-                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                <div class="criteria-row" style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
                     <span style="font-weight: bold;">Public Benefit First:</span>
                     <div style="display: flex; gap: 10px;">
                         <button onclick="selectRating('ex2-benefit', 'pass')" id="ex2-benefit-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
@@ -158,7 +158,7 @@
                 </div>
                 
                 <!-- Simple Language -->
-                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                <div class="criteria-row" style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
                     <span style="font-weight: bold;">Simple Language:</span>
                     <div style="display: flex; gap: 10px;">
                         <button onclick="selectRating('ex2-language', 'pass')" id="ex2-language-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
@@ -168,7 +168,7 @@
                 </div>
                 
                 <!-- Specific Connection -->
-                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                <div class="criteria-row" style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
                     <span style="font-weight: bold;">Specific Connection:</span>
                     <div style="display: flex; gap: 10px;">
                         <button onclick="selectRating('ex2-connection', 'pass')" id="ex2-connection-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
@@ -178,7 +178,7 @@
                 </div>
                 
                 <!-- Memorable Length -->
-                <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
+                <div class="criteria-row" style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border-radius: 8px;">
                     <span style="font-weight: bold;">Memorable Length:</span>
                     <div style="display: flex; gap: 10px;">
                         <button onclick="selectRating('ex2-length', 'pass')" id="ex2-length-pass" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; border-radius: 50%; transition: all 0.3s;">✅</button>
@@ -336,6 +336,39 @@
             return correctCount;
         }
 
+        function updateCriteriaLayout() {
+            const criteriaRows = document.querySelectorAll('.criteria-row');
+            
+            if (window.innerWidth <= 768) {
+                // Mobile: stack label above buttons
+                criteriaRows.forEach(row => {
+                    row.style.flexDirection = 'column';
+                    row.style.alignItems = 'center';
+                    row.style.gap = '10px';
+                    
+                    // Center the button container
+                    const buttonContainer = row.querySelector('div');
+                    if (buttonContainer) {
+                        buttonContainer.style.alignSelf = 'center';
+                    }
+                });
+            } else {
+                // Desktop: side by side layout
+                criteriaRows.forEach(row => {
+                    row.style.flexDirection = 'row';
+                    row.style.alignItems = 'center';
+                    row.style.justifyContent = 'space-between';
+                    row.style.gap = '15px';
+                    
+                    // Reset button container alignment
+                    const buttonContainer = row.querySelector('div');
+                    if (buttonContainer) {
+                        buttonContainer.style.alignSelf = 'auto';
+                    }
+                });
+            }
+        }
+
         // Add hover effects to rating buttons
         document.addEventListener('DOMContentLoaded', function() {
             const ratingButtons = document.querySelectorAll('button[id*="-pass"], button[id*="-warning"], button[id*="-fail"]');
@@ -353,7 +386,13 @@
                     }
                 });
             });
+            
+            // Set initial layout
+            updateCriteriaLayout();
         });
+
+        // Update layout on window resize
+        window.addEventListener('resize', updateCriteriaLayout);
     </script>
 
 </body>
