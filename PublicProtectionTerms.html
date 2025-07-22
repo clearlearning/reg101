@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Five Key Terms for Public Understanding - Interactive Guide</title>
+    <meta name="description" content="Interactive guide to key terms for public understanding of regulation">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: white;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .button-row {
+                gap: 8px !important;
+                margin-bottom: 8px !important;
+            }
+            
+            .terms-button {
+                min-width: auto !important;
+                padding: 12px 15px !important;
+                font-size: 14px !important;
+            }
+            
+            .terms-button span:first-child {
+                font-size: 24px !important;
+            }
+            
+            .content-container {
+                padding: 1.5rem 1rem !important;
+            }
+            
+            .main-content {
+                padding: 1.5rem 1rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .button-row {
+                flex-direction: column !important;
+                gap: 8px !important;
+            }
+            
+            .terms-button {
+                min-width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); overflow: hidden;">
+        <!-- Content -->
+        <div class="main-content" style="padding: 2.5rem 2rem;">
+            <!-- Main Title Section -->
+            <div style="margin-bottom: 3rem;">
+                <h1 style="text-align: center; margin-bottom: 1.5rem;">🔑 Five Key Terms for Public Understanding</h1>
+                <div style="background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%); border-radius: 15px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.25);">
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+                        <div style="background: transparent; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 50px; flex-shrink: 0;">🗣️</div>
+                        <p style="text-align: justify;">These are the essential concepts the public needs to understand. Each one answers the question: <strong><em>"How does this protect me?"</em></strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terms Buttons -->
+            <div style="margin-bottom: 2rem;">
+                <!-- First Row -->
+                <div class="button-row" style="display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; justify-content: center;">
+                    <button class="terms-button" onclick="showTerm('safety')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">🛟</span>
+                        <span style="font-weight: bold; color: black;">Public Safety</span>
+                    </button>
+                    <button class="terms-button" onclick="showTerm('consumer')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">🛒</span>
+                        <span style="font-weight: bold; color: black;">Consumer Protection</span>
+                    </button>
+                </div>
+                <!-- Second Row -->
+                <div class="button-row" style="display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; justify-content: center;">
+                    <button class="terms-button" onclick="showTerm('risk')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">🚧</span>
+                        <span style="font-weight: bold; color: black;">Reducing Risk</span>
+                    </button>
+                    <button class="terms-button" onclick="showTerm('standards')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">📋</span>
+                        <span style="font-weight: bold; color: black;">Professional Standards</span>
+                    </button>
+                </div>
+                <!-- Third Row -->
+                <div class="button-row" style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+                    <button class="terms-button" onclick="showTerm('competent')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">🦺</span>
+                        <span style="font-weight: bold; color: black;">Competent Practice</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content Display Area -->
+            <div id="termsContent" style="margin-bottom: 2rem;">
+                <div style="background: #f8f9fa; border-radius: 15px; padding: 2rem; text-align: center; color: #6c757d; border: 2px dashed #dee2e6;">
+                    <p style="margin: 0; font-style: italic;">Click on a key term above to view detailed information</p>
+                </div>
+            </div>
+
+            <!-- Practical Application -->
+            <div style="margin-bottom: 2rem;">
+                <h2 style="text-align: center; margin-bottom: 0.5rem;">💡 Putting It Into Practice</h2>
+                <div style="border-radius: 15px; padding: 0 1rem 2rem 1rem; position: relative; overflow: hidden;">
+                    <p style="text-align: justify; margin-bottom: 1.5rem; position: relative; z-index: 1;">When the public understands these key terms, they can better appreciate how regulation protects them and supports quality professional practice. Clear communication about these concepts builds public trust and demonstrates the value of regulatory oversight. This leads to:</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; position: relative; z-index: 1;">
+                        <div style="background: rgba(255,255,255,0.8); padding: 1rem; border-radius: 10px; backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(0,0,0,0.2); text-align: justify; overflow: hidden; position: relative;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%);">
+                                <br>
+                            </div><strong>Greater public trust</strong> occurs when people understand how regulation protects them</div>
+                        <div style="background: rgba(255,255,255,0.8); padding: 1rem; border-radius: 10px; backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(0,0,0,0.2); text-align: justify; overflow: hidden; position: relative;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%);">
+                                <br>
+                            </div><strong>Informed consumers</strong> who can make better decisions about professional services</div>
+                        <div style="background: rgba(255,255,255,0.8); padding: 1rem; border-radius: 10px; backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(0,0,0,0.2); text-align: justify; overflow: hidden; position: relative;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%);">
+                                <br>
+                            </div><strong>Increased compliance</strong> from professionals who understand public expectations</div>
+                        <div style="background: rgba(255,255,255,0.8); padding: 1rem; border-radius: 10px; backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(0,0,0,0.2); text-align: justify; overflow: hidden; position: relative;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%);">
+                                <br>
+                            </div><strong>Better communication</strong> between regulators and the communities they serve</div>
+                        <div style="background: rgba(255,255,255,0.8); padding: 1rem; border-radius: 10px; backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(0,0,0,0.2); text-align: justify; overflow: hidden; position: relative;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%);">
+                                <br>
+                            </div><strong>Enhanced legitimacy</strong> of regulatory processes and decisions</div>
+                        <div style="background: rgba(255,255,255,0.8); padding: 1rem; border-radius: 10px; backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(0,0,0,0.2); text-align: justify; overflow: hidden; position: relative;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%);">
+                                <br>
+                            </div><strong>Stronger support</strong> for regulatory organizations and their public protection mission</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const termsData = {
+            safety: {
+                color: '#64092c',
+                emoji: '🛟',
+                title: 'Public Safety',
+                subtitle: 'How regulation protects people from harm',
+                explanation: 'We make sure professionals can do their job without putting anyone at risk. For example, we ensure nurses know how to give medications safely.'
+            },
+            consumer: {
+                color: '#dda839',
+                emoji: '🛒',
+                title: 'Consumer Protection',
+                subtitle: 'Safeguarding against fraud and incompetence',
+                explanation: 'We protect you from dishonest or incompetent professionals. If someone isn\'t qualified or breaks the rules, we can stop them from practicing.'
+            },
+            risk: {
+                color: '#484848',
+                emoji: '🚧',
+                title: 'Reducing Risk to the Public',
+                subtitle: 'Preventing problems before they happen',
+                explanation: 'We try to prevent problems before they happen by making sure professionals meet high standards from the start.'
+            },
+            standards: {
+                color: '#084d78',
+                emoji: '📋',
+                title: 'Enforcing Professional Standards',
+                subtitle: 'Maintaining quality and ethics',
+                explanation: 'We set clear rules about how professionals should behave and what they need to know, then we make sure they follow these rules.'
+            },
+            competent: {
+                color: '#64092c',
+                emoji: '🦺',
+                title: 'Competent and Safe Practice',
+                subtitle: 'Ensuring professionals can do their job well',
+                explanation: 'We ensure professionals have the right training and skills to do their job well and safely.'
+            }
+        };
+
+        function showTerm(termType) {
+            const contentDiv = document.getElementById('termsContent');
+            const term = termsData[termType];
+            
+            // Reset ALL button styles to original state
+            document.querySelectorAll('.terms-button').forEach(btn => {
+                btn.style.background = 'transparent';
+                btn.style.transform = 'none';
+                // Reset text color to black for all buttons
+                const textSpan = btn.querySelectorAll('span')[1];
+                if (textSpan) {
+                    textSpan.style.color = 'black';
+                }
+            });
+            
+            // Highlight selected button
+            const clickedButton = event.target.closest('button');
+            clickedButton.style.background = term.color;
+            clickedButton.style.transform = 'translateY(-2px)';
+            // Set text to white for selected button only
+            const selectedTextSpan = clickedButton.querySelectorAll('span')[1];
+            if (selectedTextSpan) {
+                selectedTextSpan.style.color = 'white';
+            }
+            
+            // Check if mobile view
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // Mobile layout: emoji above title
+                contentDiv.innerHTML = `
+                    <div class="content-container" style="background: transparent; border-radius: 15px; padding: 2rem; border-left: 5px solid ${term.color}; transition: all 0.3s ease; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+                        <div style="text-align: center; margin-bottom: 20px;">
+                            <div style="font-size: 50px; margin-bottom: 15px;">${term.emoji}</div>
+                            <h3 style="margin: 0 0 10px 0; color: ${term.color}; font-size: 1.4em;">${term.title}</h3>
+                        </div>
+                        <div style="width: 100%;">
+                            <p style="text-align: justify; margin-bottom: 15px; color: #333; line-height: 1.6;"><strong>${term.subtitle}</strong></p>
+                            <p style="text-align: justify; margin: 0; color: #333; line-height: 1.6;"><strong style="color: ${term.color};">How to explain this to the public:</strong> "${term.explanation}"</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Desktop layout: original side-by-side design
+                contentDiv.innerHTML = `
+                    <div style="background: transparent; border-radius: 15px; padding: 2rem; border-left: 5px solid ${term.color}; transition: all 0.3s ease; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="background: transparent; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 40px; flex-shrink: 0;">${term.emoji}</div>
+                            <div style="flex: 1;">
+                                <h3 style="margin: 0 0 10px 0; color: ${term.color}; font-size: 1.4em;">${term.title}</h3>
+                                <p style="text-align: justify; margin-bottom: 15px; color: #333; line-height: 1.6;"><strong>${term.subtitle}</strong></p>
+                                <p style="text-align: justify; margin: 0; color: #333; line-height: 1.6;"><strong style="color: ${term.color};">How to explain this to the public:</strong> "${term.explanation}"</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Smooth scroll to content if needed (helpful on mobile)
+            contentDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Add hover effects for better interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.terms-button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    if (this.style.background === 'transparent') {
+                        this.style.transform = 'translateY(-1px)';
+                        this.style.boxShadow = '0 6px 15px rgba(0,0,0,0.2)';
+                    }
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    if (this.style.background === 'transparent') {
+                        this.style.transform = 'none';
+                        this.style.boxShadow = '0 4px 10px rgba(0,0,0,0.15)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
