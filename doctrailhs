@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Trail Training</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-text-size-adjust: none;
+            text-size-adjust: none;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif; margin: 0; padding: 20px;
+            background: transparent;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .training-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #64092c;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content-area {
+            padding: 40px;
+        }
+
+        .instructions {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid #dda839;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .instructions h3 {
+            color: #000;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .instructions p {
+            color: #000;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .training-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .hotspot-area {
+            position: absolute;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .hotspot-area:hover {
+            background: rgba(243, 223, 181, 0.2);
+            border: 2px solid #dda839;
+            border-radius: 0px;
+        }
+
+        /* Optional: Add a subtle hint animation */
+        .hotspot-area.hint {
+            animation: subtleHint 3s ease-in-out infinite;
+        }
+
+        @keyframes subtleHint {
+            0%, 100% {
+                background: transparent;
+            }
+            50% {
+                background: rgba(52, 152, 219, 0.1);
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-header {
+            background: #dda839;
+            color: white;
+            padding: 25px;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-body p {
+            line-height: 1.8;
+            font-size: 1.1em;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .modal-body ul {
+            list-style-type: square;
+            padding-left: 0;
+        }
+
+        .modal-body li {
+            margin: 0px 0px 10px 25px;
+            color: #000;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+        }
+
+        .progress-container {
+            background: #ecf0f1;
+            border-radius: 20px;
+            padding: 4px;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            background: #084d78;
+            height: 20px;
+            border-radius: 16px;
+            transition: width 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, .2) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255, 255, 255, .2) 50%,
+                rgba(255, 255, 255, .2) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 50px 50px;
+            animation: move 2s linear infinite;
+        }
+
+        @keyframes move {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 50px 50px;
+            }
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .stat {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #084d78;
+            display: block;
+        }
+
+        .stat-label {
+            color: #000;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .completion-message {
+            display: none;
+            font-size: 1.5rem;
+            text-align: center;
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-top: 5px solid #dda839;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .completion-message.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reset-btn {
+            background: #64092c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .content-area {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="training-container">
+        <div class="header">
+            <h1>Promoting Transparency and Accountability</h1>
+            <p>Transparency isn't just about making information available; it's about making it understandable and accessible. Evidence-based decision making creates multiple layers of transparency.</p>
+        </div>
+        
+        <div class="content-area">
+            <div class="instructions">
+                <h3>Instructions</h3>
+                <p>Click on the hotspots below to learn more about the documentation trail of transparency and accountability.</p>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number" id="visited-count">0</span>
+                    <span class="stat-label">Hotspots Visited</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="total-count">6</span>
+                    <span class="stat-label">Total Hotspots</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="progress-percent">0%</span>
+                    <span class="stat-label">Complete</span>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+            </div>
+
+            <div class="image-container">
+                <img src="https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/Documentation_Trail.png" alt="Documentation Trail Process" class="training-image" id="training-image">
+                
+                <!-- Invisible Clickable Areas - Adjust positions and sizes based on your actual image -->
+                <div class="hotspot-area" style="top: 5.1%; left: 0%; width: 30.5%; height: 43%;" data-hotspot="1"></div>
+                <div class="hotspot-area" style="top: 5.1%; left: 34.8%; width: 30.5%; height: 43%;" data-hotspot="2"></div>
+                <div class="hotspot-area" style="top: 5.1%; left: 69.5%; width: 30.5%; height: 43%;" data-hotspot="3"></div>
+                <div class="hotspot-area" style="top: 51.8%; left: 0%; width: 30.5%; height: 43%;" data-hotspot="4"></div>
+                <div class="hotspot-area" style="top: 51.8%; left: 34.8%; width: 30.5%; height: 43%;" data-hotspot="5"></div>
+                <div class="hotspot-area" style="top: 51.8%; left: 69.5%; width: 30.5%; height: 43%;" data-hotspot="6"></div>
+            </div>
+
+            <div class="completion-message" id="completion-message">
+                <p>You have successfully reviewed the six key aspects of the document trail of transparency and accountability.</p>
+                <button class="reset-btn" onclick="resetTraining()">Start Over</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 id="modal-title">Hotspot Information</h2>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <p>Content will be loaded here...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hotspot content data
+        const hotspotData = {
+            1: {
+                title: "The Question",
+                content: `
+                    <p style="text-align: justify;">Clearly define the regulatory problem or challenge. For example, “How can we ensure ongoing competency of licensed professionals?” or “What is the impact of new continuing education requirements?”</p>
+                    <p style="text-align: justify;"><span style="font-weight: 700;">Add Context:</span> Who raised this question (e.g., public concern, regulatory board, legislative mandate)?</p>
+                    <p style="text-align: justify;"><span style="font-weight: 700;">State Importance:</span> Why is the question relevant to public safety, professional standards, or service quality?</p>
+
+                `
+            },
+            2: {
+                title: "Evidence Sought",
+                content: `
+                    <p style="text-align: justify;">What information is considered relevant?</p>
+                    <p style="text-align: justify; font-weight: 700;">Examples:</p>
+                    <ul style="text-align: justify;">
+                        <li style="color: #64092c; list-style-type: square;"><span style="color: #000;">Compliance rates (e.g., % of professionals completing required training)</span></li>
+                        <li style="color: #64092c; list-style-type: square;"><span style="color: #000;">Incident/complaint data involving licensees</span></li>
+                        <li style="color: #64092c; list-style-type: square;"><span style="color: #000;">Outcomes from other states/countries with similar regulations</span></li>
+                        <li style="color: #64092c; list-style-type: square;"><span style="color: #000;">Expert testimony or stakeholder feedback</span></li>
+                    </ul>
+                    <p style="text-align: justify;"><span style="font-weight: 700;">Add Details:</span> List both qualitative (e.g., stakeholder interviews) and quantitative (e.g., survey data, statistics) evidence.</p>
+
+                `
+            },
+            3: {
+                title: "Evidence Found",
+                content: `
+                    <p style="text-align: justify;">Summarize the actual data or findings that were gathered.</p>
+                    <p style="text-align: justify;"><span style="font-weight: 700;">Example:</span> “80% compliance achieved in the past two years.”</p>
+                    <p style="text-align: justify;">Trends in violations or issues post-implementation.</p>
+                    <p style="text-align: justify;"><span style="font-weight: 700;">Highlight Contradictions:</span> Mention if the evidence was mixed, conflicting, or unexpectedly positive/negative.</p>
+
+                `
+            },
+            4: {
+                title: "Analysis Methods",
+                content: `
+                    <p style="text-align: justify;">Explain the techniques or frameworks used.</p>
+                    <ul style="text-align: justify;">
+                        <li style="color: #64092c; list-style-type: square;"><span style="color: #000;">Statistical methods (e.g., regression analysis, cohort study)</span></li>
+                        <li style="color: #64092c; list-style-type: square;"><span style="color: #000;">Comparative analysis with other jurisdictions</span></li>
+                        <li style="color: #64092c; list-style-type: square;"><span style="color: #000;">Cost-benefit analysis</span></li>
+                        <li style="color: #64092c; list-style-type: square;"><span style="color: #000;">Qualitative coding of interview/response data</span></li>
+                    </ul>
+                    <p style="text-align: justify;"><span style="font-weight: 700;">Add Detail:</span> Were external experts or special software/tools used?</p>
+
+                `
+            },
+            5: {
+                title: "Decision Connection",
+                content: `
+                    <p style="text-align: justify;">Describe how the analysis led to regulatory decisions.
+                    <ul style="text-align: justify;">
+                        <li style="color: #64092c; list-style-type: square;"><span style="color: #000;">Was evidence used to revise, retain, or remove a regulation?</span></li>
+                        <li style="color: #64092c; list-style-type: square;"><span style="color: #000;">Were recommendations adopted or rejected? Why?</span></li>
+                    <ul>
+                    <p style="text-align: justify;"><span style="font-weight: 700;">Clarify Logic:</span> “Because continuing education correlated with fewer complaints, the board increased requirements.”</p>
+
+                `
+            },
+            6: {
+                title: "Expected Outcomes",
+                content: `
+                    <h3 style="text-align: center; padding-bottom: 15px;">What Outcomes are Expected</h3>
+                    <p style="text-align: justify;">Define concrete indicators of successful regulation.</p>
+                    <ul style="text-align: justify;">
+                        <li style="color: #64092c; list-style-type: square;"><span style="color: #000;">Lower rates of professional misconduct or public complaints</span></li>
+                        <li style="color: #64092c; list-style-type: square;"><span style="color: #000;">Improved service outcomes (e.g., patient/client satisfaction)</span></li>
+                        <li style="color: #64092c; list-style-type: square;"><span style="color: #000;">Higher public confidence in the profession</span></li>
+                        <ul>
+                    <p style="text-align: justify"><span style="font-weight: 700;">Include Timeframe:</span> When are these results expected to emerge?</p>
+                    <p style="text-align: justify"><span style="font-weight: 700;">Add Metrics:</span> “Aim for a 20% reduction in complaints within two years.”</p>
+
+                `
+            }
+        };
+
+        // Training state
+        let visitedHotspots = new Set();
+        const totalHotspots = Object.keys(hotspotData).length;
+
+        // Get DOM elements
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        const visitedCount = document.getElementById('visited-count');
+        const progressBar = document.getElementById('progress-bar');
+        const progressPercent = document.getElementById('progress-percent');
+        const completionMessage = document.getElementById('completion-message');
+
+        // Add click events to hotspot areas
+        document.querySelectorAll('.hotspot-area').forEach(hotspot => {
+            hotspot.addEventListener('click', function() {
+                const hotspotId = this.getAttribute('data-hotspot');
+                showModal(hotspotId);
+            });
+        });
+
+        // Modal functionality
+        function showModal(hotspotId) {
+            const data = hotspotData[hotspotId];
+            if (data) {
+                modalTitle.textContent = data.title;
+                modalBody.innerHTML = data.content;
+                modal.style.display = 'block';
+                
+                // Add to visited set and update progress
+                if (!visitedHotspots.has(hotspotId)) {
+                    visitedHotspots.add(hotspotId);
+                    updateProgress();
+                }
+                
+                // Add show class after a brief delay for animation
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+            }
+        }
+
+        function closeModal() {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Event listeners for modal
+        closeBtn.addEventListener('click', closeModal);
+        
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Keyboard support
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.style.display === 'block') {
+                closeModal();
+            }
+        });
+
+        // Progress tracking
+        function updateProgress() {
+            const progress = (visitedHotspots.size / totalHotspots) * 100;
+            const roundedProgress = Math.round(progress);
+            
+            visitedCount.textContent = visitedHotspots.size;
+            progressBar.style.width = progress + '%';
+            progressPercent.textContent = roundedProgress + '%';
+            
+            // Show completion message if all hotspots visited
+            if (visitedHotspots.size === totalHotspots) {
+                setTimeout(() => {
+                    completionMessage.classList.add('show');
+                }, 500);
+            }
+        }
+
+        // Reset functionality
+        function resetTraining() {
+            visitedHotspots.clear();
+            updateProgress();
+            completionMessage.classList.remove('show');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
