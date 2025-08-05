@@ -567,7 +567,7 @@
         function updateProgress() {
             const progress = ((currentStepIndex + 1) / totalSteps) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
-            document.getElementById('progressText').textContent = `Decision ${currentStepIndex + 1} of ${totalSteps}`;
+            document.getElementById('progressText').textContent = `Page ${currentStepIndex + 1} of ${totalSteps}`;
             document.getElementById('currentStep').textContent = currentStepIndex + 1;
             
             // Update navigation buttons
