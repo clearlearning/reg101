@@ -3,273 +3,703 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Fundamental Consumer Rights - Interactive Guide</title>
-    <meta name="description" content="Interactive guide to fundamental consumer rights for regulatory professionals">
-     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Right Touch Regulation - Interactive Case Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-burgundy: #64092c;
+            --accent-gold: #dda839;
+            --neutral-gray: #484848;
+            --secondary-blue: #084d78;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            -webkit-text-size-adjust: none;
+            text-size-adjust: none;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-text-size-adjust: none;
-            text-size-adjust: none;
         }
-        
+
         body {
             font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            background: white;
-            min-height: 100vh;
-            padding: 20px 0;
+            text-align: justify;
+            color: #000000;
+            background: transparent;
+            height: 100vh;
+            overflow: hidden;
         }
-        
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .button-row {
-                gap: 8px !important;
-                margin-bottom: 8px !important;
-            }
-            
-            .rights-button {
-                min-width: auto !important;
-                padding: 12px 15px !important;
-                font-size: 14px !important;
-            }
-            
-            .rights-button span:first-child {
-                font-size: 24px !important;
-            }
-            
-            .content-container {
-                padding: 1.5rem 1rem !important;
-            }
-            
-            .main-content {
-                padding: 1.5rem 1rem !important;
-            }
+
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 1rem;
         }
-        
-        @media (max-width: 480px) {
-            .button-row {
-                flex-direction: column !important;
-                gap: 8px !important;
-            }
-            
-            .rights-button {
-                min-width: 100% !important;
-            }
+
+        .case-study-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
         }
+
+        .progress-container {
+            background: var(--light-bg);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            flex-shrink: 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--neutral-gray);
+        }
+
+        .scenario-section {
+            display: none;
+            padding: 2rem;
+            animation: fadeIn 0.5s ease-in;
+            overflow-y: auto;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .scenario-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .decision-point {
+            background: var(--light-bg);
+            border-left: 4px solid #084d78;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .decision-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #084d78;
+            margin-bottom: 1rem;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .option-button {
+            background: var(--white);
+            border: 2px solid var(--light-bg);
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .option-button:hover {
+            background: #fffef9;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .option-button.selected {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .option-button.correct {
+            background: #eaf6ea;
+            border: none;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .option-button.incorrect {
+            border: none;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            background: #fce4e6;
+        }
+
+        .option-button.neutral {
+            border: none;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            background: #fffae0;
+        }
+
+        .feedback-container {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 12px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .feedback-container.show {
+            display: block;
+            text-align: justify;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback-excellent {
+            background: #eaf6ea;
+            border-left: 4px solid #28a745;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-align: left;
+        }
+
+        .feedback-good {
+            background: #fffae0;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-align: left;
+        }
+
+        .feedback-poor {
+            background: #fce4e6;
+            border-left: 4px solid #dc3545;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-align: left;
+        }
+
+        .right-touch-connection {
+            background: #ffffff;
+            border: 0px solid var(--primary-burgundy);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            padding: 1rem;
+            margin: 15px;
+            text-align: left;
+        }
+
+        .right-touch-connection h4 {
+            color: var(--primary-burgundy);
+            margin-bottom: 0.5rem;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: var(--light-bg);
+            border-top: 1px solid #e0e0e0;
+            flex-shrink: 0;
+        }
+
+        .nav-button {
+            background: var(--primary-burgundy);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover:not(:disabled) {
+            background: #490720;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .nav-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results-summary {
+            background: linear-gradient(135deg, #eed59d 0%, #dda839 150%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            color: var(--primary-burgundy);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .principles-checklist {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .principle-check {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .principle-check.achieved {
+            background: #eaf6ea;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.25)
+        }
+
+        .principle-check.partial {
+            background: #fffae0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.25)
+        }
+
+        .principle-check.missed {
+            background: #fce4e6;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.25)
+        }
+
+            @media (max-width: 768px) {
+                .case-study-container {
+                    margin: 0;
+                    border-radius: 0;
+                    height: 100vh;
+                }
+                
+                .scenario-section {
+                    padding: 1rem;
+                }
+                
+                .navigation {
+                    padding: 1rem;
+                }
+            }
     </style>
 </head>
 <body>
-    <div style="max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); overflow: hidden;">
-        <!-- Content -->
-        <div class="main-content" style="padding: 2.5rem 2rem;">
-            <!-- Main Title Section -->
-            <div style="margin-bottom: 3rem;">
-                <h1 style="text-align: center; margin-bottom: 1.5rem;">Fundamental Consumer Rights</h1>
-                <p style="text-align: justify; margin-bottom: 2rem;">These six fundamental consumer rights guide regulatory decision-making and policy development. As regulatory professionals, understanding these rights helps you evaluate current regulations, identify protection gaps, and make informed enforcement decisions.</p>
-                <p style="text-align: justify;">Think of these rights as your "consumer protection compass"—they help navigate complex marketplace situations and ensure regulatory actions serve the public interest. Each right addresses specific consumer vulnerabilities, from physical safety to privacy concerns.</p>
+    <div class="case-study-container">
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
             </div>
-
-            <!-- Rights Buttons -->
-            <div style="margin-bottom: 2rem;">
-                <!-- First Row -->
-                <div class="button-row" style="display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; justify-content: center;">
-                    <button class="rights-button" onclick="showRight('safety')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
-                        <span style="font-size: 30px;">🦺</span>
-                        <span style="font-weight: bold; color: black;">Safety Rights</span>
-                    </button>
-                    <button class="rights-button" onclick="showRight('information')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
-                        <span style="font-size: 30px;">📋</span>
-                        <span style="font-weight: bold; color: black;">Information Rights</span>
-                    </button>
-                    <button class="rights-button" onclick="showRight('choice')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
-                        <span style="font-size: 30px;">🔄</span>
-                        <span style="font-weight: bold; color: black;">Choice Rights</span>
-                    </button>
-                </div>
-                <!-- Second Row -->
-                <div class="button-row" style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
-                    <button class="rights-button" onclick="showRight('redress')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
-                        <span style="font-size: 30px;">⚖️</span>
-                        <span style="font-weight: bold; color: black;">Redress Rights</span>
-                    </button>
-                    <button class="rights-button" onclick="showRight('basic')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
-                        <span style="font-size: 30px;">🏠</span>
-                        <span style="font-weight: bold; color: black;">Basic Needs</span>
-                    </button>
-                    <button class="rights-button" onclick="showRight('privacy')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
-                        <span style="font-size: 30px;">🔐</span>
-                        <span style="font-weight: bold; color: black;">Privacy Rights</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Content Display Area -->
-            <div id="rightsContent" style="margin-bottom: 0px;">
-                <div style="background: #f8f9fa; border-radius: 15px; padding: 2rem; text-align: center; color: #6c757d; border: 2px dashed #dee2e6;">
-                    <p style="margin: 0; font-style: italic;">Click on a consumer right above to view detailed information</p>
-                </div>
-            </div>
+            <div class="progress-text" id="progressText">Step 1 of 5</div>
         </div>
+
+        <!-- Decision Point 1 -->
+        <section class="scenario-section active" id="step1">
+            <div class="decision-point">
+                <div class="decision-title">Decision Point 1: Where do you start?</div>
+                <h3>As the regulatory authority, what should be your first step in addressing this situation?</h3>
+                
+                <div class="options-container">
+                    <button class="option-button" onclick="selectOption(1, 'A')">
+                        <strong>A)</strong> Conduct a comprehensive data analysis to understand the scope and specific nature of the problems before determining solutions
+                    </button>
+                    <button class="option-button" onclick="selectOption(1, 'B')">
+                        <strong>B)</strong> Immediately ban all cosmetic injectable procedures until new regulations can be developed
+                    </button>
+                    <button class="option-button" onclick="selectOption(1, 'C')">
+                        <strong>C)</strong> Issue emergency licensing requirements for all current practitioners
+                    </button>
+                    <button class="option-button" onclick="selectOption(1, 'D')">
+                        <strong>D)</strong> Copy regulations from another jurisdiction that seems to have good oversight
+                    </button>
+                </div>
+
+                <div class="feedback-container" id="feedback1"></div>
+            </div>
+        </section>
+
+        <!-- Decision Point 2: Risk Assessment -->
+        <section class="scenario-section" id="step2">
+            <div class="decision-point">
+                <div class="decision-title">Decision Point 2: Risk Assessment Approach</div>
+                <h3>Your data analysis reveals 847 complaints in 18 months, with 23% involving serious adverse events. How do you proceed with risk assessment?</h3>
+                
+                <div class="options-container">
+                    <button class="option-button" onclick="selectOption(2, 'A')">
+                        <strong>A)</strong> All cosmetic procedures carry the same risk level and should be regulated equally
+                    </button>
+                    <button class="option-button" onclick="selectOption(2, 'B')">
+                        <strong>B)</strong> Categorize procedures by risk level, analyze practitioner qualifications, and map complaint patterns to specific risk factors
+                    </button>
+                    <button class="option-button" onclick="selectOption(2, 'C')">
+                        <strong>C)</strong> Focus only on procedures that have resulted in hospitalizations
+                    </button>
+                    <button class="option-button" onclick="selectOption(2, 'D')">
+                        <strong>D)</strong> Assume all complaints are valid and require the highest level of regulatory intervention
+                    </button>
+                </div>
+
+                <div class="feedback-container" id="feedback2"></div>
+            </div>
+        </section>
+
+        <!-- Decision Point 3: Regulatory Response -->
+        <section class="scenario-section" id="step3">
+            <div class="decision-point">
+                <div class="decision-title">Decision Point 3: Regulatory Response Design</div>
+                <h3>Risk analysis shows high-risk injectables (like Botox) correlate with 89% of serious adverse events when performed by non-medical practitioners. What's your regulatory approach?</h3>
+                
+                <div class="options-container">
+                    <button class="option-button" onclick="selectOption(3, 'A')">
+                        <strong>A)</strong> Require medical supervision for high-risk procedures while allowing qualified non-medical practitioners to perform low-risk treatments with proper training
+                    </button>
+                    <button class="option-button" onclick="selectOption(3, 'B')">
+                        <strong>B)</strong> Require all cosmetic procedures to be performed by licensed physicians only
+                    </button>
+                    <button class="option-button" onclick="selectOption(3, 'C')">
+                        <strong>C)</strong> Create a single licensing category for all cosmetic practitioners regardless of procedures offered
+                    </button>
+                    <button class="option-button" onclick="selectOption(3, 'D')">
+                        <strong>D)</strong> Ban high-risk procedures and allow market forces to regulate low-risk treatments
+                    </button>
+                </div>
+
+                <div class="feedback-container" id="feedback3"></div>
+            </div>
+        </section>
+
+        <!-- Decision Point 4: Implementation Strategy -->
+        <section class="scenario-section" id="step4">
+            <div class="decision-point">
+                <div class="decision-title">Decision Point 4: Implementation Strategy</div>
+                <h3>You've designed a tiered regulatory approach. How do you implement it to ensure compliance and minimize unintended consequences?</h3>
+                
+                <div class="options-container">
+                    <button class="option-button" onclick="selectOption(4, 'A')">
+                        <strong>A)</strong> Implement immediately with a 30-day compliance deadline for all practitioners
+                    </button>
+                    <button class="option-button" onclick="selectOption(4, 'B')">
+                        <strong>B)</strong> Phase implementation over 6 months with stakeholder consultation, clear guidance, and transition support for existing practitioners
+                    </button>
+                    <button class="option-button" onclick="selectOption(4, 'C')">
+                        <strong>C)</strong> Start with the most restrictive rules and gradually ease requirements based on industry feedback
+                    </button>
+                    <button class="option-button" onclick="selectOption(4, 'D')">
+                        <strong>D)</strong> Implement for new practitioners only, allowing existing ones to continue under current rules
+                    </button>
+                </div>
+
+                <div class="feedback-container" id="feedback4"></div>
+            </div>
+        </section>
+
+        <!-- Results Summary -->
+        <section class="scenario-section" id="step5">
+            <div class="results-summary">
+                <div class="score-display" id="finalScore">0%</div>
+                <h2>Right Touch Regulation Assessment</h2>
+                <p id="overallFeedback"></h3>
+            </div>
+
+            <div class="decision-point">
+                <div class="decision-title">How well did you apply Right Touch principles?</div>
+                <div class="principles-checklist" id="principlesChecklist">
+                    <!-- Principles will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #f8fbff 0%, #f2f7fe 100%); padding: 15px; border-radius: 12px; margin-top: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.5);">
+                <h3 style="color: var(--secondary-blue); margin-bottom: 1rem;">🎓 Key Takeaways</h3>
+                <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                    <li>Right Touch Regulation requires careful problem analysis before solution design</li>
+                    <li>Risk-based approaches target regulatory resources where they're most needed</li>
+                    <li>Proportionate responses balance public protection with regulatory burden</li>
+                    <li>Implementation strategy is as important as regulatory design</li>
+                </ul>
+            </div>
+        </section>
+
+        <nav class="navigation">
+            <button class="nav-button" id="prevButton" onclick="previousStep()">Previous</button>
+            <div style="color: var(--neutral-gray);">
+                <span id="currentStep">1</span> of 5
+            </div>
+            <button class="nav-button" id="nextButton" onclick="nextStep()">Next</button>
+        </nav>
     </div>
 
     <script>
-        const rightsData = {
-            safety: {
-                color: '#64092c',
-                lightColor: '#fcf6f8',
-                emoji: '🦺',
-                title: 'Safety Rights',
-                description: 'The right to protection from products, services, or practices that could cause harm to health, safety, or well-being.',
-                example: 'Expecting a licensed electrician to follow safety codes and use proper materials to prevent electrical hazards in your home.'
+        // Global state
+        let currentStepIndex = 0;
+        const totalSteps = 5;
+        let answers = {};
+        let stepCompleted = [false, false, false, false, false];
+
+        // Feedback database
+        const feedbackData = {
+            1: {
+                A: {
+                    quality: 'excellent',
+                    content: '✅ <strong>Excellent choice!</strong> You\'ve applied the first element of Right Touch Regulation perfectly. By gathering comprehensive data first, you\'re ensuring your regulatory response will be based on evidence rather than assumptions.',
+                    rightTouch: 'This demonstrates "Identify the problem before the solution" - the foundational element of Right Touch Regulation.'
+                },
+                B: {
+                    quality: 'poor',
+                    content: '❌ <strong>This approach could cause significant harm.</strong> An immediate ban would shut down legitimate, safe practitioners along with problematic ones, likely pushing procedures underground and creating worse public safety.',
+                    rightTouch: 'This violates the "Proportionate" principle by using excessive regulatory force before understanding the actual scope of the problem.'
+                },
+                C: {
+                    quality: 'good',
+                    content: '⚠️ <strong>This shows urgency but lacks precision.</strong> Emergency licensing might address immediate concerns but could create new problems if requirements aren\'t well-designed based on actual risk data.',
+                    rightTouch: 'While responsive, this approach skips the critical "Identify the problem before the solution" step.'
+                },
+                D: {
+                    quality: 'poor',
+                    content: '❌ <strong>This could lead to mismatched regulation.</strong> Each jurisdiction has unique circumstances. Copying solutions without understanding your specific problem could create ineffective or inappropriate oversight.',
+                    rightTouch: 'This violates "Targeted" regulation by not focusing on your jurisdiction\'s specific problems and circumstances.'
+                }
             },
-            information: {
-                color: '#B4851F',
-                lightColor: '#fefcf7',
-                emoji: '📋',
-                title: 'Information Rights',
-                description: 'The right to receive accurate, complete information needed to make informed decisions about purchases and services.',
-                example: 'A licensed physician must clearly explain treatment options, risks, and costs, and provide prescription information with proper dosage instructions.'
+            2: {
+                A: {
+                    quality: 'poor',
+                    content: '❌ <strong>This oversimplified approach misses critical distinctions.</strong> A basic facial treatment and Botox injections carry vastly different risk profiles and should be regulated accordingly.',
+                    rightTouch: 'This fails the "Proportionate" principle by not matching regulatory intensity to actual risk levels.'
+                },
+                B: {
+                    quality: 'excellent',
+                    content: '✅ <strong>Outstanding risk assessment approach!</strong> You\'re systematically analyzing multiple risk factors to create a nuanced understanding that will enable targeted, effective regulation.',
+                    rightTouch: 'This exemplifies "Quantify and qualify the risks" while supporting "Targeted" regulation based on evidence.'
+                },
+                C: {
+                    quality: 'good',
+                    content: '⚠️ <strong>This focuses on serious outcomes but is too narrow.</strong> Preventing hospitalizations is important, but you\'re missing opportunities to prevent smaller harms that collectively impact many people.',
+                    rightTouch: 'While targeting high-impact events, this approach may not be sufficiently "Proportionate" to address the full spectrum of risks.'
+                },
+                D: {
+                    quality: 'poor',
+                    content: '❌ <strong>This assumption-based approach could lead to overregulation.</strong> Not all complaints indicate regulatory failures, and treating them as equivalent could result in unnecessarily burdensome rules.',
+                    rightTouch: 'This violates "Proportionate" regulation by not properly qualifying risks and their actual causes.'
+                }
             },
-            choice: {
-                color: '#484848',
-                lightColor: '#f8f8f8',
-                emoji: '🔄',
-                title: 'Choice Rights',
-                description: 'The right to access a variety of products and services at competitive prices without unfair restrictions.',
-                example: 'Being able to choose from multiple licensed contractors for home repairs, with transparent pricing and service options.'
+            3: {
+                A: {
+                    quality: 'excellent',
+                    content: '✅ <strong>Perfect application of risk-based regulation!</strong> You\'re matching regulatory intensity to actual risk while preserving access to safe services. This approach protects the public without unnecessary economic disruption.',
+                    rightTouch: 'This demonstrates "Proportionate," "Targeted," and "Get as close to the problem as possible" principles working together.'
+                },
+                B: {
+                    quality: 'poor',
+                    content: '❌ <strong>This overreaction would eliminate safe, accessible services.</strong> Many cosmetic procedures can be safely performed by properly trained non-physicians. This approach protects against some risks while creating access problems.',
+                    rightTouch: 'This violates "Proportionate" regulation by applying maximum restriction regardless of actual risk levels.'
+                },
+                C: {
+                    quality: 'poor',
+                    content: '❌ <strong>This misses the risk-based approach entirely.</strong> A single category fails to distinguish between vastly different risk profiles, likely under-regulating dangerous procedures while over-regulating safe ones.',
+                    rightTouch: 'This fails both "Targeted" and "Proportionate" principles by not matching oversight to specific risks.'
+                },
+                D: {
+                    quality: 'good',
+                    content: '⚠️ <strong>This addresses high risks but may not be necessary.</strong> Banning procedures that could be safely performed with proper oversight eliminates consumer choice when a regulatory solution might be more appropriate.',
+                    rightTouch: 'While this gets "close to the problem," it may not be the most "Proportionate" response if oversight could achieve the same safety goals.'
+                }
             },
-            redress: {
-                color: '#084d78',
-                lightColor: '#f7f9fc',
-                emoji: '⚖️',
-                title: 'Redress Rights',
-                description: 'The right to seek fair resolution when products or services fail to meet reasonable expectations or cause harm.',
-                example: 'Having access to a licensing board\'s complaint process if a licensed professional provides substandard service or violates professional standards.'
-            },
-            basic: {
-                color: '#64092c',
-                lightColor: '#fcf6f8',
-                emoji: '🏠',
-                title: 'Basic Needs',
-                description: 'The right to access essential goods and services necessary for health, safety, and well-being.',
-                example: 'Access to licensed healthcare providers, legal representation, and essential home services regardless of economic status.'
-            },
-            privacy: {
-                color: '#B4851F',
-                lightColor: '#fefcf7',
-                emoji: '🔐',
-                title: 'Privacy Rights',
-                description: 'The right to control how personal information is collected, used, and shared in commercial transactions.',
-                example: 'A licensed accountant must protect your financial information and only share it with your explicit consent or as required by law.'
+            4: {
+                A: {
+                    quality: 'good',
+                    content: '⚠️ <strong>Shows urgency but risks poor compliance.</strong> A 30-day deadline might not give practitioners enough time to understand requirements or obtain necessary training, potentially creating widespread non-compliance.',
+                    rightTouch: 'While direct, this approach may not "Keep it simple" for practitioners trying to comply quickly.'
+                },
+                B: {
+                    quality: 'excellent',
+                    content: '✅ <strong>Excellent implementation strategy!</strong> This approach balances urgency with practicality, helps ensure compliance, and reduces unintended consequences through stakeholder input and transition support.',
+                    rightTouch: 'This demonstrates "Agile," "Keep it simple," and "Check for unintended consequences" principles in action.'
+                },
+                C: {
+                    quality: 'poor',
+                    content: '❌ <strong>This backwards approach could undermine your regulatory goals.</strong> Starting with maximum restrictions and loosening them creates uncertainty and may not address the specific risks you\'ve identified.',
+                    rightTouch: 'This violates "Targeted" regulation by not addressing specific identified problems with appropriate responses.'
+                },
+                D: {
+                    quality: 'good',
+                    content: '⚠️ <strong>This may create unfair competitive advantages.</strong> While it allows time for existing practitioners to adapt, it could create two classes of providers operating under different standards, potentially confusing consumers.',
+                    rightTouch: 'This raises "Consistent" application concerns while showing consideration for implementation practicalities.'
+                }
             }
         };
 
-        function showRight(rightType) {
-            const contentDiv = document.getElementById('rightsContent');
-            const right = rightsData[rightType];
+        function updateProgress() {
+            const progress = ((currentStepIndex + 1) / totalSteps) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `Decision ${currentStepIndex + 1} of ${totalSteps}`;
+            document.getElementById('currentStep').textContent = currentStepIndex + 1;
             
-            // Reset ALL button styles to original state
-            document.querySelectorAll('.rights-button').forEach(btn => {
-                btn.style.background = 'transparent';
-                btn.style.transform = 'none';
-                // Reset text color to black for all buttons
-                const textSpan = btn.querySelectorAll('span')[1];
-                if (textSpan) {
-                    textSpan.style.color = 'black';
+            // Update navigation buttons
+            document.getElementById('prevButton').disabled = currentStepIndex === 0;
+            
+            if (currentStepIndex === totalSteps - 1) {
+                document.getElementById('nextButton').style.display = 'none';
+            } else {
+                document.getElementById('nextButton').style.display = 'block';
+                document.getElementById('nextButton').textContent = 'Next';
+                document.getElementById('nextButton').disabled = !stepCompleted[currentStepIndex];
+            }
+        }
+
+        function showStep(index) {
+            // Hide all sections
+            document.querySelectorAll('.scenario-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show current section
+            document.getElementById(`step${index + 1}`).classList.add('active');
+            
+            // If showing step 5 (results), automatically calculate results
+            if (index === 4) {
+                calculateResults();
+            }
+            
+            updateProgress();
+        }
+
+        function selectOption(step, option) {
+            const feedback = feedbackData[step][option];
+            
+            // Store the answer
+            answers[step] = { option, quality: feedback.quality };
+            
+            // Update button states
+            const buttons = document.querySelectorAll(`#step${step} .option-button`);
+            buttons.forEach(btn => {
+                btn.classList.remove('selected', 'correct', 'incorrect', 'neutral');
+                if (btn.textContent.trim().startsWith(option + ')')) {
+                    btn.classList.add('selected');
+                    if (feedback.quality === 'excellent') {
+                        btn.classList.add('correct');
+                    } else if (feedback.quality === 'poor') {
+                        btn.classList.add('incorrect');
+                    } else {
+                        btn.classList.add('neutral');
+                    }
                 }
             });
-            
-            // Highlight selected button
-            const clickedButton = event.target.closest('button');
-            clickedButton.style.background = right.color;
-            clickedButton.style.transform = 'translateY(-2px)';
-            // Set text to white for selected button only
-            const selectedTextSpan = clickedButton.querySelectorAll('span')[1];
-            if (selectedTextSpan) {
-                selectedTextSpan.style.color = 'white';
-            }
-            
-            // Check if mobile view
-            const isMobile = window.innerWidth <= 768;
-            
-            if (isMobile) {
-                // Mobile layout: emoji above title
-                contentDiv.innerHTML = `
-                    <div class="content-container" style="background: transparent; border-radius: 15px; padding: 2rem; border-left: 5px solid ${right.color}; transition: all 0.3s ease; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
-                        <div style="text-align: center; margin-bottom: 20px;">
-                            <div style="font-size: 50px; margin-bottom: 15px;">${right.emoji}</div>
-                            <h3 style="margin: 0 0 20px 0; color: ${right.color}; font-size: 1.4em;">${right.title}</h3>
-                        </div>
-                        <div style="width: 100%;">
-                            <p style="text-align: justify; margin-bottom: 15px; color: #333; line-height: 1.6;">${right.description}</p>
-                            <p style="text-align: justify; margin: 0; color: #333; line-height: 1.6;"><strong style="color: ${right.color};">Example:</strong> ${right.example}</p>
-                        </div>
+
+            // Show feedback
+            const feedbackContainer = document.getElementById(`feedback${step}`);
+            feedbackContainer.innerHTML = `
+                <div class="feedback-${feedback.quality}">
+                    ${feedback.content}
+                    <div class="right-touch-connection">
+                        <h4>🎯 Right Touch Connection:</h4>
+                        <h3>${feedback.rightTouch}</h3>
                     </div>
-                `;
+                </div>
+            `;
+            feedbackContainer.classList.add('show');
+            
+            // Mark step as completed
+            stepCompleted[step - 1] = true;
+            updateProgress();
+        }
+
+        function nextStep() {
+            if (currentStepIndex < totalSteps - 1) {
+                currentStepIndex++;
+                showStep(currentStepIndex);
+            }
+        }
+
+        function previousStep() {
+            if (currentStepIndex > 0) {
+                currentStepIndex--;
+                showStep(currentStepIndex);
+            }
+        }
+
+        function calculateResults() {
+            const answerValues = Object.values(answers);
+            const excellentCount = answerValues.filter(a => a.quality === 'excellent').length;
+            const goodCount = answerValues.filter(a => a.quality === 'good').length;
+            const poorCount = answerValues.filter(a => a.quality === 'poor').length;
+            
+            const totalAnswered = excellentCount + goodCount + poorCount;
+            const score = totalAnswered > 0 ? Math.round(((excellentCount * 3 + goodCount * 2 + poorCount * 1) / (totalAnswered * 3)) * 100) : 0;
+            
+            document.getElementById('finalScore').textContent = score + '%';
+            
+            let overallFeedback = '';
+            if (score >= 85) {
+                overallFeedback = 'Outstanding! You demonstrated excellent understanding of Right Touch Regulation principles.';
+            } else if (score >= 70) {
+                overallFeedback = 'Good work! You showed solid grasp of Right Touch principles with room for refinement.';
+            } else if (score >= 55) {
+                overallFeedback = 'Fair application. Consider reviewing the Right Touch principles to strengthen your regulatory approach.';
             } else {
-                // Desktop layout: original side-by-side design
-                contentDiv.innerHTML = `
-                    <div style="background: transparent; border-radius: 15px; padding: 2rem; border-left: 5px solid ${right.color}; transition: all 0.3s ease; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div style="background: transparent; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 40px; flex-shrink: 0;">${right.emoji}</div>
-                            <div style="flex: 1;">
-                                <h3 style="margin: 0 0 15px 0; color: ${right.color}; font-size: 1.4em;">${right.title}</h3>
-                                <p style="text-align: justify; margin-bottom: 15px; color: #333; line-height: 1.6;">${right.description}</p>
-                                <p style="text-align: justify; margin: 0; color: #333; line-height: 1.6;"><strong style="color: ${right.color};">Example:</strong> ${right.example}</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                overallFeedback = 'This case study highlighted areas for improvement in applying Right Touch Regulation principles.';
             }
             
-            // Smooth scroll to content if needed (helpful on mobile)
-            contentDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            document.getElementById('overallFeedback').textContent = overallFeedback;
+            
+            // Show principles checklist
+            const principles = [
+                { name: 'Proportionate', achieved: excellentCount >= 2 },
+                { name: 'Consistent', achieved: score >= 70 },
+                { name: 'Targeted', achieved: excellentCount >= 1 },
+                { name: 'Transparent', achieved: true },
+                { name: 'Accountable', achieved: score >= 60 },
+                { name: 'Agile', achieved: answers[4] && answers[4].quality !== 'poor' }
+            ];
+            
+            const checklistHTML = principles.map(p => {
+                const status = p.achieved ? 'achieved' : (score >= 50 ? 'partial' : 'missed');
+                const icon = p.achieved ? '✅' : (score >= 50 ? '⚠️' : '❌');
+                return `<div class="principle-check ${status}">${icon}<br><strong>${p.name}</strong></div>`;
+            }).join('');
+            
+            document.getElementById('principlesChecklist').innerHTML = checklistHTML;
         }
 
-        // Add hover effects for better interactivity
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            const buttons = document.querySelectorAll('.rights-button');
-            buttons.forEach(button => {
-                button.addEventListener('mouseenter', function() {
-                    if (this.style.background === 'transparent') {
-                        this.style.transform = 'translateY(-1px)';
-                        this.style.boxShadow = '0 6px 15px rgba(0,0,0,0.2)';
-                    }
-                });
-                
-                button.addEventListener('mouseleave', function() {
-                    if (this.style.background === 'transparent') {
-                        this.style.transform = 'none';
-                        this.style.boxShadow = '0 4px 10px rgba(0,0,0,0.15)';
-                    }
-                });
-            });
+            updateProgress();
         });
-
-        // Add before closing </body> tag in ConsumerRights.html
-function optimizeForIframe() {
-    document.body.style.margin = '0';
-    document.body.style.padding = '10px';
-    
-    const style = document.createElement('style');
-    style.textContent = `
-        body { overflow-x: hidden; }
-        img, video { max-width: 100% !important; height: auto !important; }
-        @media (max-width: 768px) {
-            body { font-size: 14px !important; padding: 5px !important; }
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-window.addEventListener('load', optimizeForIframe);
     </script>
 </body>
 </html>
