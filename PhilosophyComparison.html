@@ -253,6 +253,17 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Key insight section - initially hidden */
+        .key-insight {
+            display: none;
+            margin-top: 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .key-insight.show {
+            display: block;
+        }
+
         @media (max-width: 768px) {
             .container {
                 margin: 1rem;
@@ -340,7 +351,7 @@
                 <button id="resetActivity" class="btn btn-secondary">Reset Activity</button>
             </div>
 
-            <div style="margin-top: 2rem;">
+            <div id="keyInsight" class="key-insight">
                 <h3>Key Insight</h3>
                 <p>Notice how the same consumer protection goal can be achieved through different philosophical approaches. The choice between them often depends on:</p>
                 <ul style="margin: 1rem 0 0 2rem;">
@@ -355,6 +366,7 @@
 
     <script>
         let draggedElement = null;
+        let keyInsightShown = false;
         const originalParent = document.querySelector('.drag-items');
 
         // Initialize drag and drop functionality
@@ -485,6 +497,13 @@
                     <strong>Keep trying!</strong> None are correct yet. Think about whether each approach relies on mandatory requirements or market-based solutions.
                 `;
             }
+            
+            // Show key insight section after first check
+            if (!keyInsightShown) {
+                const keyInsight = document.getElementById('keyInsight');
+                keyInsight.classList.add('show');
+                keyInsightShown = true;
+            }
         });
 
         // Reset functionality
@@ -504,6 +523,9 @@
             // Hide feedback
             const feedback = document.getElementById('dragDropFeedback');
             feedback.classList.remove('show');
+            
+            // Keep key insight visible if it was already shown
+            // (keyInsightShown variable tracks this state)
         });
 
         // Initialize the activity when page loads
@@ -513,4 +535,3 @@
     </script>
 </body>
 </html>
-
