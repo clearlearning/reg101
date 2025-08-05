@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Right Touch Regulation - Interactive Case Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-burgundy: #64092c;
@@ -12,6 +13,8 @@
             --secondary-blue: #084d78;
             --light-bg: #f8f9fa;
             --white: #ffffff;
+            -webkit-text-size-adjust: none;
+            text-size-adjust: none;
         }
 
         * {
@@ -21,31 +24,38 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: var(--neutral-gray);
+            text-align: justify;
+            color: #000000;
             background: transparent;
-            min-height: 100vh;
-            max-height: 1500px;
-            overflow-y: auto;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 1rem;
         }
 
         .case-study-container {
             max-width: 800px;
-            margin: 2rem auto;
+            margin: 0 auto;
             background: var(--white);
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             border-radius: 12px;
-            overflow: hidden;
-            max-height: calc(1500px - 4rem);
             display: flex;
             flex-direction: column;
+            height: 100vh;
         }
 
         .progress-container {
             background: var(--light-bg);
             padding: 1rem 2rem;
             border-bottom: 1px solid #e0e0e0;
+            flex-shrink: 0;
         }
 
         .progress-bar {
@@ -58,7 +68,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary-burgundy) 0%, var(--accent-gold) 100%);
+            background: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%);
             width: 0%;
             transition: width 0.5s ease;
         }
@@ -76,6 +86,7 @@
             animation: fadeIn 0.5s ease-in;
             overflow-y: auto;
             flex: 1;
+            min-height: 0;
         }
 
         .scenario-section.active {
@@ -87,26 +98,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .scenario-card {
-            background: var(--light-bg);
-            border-left: 4px solid var(--primary-burgundy);
-            color: black;
-            padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        .scenario-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--primary-burgundy);
-        }
-
         .decision-point {
             background: var(--light-bg);
-            border-left: 4px solid var(--accent-gold);
+            border-left: 4px solid #084d78;
             padding: 1rem;
             border-radius: 12px;
             margin-bottom: 2rem;
@@ -115,8 +109,8 @@
 
         .decision-title {
             font-size: 1.3rem;
-            font-weight: 600;
-            color: #966e19;
+            font-weight: 700;
+            color: #084d78;
             margin-bottom: 1rem;
         }
 
@@ -135,6 +129,7 @@
             transition: all 0.3s ease;
             text-align: left;
             font-size: 1rem;
+            line-height: 1.5;
         }
 
         .option-button:hover {
@@ -194,6 +189,7 @@
             padding: 10px;
             border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-align: left;
         }
 
         .feedback-good {
@@ -202,6 +198,7 @@
             padding: 10px;
             border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-align: left;
         }
 
         .feedback-poor {
@@ -210,15 +207,17 @@
             padding: 10px;
             border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-align: left;
         }
 
         .right-touch-connection {
-            background: linear-gradient(135deg, #fdf8f8 0%, #fef2f2 100%);
+            background: #ffffff;
             border: 0px solid var(--primary-burgundy);
             border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
             padding: 1rem;
             margin: 15px;
+            text-align: left;
         }
 
         .right-touch-connection h4 {
@@ -230,9 +229,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem;
+            padding: 1rem 2rem;
             background: var(--light-bg);
             border-top: 1px solid #e0e0e0;
+            flex-shrink: 0;
         }
 
         .nav-button {
@@ -304,37 +304,21 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.25)
         }
 
-        @media (max-width: 768px) {
-            .case-study-container {
-                margin: 1rem;
-            }
-            
-            .scenario-section {
-                padding: 1rem;
-            }
-            
-            .navigation {
-                padding: 1rem;
-            }
-
             @media (max-width: 768px) {
-                body {
-                    max-height: none;
+                .case-study-container {
+                    margin: 0;
+                    border-radius: 0;
+                    height: 100vh;
+                }
+                
+                .scenario-section {
+                    padding: 1rem;
+                }
+                
+                .navigation {
+                    padding: 1rem;
+                }
             }
-    
-            .case-study-container {
-                margin: 1rem;
-                max-height: none;
-            }
-            
-            .scenario-section {
-                padding: 1rem;
-            }
-            
-            .navigation {
-                padding: 1rem;
-            }
-        }
     </style>
 </head>
 <body>
@@ -346,20 +330,11 @@
             <div class="progress-text" id="progressText">Step 1 of 5</div>
         </div>
 
-        <!-- Scenario Introduction -->
+        <!-- Decision Point 1 -->
         <section class="scenario-section active" id="step1">
-            <div class="scenario-card">
-                <div class="scenario-title">🏥 The Cosmetic Injectable Crisis</div>
-                <p style="margin-bottom: 1rem;">A large metropolitan area has experienced a 300% increase in cosmetic injectable clinics over the past two years. These clinics offer Botox, dermal fillers, and other aesthetic procedures.</p>
-                
-                <p style="margin-bottom: 1rem;"><strong>The Problem:</strong> Patient complaints have skyrocketed, including reports of botched procedures, infections, scarring, and lack of informed consent. Many clinics are operated by individuals with minimal medical training.</p>
-                
-                <p><strong>Current Regulatory Gap:</strong> Existing regulations are vague and fragmented. Some practitioners fall under healthcare licensing, others operate in regulatory gray areas with little oversight.</p>
-            </div>
-
             <div class="decision-point">
                 <div class="decision-title">Decision Point 1: Where do you start?</div>
-                <p>As the regulatory authority, what should be your first step in addressing this situation?</p>
+                <h3>As the regulatory authority, what should be your first step in addressing this situation?</h3>
                 
                 <div class="options-container">
                     <button class="option-button" onclick="selectOption(1, 'A')">
@@ -384,7 +359,7 @@
         <section class="scenario-section" id="step2">
             <div class="decision-point">
                 <div class="decision-title">Decision Point 2: Risk Assessment Approach</div>
-                <p>Your data analysis reveals 847 complaints in 18 months, with 23% involving serious adverse events. How do you proceed with risk assessment?</p>
+                <h3>Your data analysis reveals 847 complaints in 18 months, with 23% involving serious adverse events. How do you proceed with risk assessment?</h3>
                 
                 <div class="options-container">
                     <button class="option-button" onclick="selectOption(2, 'A')">
@@ -409,7 +384,7 @@
         <section class="scenario-section" id="step3">
             <div class="decision-point">
                 <div class="decision-title">Decision Point 3: Regulatory Response Design</div>
-                <p>Risk analysis shows high-risk injectables (like Botox) correlate with 89% of serious adverse events when performed by non-medical practitioners. What's your regulatory approach?</p>
+                <h3>Risk analysis shows high-risk injectables (like Botox) correlate with 89% of serious adverse events when performed by non-medical practitioners. What's your regulatory approach?</h3>
                 
                 <div class="options-container">
                     <button class="option-button" onclick="selectOption(3, 'A')">
@@ -434,7 +409,7 @@
         <section class="scenario-section" id="step4">
             <div class="decision-point">
                 <div class="decision-title">Decision Point 4: Implementation Strategy</div>
-                <p>You've designed a tiered regulatory approach. How do you implement it to ensure compliance and minimize unintended consequences?</p>
+                <h3>You've designed a tiered regulatory approach. How do you implement it to ensure compliance and minimize unintended consequences?</h3>
                 
                 <div class="options-container">
                     <button class="option-button" onclick="selectOption(4, 'A')">
@@ -460,7 +435,7 @@
             <div class="results-summary">
                 <div class="score-display" id="finalScore">0%</div>
                 <h2>Right Touch Regulation Assessment</h2>
-                <p id="overallFeedback"></p>
+                <p id="overallFeedback"></h3>
             </div>
 
             <div class="decision-point">
@@ -592,7 +567,7 @@
         function updateProgress() {
             const progress = ((currentStepIndex + 1) / totalSteps) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
-            document.getElementById('progressText').textContent = `Step ${currentStepIndex + 1} of ${totalSteps}`;
+            document.getElementById('progressText').textContent = `Decision ${currentStepIndex + 1} of ${totalSteps}`;
             document.getElementById('currentStep').textContent = currentStepIndex + 1;
             
             // Update navigation buttons
@@ -653,7 +628,7 @@
                     ${feedback.content}
                     <div class="right-touch-connection">
                         <h4>🎯 Right Touch Connection:</h4>
-                        <p>${feedback.rightTouch}</p>
+                        <h3>${feedback.rightTouch}</h3>
                     </div>
                 </div>
             `;
