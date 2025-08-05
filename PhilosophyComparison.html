@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,6 +20,7 @@
             color: #333;
             min-height: 100vh;
             padding: 2rem;
+            touch-action: manipulation;
         }
 
         .container {
@@ -88,8 +90,12 @@
             margin: 0.5rem 0;
             border-radius: 5px;
             cursor: move;
+            cursor: grab;
             transition: all 0.3s ease;
             user-select: none;
+            touch-action: none;
+            position: relative;
+            z-index: 1;
         }
 
         .drag-item:hover {
@@ -98,14 +104,20 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
+        .drag-item:active {
+            cursor: grabbing;
+        }
+
         .drag-item.dragging {
-            opacity: 0.5;
-            transform: rotate(5deg);
+            opacity: 0.8;
+            transform: rotate(3deg) scale(1.05);
+            z-index: 1000;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
 
         .drop-zone {
             min-height: 120px;
-            border:  0px;
+            border: 0px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
             border-radius: 5px;
             padding: 1rem;
@@ -113,6 +125,7 @@
             text-align: center;
             transition: all 0.3s ease;
             background: #ececec;
+            position: relative;
         }
 
         .drop-zone h4 {
@@ -128,8 +141,9 @@
 
         .drop-zone.drag-over {
             border-color: #27ae60;
-            background: #ececec;
+            background: #e8f5e8;
             transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
         }
 
         .drop-zone.filled {
@@ -144,7 +158,7 @@
 
         .drop-zone[data-category="restrictive"].drag-over {
             border-color: #27ae60;
-            background: #ececec;
+            background: #e8f5e8;
         }
 
         .drop-zone[data-category="less-restrictive"] {
@@ -153,7 +167,7 @@
 
         .drop-zone[data-category="less-restrictive"].drag-over {
             border-color: #27ae60;
-            background: #ececec;
+            background: #e8f5e8;
         }
 
         .btn {
@@ -264,9 +278,14 @@
             display: block;
         }
 
+        /* Mobile-specific styles */
         @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
             .container {
-                margin: 1rem;
+                margin: 0;
                 border-radius: 0;
             }
 
@@ -288,8 +307,38 @@
             }
 
             .drop-zone {
-                min-height: 80px;
+                min-height: 100px;
+                padding: 1.5rem 1rem;
             }
+
+            .drag-item {
+                padding: 1.2rem;
+                font-size: 0.95rem;
+                margin: 0.75rem 0;
+            }
+
+            .instructions p {
+                font-size: 0.95rem;
+            }
+
+            .btn {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+        }
+
+        /* Visual feedback for mobile dragging */
+        .drag-item.mobile-dragging {
+            opacity: 0.8;
+            transform: scale(1.1);
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
     </style>
 </head>
@@ -368,19 +417,36 @@
         let draggedElement = null;
         let keyInsightShown = false;
         const originalParent = document.querySelector('.drag-items');
+        
+        // Touch event variables
+        let touchItem = null;
+        let touchOffset = { x: 0, y: 0 };
+        let isDragging = false;
+
+        // Detect if device supports touch
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
         // Initialize drag and drop functionality
         function initializeDragDrop() {
             const dragItems = document.querySelectorAll('.drag-item');
             const dropZones = document.querySelectorAll('.drop-zone');
 
-            // Add drag event listeners to items
+            // Add drag event listeners to items (for desktop)
             dragItems.forEach(item => {
+                // Desktop drag events
                 item.addEventListener('dragstart', handleDragStart);
                 item.addEventListener('dragend', handleDragEnd);
+
+                // Touch events for mobile
+                item.addEventListener('touchstart', handleTouchStart, { passive: false });
+                item.addEventListener('touchmove', handleTouchMove, { passive: false });
+                item.addEventListener('touchend', handleTouchEnd, { passive: false });
+                
+                // Prevent context menu on long press for mobile
+                item.addEventListener('contextmenu', e => e.preventDefault());
             });
 
-            // Add drop event listeners to zones
+            // Add drop event listeners to zones (for desktop)
             dropZones.forEach(zone => {
                 zone.addEventListener('dragover', handleDragOver);
                 zone.addEventListener('dragenter', handleDragEnter);
@@ -389,6 +455,7 @@
             });
         }
 
+        // Desktop drag handlers
         function handleDragStart(e) {
             draggedElement = e.target;
             e.target.classList.add('dragging');
@@ -427,15 +494,107 @@
                 dropZone.classList.add('filled');
                 draggedElement = null;
                 
-                // Reset any previous feedback styles
-                document.querySelectorAll('.drag-item').forEach(item => {
-                    item.classList.remove('correct-item', 'incorrect-item');
-                });
-                
-                // Hide feedback
-                const feedback = document.getElementById('dragDropFeedback');
-                feedback.classList.remove('show');
+                resetFeedbackStyles();
             }
+        }
+
+        // Touch handlers for mobile
+        function handleTouchStart(e) {
+            e.preventDefault();
+            touchItem = e.target;
+            isDragging = true;
+            
+            const touch = e.touches[0];
+            const rect = touchItem.getBoundingClientRect();
+            touchOffset.x = touch.clientX - rect.left;
+            touchOffset.y = touch.clientY - rect.top;
+            
+            touchItem.classList.add('mobile-dragging');
+            
+            // Store original position
+            touchItem.originalParent = touchItem.parentNode;
+            touchItem.originalNextSibling = touchItem.nextSibling;
+        }
+
+        function handleTouchMove(e) {
+            if (!isDragging || !touchItem) return;
+            
+            e.preventDefault();
+            const touch = e.touches[0];
+            
+            // Move the item with the finger
+            touchItem.style.position = 'fixed';
+            touchItem.style.left = (touch.clientX - touchOffset.x) + 'px';
+            touchItem.style.top = (touch.clientY - touchOffset.y) + 'px';
+            touchItem.style.zIndex = '1000';
+            touchItem.style.pointerEvents = 'none';
+            
+            // Find what's under the finger
+            const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+            const dropZone = elementBelow ? elementBelow.closest('.drop-zone') : null;
+            
+            // Visual feedback
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                zone.classList.remove('drag-over');
+            });
+            
+            if (dropZone) {
+                dropZone.classList.add('drag-over');
+            }
+        }
+
+        function handleTouchEnd(e) {
+            if (!isDragging || !touchItem) return;
+            
+            e.preventDefault();
+            isDragging = false;
+            
+            const touch = e.changedTouches[0];
+            const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+            const dropZone = elementBelow ? elementBelow.closest('.drop-zone') : null;
+            
+            // Reset item styles
+            touchItem.style.position = '';
+            touchItem.style.left = '';
+            touchItem.style.top = '';
+            touchItem.style.zIndex = '';
+            touchItem.style.pointerEvents = '';
+            touchItem.classList.remove('mobile-dragging');
+            
+            // Remove drag-over classes
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                zone.classList.remove('drag-over');
+            });
+            
+            // Handle the drop
+            if (dropZone) {
+                dropZone.appendChild(touchItem);
+                dropZone.classList.add('filled');
+                resetFeedbackStyles();
+            } else {
+                // Return to original position if not dropped on a valid zone
+                if (touchItem.originalNextSibling) {
+                    touchItem.originalParent.insertBefore(touchItem, touchItem.originalNextSibling);
+                } else {
+                    touchItem.originalParent.appendChild(touchItem);
+                }
+            }
+            
+            // Clean up
+            delete touchItem.originalParent;
+            delete touchItem.originalNextSibling;
+            touchItem = null;
+        }
+
+        function resetFeedbackStyles() {
+            // Reset any previous feedback styles
+            document.querySelectorAll('.drag-item').forEach(item => {
+                item.classList.remove('correct-item', 'incorrect-item');
+            });
+            
+            // Hide feedback
+            const feedback = document.getElementById('dragDropFeedback');
+            feedback.classList.remove('show');
         }
 
         // Check answers functionality
@@ -511,8 +670,15 @@
             // Move all items back to original container
             const dragItems = document.querySelectorAll('.drag-item');
             dragItems.forEach(item => {
+                // Reset any positioning styles that might be left over
+                item.style.position = '';
+                item.style.left = '';
+                item.style.top = '';
+                item.style.zIndex = '';
+                item.style.pointerEvents = '';
+                
                 originalParent.appendChild(item);
-                item.classList.remove('correct-item', 'incorrect-item');
+                item.classList.remove('correct-item', 'incorrect-item', 'mobile-dragging');
             });
             
             // Reset drop zones
@@ -532,6 +698,13 @@
         document.addEventListener('DOMContentLoaded', () => {
             initializeDragDrop();
         });
+
+        // Prevent scrolling when dragging on mobile
+        document.addEventListener('touchmove', function(e) {
+            if (isDragging) {
+                e.preventDefault();
+            }
+        }, { passive: false });
     </script>
 </body>
 </html>
