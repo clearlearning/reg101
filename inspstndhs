@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Standards</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-text-size-adjust: none;
+            text-size-adjust: none;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: transparent;
+        }
+
+        html, body {
+            height: auto !important;
+            min-height: 0 !important;
+        }
+
+        .training-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-area {
+            padding: 20px;
+        }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .training-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .hotspot-area {
+            position: absolute;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .hotspot-area:hover {
+            background: rgba(99, 9, 44, 0.05);
+            border: none;
+            border-radius: 0px;
+            box-shadow: 0 5px 5px rgba(0,0,0,0.3);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-header {
+            background: white;
+            border-bottom: 5px solid transparent;
+            border-image: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%) 1;
+            color: black;
+            padding: 25px;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .modal-body {
+            padding: 10px 20px 10px 20px;
+        }
+
+        .modal-body p {
+            line-height: 1.8;
+            color: #000;
+            margin: 10px;
+        }
+
+        .modal-body ul {
+            list-style-type: square;
+            padding-left: 0;
+        }
+
+        .modal-body li {
+            margin: 0px 0px 10px 25px;
+            color: #000;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .content-area {
+                padding: 10px;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="training-container">
+        <div class="content-area">
+            <div class="image-container">
+                <img src="https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/professional_standards.png" alt="Professional Standards for Regulatory Inspectors" class="training-image" id="training-image">
+                
+                <!-- Invisible Clickable Areas -->
+                <div class="hotspot-area" style="top: 27%; left: 0%; width: 16.5%; height: 46%;" data-hotspot="1"></div>
+                <div class="hotspot-area" style="top: 27%; left: 21%; width: 16.5%; height: 46%;" data-hotspot="2"></div>
+                <div class="hotspot-area" style="top: 27%; left: 41.7%; width: 16.5%; height: 46%;" data-hotspot="3"></div>
+                <div class="hotspot-area" style="top: 27%; left: 62.55%; width: 16.5%; height: 46%" data-hotspot="4"></div>
+                <div class="hotspot-area" style="top: 27%; left: 83.5%; width: 16.5%; height: 46%;" data-hotspot="5"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 id="modal-title">Hotspot Information</h2>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <p>Content will be loaded here...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hotspot content data
+        const hotspotData = {
+            1: {
+                title: "🎩 Courtesy & Respect",
+                content: `
+                    <p style="text-align: justify;">Remain professional, firm yet courteous—even in difficult situations. Use respectful language, listen to concerns, and avoid confrontational tones. Remember that licensees may be defensive or stressed, and your calm professionalism can defuse tension while maintaining your authority.</p>
+
+                `
+            },
+            2: {
+                title: "⚖️ Impartiality",
+                content: `
+                    <p style="text-align: justify;">Consistently apply rules to all; guard against favoritism or bias. Treat large corporations and small businesses the same way. Don't let personal relationships, past experiences, or assumptions about certain types of businesses affect your judgment or enforcement decisions.</p>
+
+                `
+            },
+            3: {
+                title: "🔒 Confidentiality",
+                content: `
+                    <p style="text-align: justify;">Safeguard licensee's and public's sensitive information. Don't discuss one licensee's issues with another, avoid sharing details in public spaces, and follow your agency's protocols for handling confidential business information or trade secrets you may encounter.</p>
+
+                `
+            },
+            4: {
+                title: "💎 Clarity",
+                content: `
+                    <p style="text-align: justify;">Explain findings, corrections, and next steps in direct, accessible language. Avoid regulatory jargon that confuses licensees. Make sure they understand not just what needs to be fixed, but also why it matters and how to achieve compliance.</p>
+
+                `
+            },
+            5: {
+                title: "🎓 Supportive Educator",
+                content: `
+                    <p style="text-align: justify;">Explain not only what should be fixed, but also how and why—compliance, not punishment, is the goal. Connect violations to their impact on public safety, suggest resources for compliance assistance, and recognize when licensees are making good faith efforts to improve.</p>
+
+                `
+            },
+        };
+
+        // Get DOM elements
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        // Add click events to hotspot areas
+        document.querySelectorAll('.hotspot-area').forEach(hotspot => {
+            hotspot.addEventListener('click', function() {
+                const hotspotId = this.getAttribute('data-hotspot');
+                showModal(hotspotId);
+            });
+        });
+
+        // Modal functionality
+        function showModal(hotspotId) {
+            const data = hotspotData[hotspotId];
+            if (data) {
+                modalTitle.textContent = data.title;
+                modalBody.innerHTML = data.content;
+                modal.style.display = 'block';
+                
+                // Add show class after a brief delay for animation
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+            }
+        }
+
+        function closeModal() {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Event listeners for modal
+        closeBtn.addEventListener('click', closeModal);
+        
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Keyboard support
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.style.display === 'block') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
