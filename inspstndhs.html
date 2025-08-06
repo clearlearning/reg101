@@ -19,35 +19,50 @@
             margin: 0;
             padding: 20px;
             background: transparent;
+            min-height: 0;
+            height: auto;
         }
 
         html, body {
             height: auto !important;
             min-height: 0 !important;
+            overflow: hidden;
         }
 
         .training-container {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
+            padding: 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            min-height: 0;
         }
 
         .content-area {
-            padding: 20px;
+            padding: 0;
+            margin: 0;
+            display: inline-block;
+            line-height: 0;
         }
 
         .image-container {
             position: relative;
             display: inline-block;
             max-width: 100%;
-            margin: 20px 0;
+            margin: 0;
             border-radius: 8px;
             overflow: hidden;
+            line-height: 0;
         }
 
         .training-image {
             width: 100%;
             height: auto;
             display: block;
+            margin: 0;
+            padding: 0;
+            vertical-align: top;
         }
 
         .hotspot-area {
@@ -136,7 +151,7 @@
             position: absolute;
             right: 20px;
             top: 20px;
-            color: black;
+            color: white;
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
