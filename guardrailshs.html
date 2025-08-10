@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardrails</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-text-size-adjust: none;
+            text-size-adjust: none;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: transparent;
+            min-height: 0;
+            height: auto;
+        }
+
+        html, body {
+            height: auto !important;
+            min-height: 0 !important;
+            overflow: hidden;
+        }
+
+        .training-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            min-height: 0;
+        }
+
+        .content-area {
+            padding: 0;
+            margin: 0;
+            display: inline-block;
+            line-height: 0;
+        }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            margin: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .training-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0;
+            padding: 0;
+            vertical-align: top;
+        }
+
+        .hotspot-area {
+            position: absolute;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .hotspot-area:hover {
+            background: rgba(99, 9, 44, 0.05);
+            border: none;
+            border-radius: 0px;
+            box-shadow: 0 5px 5px rgba(0,0,0,0.3);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 94.5%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-header {
+            background: white;
+            border-bottom: 5px solid transparent;
+            border-image: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%) 1;
+            color: black;
+            padding: 25px;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .modal-body {
+            padding: 10px 20px 10px 20px;
+        }
+
+        .modal-body p {
+            line-height: 1.8;
+            color: #000;
+            margin: 10px;
+        }
+
+        .modal-body ul {
+            list-style-type: square;
+            padding-left: 0;
+        }
+
+        .modal-body li {
+            margin: 0px 0px 10px 25px;
+            color: #000;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: black;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .content-area {
+                padding: 10px;
+            }
+            
+            .modal-content {
+                width: 94.5%;
+                margin: 10% auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="training-container">
+        <div class="content-area">
+            <div class="image-container">
+                <img src="https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/guardrails.png" alt="Guardrails for Regulators" class="training-image" id="training-image">
+                
+                <!-- Invisible Clickable Areas -->
+                <div class="hotspot-area" style="top: 3%; left: 0%; width: 21.5%; height: 94.5%;" data-hotspot="1"></div>
+                <div class="hotspot-area" style="top: 3%; left: 26.1%; width: 21.5%; height: 94.5%;" data-hotspot="2"></div>
+                <div class="hotspot-area" style="top: 3%; left: 52.2%; width: 21.5%; height: 94.5%;" data-hotspot="3"></div>
+                <div class="hotspot-area" style="top: 3%; left: 78.35%; width: 21.5%; height: 94.5%" data-hotspot="4"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 id="modal-title">Hotspot Information</h2>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <p>Content will be loaded here...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hotspot content data
+        const hotspotData = {
+            1: {
+                title: "🏛️ Jurisdiction",
+                content: `
+                    <p style="text-align: center; font-size: 1.25em; font-weight: 600;">Only exercise authority where you are legally empowered</p>
+                    <p style="text-align: justify;"><span style="font-weight: 700;">Example:</span> A pharmacy regulator receives a complaint about a veterinarian who may have improperly dispensed animal medications. Rather than investigating the complaint himself, he refers it to the veterinary regulatory board since veterinary practice falls outside his legal authority, even though both involve pharmaceutical oversight.</p>
+
+                `
+            },
+            2: {
+                title: "⚖️ Impartiality",
+                content: `
+                    <p style="text-align: center; font-size: 1.25em; font-weight: 600;">Never favor family, friends, or powerful interests; apply the rules equally to all.</p>
+                    <p style="text-align: justify;"><span style="font-weight: 700;">Example:</span> A regulator discovers that her neighbor has filed an application for a new business license. Even though they have a friendly relationship and she believes the neighbor would run an excellent business, she recuses herself from the decision and asks a colleague to handle the case.</p>
+
+                `
+            },
+            3: {
+                title: "🔒 Confidentiality",
+                content: `
+                    <p style="text-align: center; font-size: 1.25em; font-weight: 600;">Sensitive information about applicants or investigations must be securely managed and not inappropriately shared.</p>
+                    <p style="text-align: justify;"><span style="font-weight: 700;">Example:</span> A regulator receives sensitive financial information during a compliance audit of a medical practice. Despite pressure from local media asking about the practice's financial status, the regulator refuses to comment and ensures all audit documents are stored securely according to data protection protocols.</p>
+
+                `
+            },
+            4: {
+                title: "📖 Transparency",
+                content: `
+                    <p style="text-align: center; font-size: 1.25em; font-weight: 600;">Clearly document processes and decisions so they can be explained and justified.</p>
+                    <p style="text-align: justify;"><span style="font-weight: 700;">Example:</span> A food safety inspector writes detailed inspection reports that clearly explain what violations were found, what corrective actions are required, and the timeline for compliance. When the restaurant owner questions a decision, the inspector can easily walk through the documented reasoning and regulatory standards that guided the determination.</p>
+
+                `
+            },
+        };
+
+        // Get DOM elements
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        // Add click events to hotspot areas
+        document.querySelectorAll('.hotspot-area').forEach(hotspot => {
+            hotspot.addEventListener('click', function() {
+                const hotspotId = this.getAttribute('data-hotspot');
+                showModal(hotspotId);
+            });
+        });
+
+        // Modal functionality
+        function showModal(hotspotId) {
+            const data = hotspotData[hotspotId];
+            if (data) {
+                modalTitle.textContent = data.title;
+                modalBody.innerHTML = data.content;
+                modal.style.display = 'block';
+                
+                // Add show class after a brief delay for animation
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+            }
+        }
+
+        function closeModal() {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Event listeners for modal
+        closeBtn.addEventListener('click', closeModal);
+        
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Keyboard support
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.style.display === 'block') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
