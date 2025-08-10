@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Your Judgment - The Rushed License Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-burgundy: #64092c;
+            --accent-gold: #dda839;
+            --neutral-gray: #484848;
+            --accent-blue: #084d78;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --success-green: #28a745;
+            --warning-orange: #ffc107;
+            --danger-red: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
+            color: var(--neutral-gray);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .scenario-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #f8f9fa;
+            color: #000000;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            background: var(--white);
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0 0 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-burgundy) 0%, var(--accent-gold) 50%, var(--accent-blue) 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .content-section {
+            padding: 40px;
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .scenario-box {
+            background: linear-gradient(135deg, rgba(100, 9, 44, 0.05), rgba(8, 77, 120, 0.05));
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            border: 2px solid var(--accent-gold);
+        }
+
+        .scenario-header {
+            background: transparent;
+            color: #000000;
+            padding: 12px 25px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 1.5em;
+        }
+
+        .decision-point {
+            background: var(--white);
+            border: 2px solid var(--accent-blue);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .decision-header {
+            color: var(--accent-blue);
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .option-btn {
+            background: var(--light-gray);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .option-btn:hover {
+            border-color: var(--accent-gold);
+            background: rgba(221, 168, 57, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .option-btn.selected {
+            border-color: var(--accent-blue);
+            background: rgba(8, 77, 120, 0.1);
+        }
+
+        .option-btn.correct {
+            border-color: var(--success-green);
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .option-btn.incorrect {
+            border-color: var(--danger-red);
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        .feedback-box {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback-box.correct {
+            background: rgba(40, 167, 69, 0.1);
+            border: 2px solid var(--success-green);
+            color: #155724;
+        }
+
+        .feedback-box.incorrect {
+            background: rgba(220, 53, 69, 0.1);
+            border: 2px solid var(--danger-red);
+            color: #721c24;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+            padding-top: 20px;
+            border-top: 2px solid var(--light-gray);
+        }
+
+        .nav-btn {
+            background: var(--primary-burgundy);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn:disabled {
+            background: var(--neutral-gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .final-results {
+            background: linear-gradient(135deg, rgba(221, 168, 57, 0.1), rgba(8, 77, 120, 0.1));
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .score-excellent {
+            color: var(--success-green);
+        }
+
+        .score-good {
+            color: var(--warning-orange);
+        }
+
+        .score-needs-improvement {
+            color: var(--danger-red);
+        }
+
+        .key-points {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .key-points h4 {
+            color: var(--primary-burgundy);
+            margin-bottom: 15px;
+        }
+
+        .key-points ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .key-points li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .key-points li::before {
+            content: "🎯";
+            position: absolute;
+            left: 0;
+            top: 5px;
+        }
+
+        .restart-btn {
+            background: var(--accent-gold);
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            background: var(--primary-burgundy);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .section-indicator {
+            text-align: center;
+            margin: 20px 0;
+            color: var(--neutral-gray);
+            font-size: 0.9em;
+        }
+
+        h2 {
+            color: var(--primary-burgundy);
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+    </style>
+</head>
+<body>
+    <div class="scenario-container">
+        <div class="header">
+            <h1>Test Your Judgment</h1>
+            <p>The Rushed License Application</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </div>
+
+        <!-- Section 1: Background -->
+        <div class="content-section active" id="section1">
+            <h2>Case Background</h2>
+            
+            <div class="scenario-box">
+                <div class="scenario-header">📋 The Situation</div>
+                <p><strong>You are a regulator responsible for licensing construction contractors.</strong> A well-established plumbing contractor submits an application to add electrical work to their existing license scope.</p>
+                
+                <p style="margin-top: 15px;">During your review, you notice that while the applicant has completed the required electrical training courses, they submitted certificates from an online program that <strong>isn't on your agency's approved provider list.</strong></p>
+                
+                <p style="margin-top: 15px;">The contractor contacts you explaining that their regular training provider was booked solid, and they found this alternative program that "covers the same material." They mention they have a large commercial project starting in two weeks that requires both plumbing and electrical work, and <strong>losing this contract could force them to lay off several employees.</strong></p>
+                
+                <p style="margin-top: 15px;">The contractor has an otherwise clean record and has been licensed with your agency for over 15 years. You also discover that your colleague processed a similar application last month and approved the same online training program, though you're not sure if that was an oversight or a deliberate decision.</p>
+                
+                <p style="margin-top: 15px; font-weight: 600; color: var(--primary-burgundy);">The contractor mentions this precedent and asks for "consistent treatment."</p>
+            </div>
+
+            <div class="section-indicator">Section 1 of 5</div>
+        </div>
+
+        <!-- Section 2: Decision Point 1 -->
+        <div class="content-section" id="section2">
+            <h2>Decision Point 1</h2>
+            
+            <div class="decision-point">
+                <div class="decision-header">
+                    <span>🤔</span> How should you handle the non-approved training provider issue?
+                </div>
+                
+                <div class="options-container">
+                    <button class="option-btn" onclick="selectOption(1, 'A', false)">
+                        <strong>A)</strong> Approve the application since the contractor has a good track record and the training content appears equivalent
+                    </button>
+                    
+                    <button class="option-btn" onclick="selectOption(1, 'B', false)">
+                        <strong>B)</strong> Deny the application and require training from an approved provider, regardless of the previous approval
+                    </button>
+                    
+                    <button class="option-btn" onclick="selectOption(1, 'C', true)">
+                        <strong>C)</strong> Put the application on hold while you research the training provider and consult with your colleague about the previous decision
+                    </button>
+                    
+                    <button class="option-btn" onclick="selectOption(1, 'D', false)">
+                        <strong>D)</strong> Approve the application temporarily for six months while requiring additional training from an approved provider
+                    </button>
+                </div>
+                
+                <div class="feedback-box" id="feedback1"></div>
+            </div>
+
+            <div class="section-indicator">Section 2 of 5</div>
+        </div>
+
+        <!-- Section 3: Decision Point 2 -->
+        <div class="content-section" id="section3">
+            <h2>Decision Point 2</h2>
+            
+            <div class="decision-point">
+                <div class="decision-header">
+                    <span>💬</span> When you speak with your colleague about the previous approval, they admit they "made an exception" due to similar economic pressure. How do you proceed?
+                </div>
+                
+                <div class="options-container">
+                    <button class="option-btn" onclick="selectOption(2, 'A', false)">
+                        <strong>A)</strong> Follow the same approach to maintain consistency, approving this application as well
+                    </button>
+                    
+                    <button class="option-btn" onclick="selectOption(2, 'B', false)">
+                        <strong>B)</strong> Report your colleague's deviation from procedures to your supervisor
+                    </button>
+                    
+                    <button class="option-btn" onclick="selectOption(2, 'C', true)">
+                        <strong>C)</strong> Discuss with your supervisor how to handle both this application and establish clear guidance for future similar situations
+                    </button>
+                    
+                    <button class="option-btn" onclick="selectOption(2, 'D', false)">
+                        <strong>D)</strong> Approve this application but insist that all future applications follow proper procedures
+                    </button>
+                </div>
+                
+                <div class="feedback-box" id="feedback2"></div>
+            </div>
+
+            <div class="section-indicator">Section 3 of 5</div>
+        </div>
+
+        <!-- Section 4: Decision Point 3 -->
+        <div class="content-section" id="section4">
+            <h2>Decision Point 3</h2>
+            
+            <div class="decision-point">
+                <div class="decision-header">
+                    <span>⚖️</span> After consultation, you learn the training provider meets educational standards but hasn't completed the formal approval process, which typically takes 60 days. The contractor's project deadline is in two weeks. What's your final decision?
+                </div>
+                
+                <div class="options-container">
+                    <button class="option-btn" onclick="selectOption(3, 'A', true)">
+                        <strong>A)</strong> Deny the application and advise the contractor to work with an approved electrician for this project
+                    </button>
+                    
+                    <button class="option-btn" onclick="selectOption(3, 'B', false)">
+                        <strong>B)</strong> Approve a provisional license valid only for this specific project while the training provider completes the approval process
+                    </button>
+                    
+                    <button class="option-btn" onclick="selectOption(3, 'C', false)">
+                        <strong>C)</strong> Approve the full license since the training appears adequate, regardless of the approval process
+                    </button>
+                    
+                    <button class="option-btn" onclick="selectOption(3, 'D', false)">
+                        <strong>D)</strong> Offer to expedite the training provider's approval process if they submit their application immediately
+                    </button>
+                </div>
+                
+                <div class="feedback-box" id="feedback3"></div>
+            </div>
+
+            <div class="section-indicator">Section 4 of 5</div>
+        </div>
+
+        <!-- Section 5: Results -->
+        <div class="content-section" id="section5">
+            <h2>Your Results</h2>
+            
+            <div class="final-results">
+                <div class="score-display" id="scoreDisplay">0/3</div>
+                
+                <div id="overallFeedback">
+                    <p>Calculating your performance...</p>
+                </div>
+                
+                <div class="key-points">
+                    <h4>🎯 Key Learning Points</h4>
+                    <ul>
+                        <li>Licensing requirements must be applied consistently regardless of business pressures</li>
+                        <li>Addressing procedural inconsistencies transparently protects regulatory integrity</li>
+                        <li>Economic considerations don't override public safety requirements</li>
+                        <li>Alternative solutions can meet business needs without compromising standards</li>
+                    </ul>
+                </div>
+                
+                <button class="restart-btn" onclick="restartScenario()">🔄 Try Again</button>
+            </div>
+
+            <div class="section-indicator">Section 5 of 5</div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <button class="nav-btn" id="prevBtn" onclick="previousSection()" disabled>⬅ Previous</button>
+            <button class="nav-btn" id="nextBtn" onclick="nextSection()">Next ➡</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        const totalSections = 5;
+        let userAnswers = {};
+        let correctAnswers = 0;
+
+        const feedbackData = {
+            1: {
+                A: { correct: false, text: "❌ Incorrect: Personal track record doesn't substitute for meeting specific licensing requirements. This approach compromises regulatory standards." },
+                B: { correct: false, text: "❌ Incorrect: This approach ignores the precedent issue and could create inconsistency problems without addressing the underlying procedural question." },
+                C: { correct: true, text: "✅ Correct: This ensures thorough review and addresses the consistency issue before making a decision. It demonstrates proper due diligence." },
+                D: { correct: false, text: "❌ Incorrect: Temporary licenses aren't appropriate when fundamental requirements haven't been met. This creates problematic precedents." }
+            },
+            2: {
+                A: { correct: false, text: "❌ Incorrect: Following improper precedent compounds the original error and undermines regulatory standards across the board." },
+                B: { correct: false, text: "❌ Incorrect: This approach focuses on blame rather than solving the procedural issue constructively." },
+                C: { correct: true, text: "✅ Correct: This addresses both immediate and systemic issues while maintaining appropriate transparency with leadership." },
+                D: { correct: false, text: "❌ Incorrect: This perpetuates inconsistent application of standards and doesn't address the underlying procedural problem." }
+            },
+            3: {
+                A: { correct: true, text: "✅ Correct: This maintains licensing standards while providing practical alternatives for the contractor's business needs." },
+                B: { correct: false, text: "❌ Incorrect: Creating special project-specific licenses undermines the licensing system's integrity and creates problematic precedents." },
+                C: { correct: false, text: "❌ Incorrect: This essentially abandons the approved provider requirement entirely, compromising regulatory standards." },
+                D: { correct: false, text: "❌ Incorrect: You cannot guarantee expedited processing, and this creates inappropriate expectations about regulatory timelines." }
+            }
+        };
+
+        function showSection(sectionNum) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show current section
+            document.getElementById(`section${sectionNum}`).classList.add('active');
+            
+            // Update progress bar
+            const progressPercent = (sectionNum / totalSections) * 100;
+            document.getElementById('progressBar').style.width = progressPercent + '%';
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = sectionNum === 1;
+            
+            if (sectionNum === totalSections) {
+                document.getElementById('nextBtn').textContent = 'Complete ✅';
+                document.getElementById('nextBtn').disabled = true;
+                calculateResults();
+            } else if (sectionNum > 1 && sectionNum < 5) {
+                document.getElementById('nextBtn').disabled = !userAnswers[sectionNum - 1];
+                document.getElementById('nextBtn').textContent = 'Next ➡';
+            } else {
+                document.getElementById('nextBtn').textContent = 'Next ➡';
+                document.getElementById('nextBtn').disabled = false;
+            }
+        }
+
+        function selectOption(decisionPoint, option, isCorrect) {
+    // Remove previous selections
+    const options = document.querySelectorAll(`#section${decisionPoint + 1} .option-btn`);
+    options.forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'incorrect');
+    });
+    
+    // If this question was previously answered correctly, subtract from score
+    if (userAnswers[decisionPoint] && userAnswers[decisionPoint].isCorrect) {
+        correctAnswers--;
+    }
+    
+    // Mark selected option
+    const selectedOption = event.target;
+    selectedOption.classList.add('selected');
+    
+    // Store user answer BEFORE checking correctness
+    userAnswers[decisionPoint] = { option, isCorrect };
+    
+    // Add to score if this answer is correct
+    if (isCorrect) {
+        correctAnswers++;
+    }
+    
+    // Show feedback
+    const feedbackBox = document.getElementById(`feedback${decisionPoint}`);
+    const feedbackData_item = feedbackData[decisionPoint][option];
+    
+    if (feedbackData_item.correct) {
+        selectedOption.classList.add('correct');
+        feedbackBox.className = 'feedback-box correct';
+    } else {
+        selectedOption.classList.add('incorrect');
+        feedbackBox.className = 'feedback-box incorrect';
+    }
+    
+    feedbackBox.innerHTML = feedbackData_item.text;
+    feedbackBox.style.display = 'block';
+    
+    // Enable next button
+    document.getElementById('nextBtn').disabled = false;
+}
+
+        function nextSection() {
+            if (currentSection < totalSections) {
+                currentSection++;
+                showSection(currentSection);
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 1) {
+                currentSection--;
+                showSection(currentSection);
+            }
+        }
+
+        function calculateResults() {
+            const score = correctAnswers;
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const overallFeedback = document.getElementById('overallFeedback');
+            
+            scoreDisplay.textContent = `${score}/3`;
+            
+            if (score === 3) {
+                scoreDisplay.className = 'score-display score-excellent';
+                overallFeedback.innerHTML = `
+                    <h3>🎉 Excellent Regulatory Judgment!</h3>
+                    <p>You demonstrated proper use of guardrails by maintaining licensing standards while addressing procedural inconsistencies transparently. Your approach protects public safety through proper credentialing while providing practical business solutions.</p>
+                `;
+            } else if (score === 2) {
+                scoreDisplay.className = 'score-display score-good';
+                overallFeedback.innerHTML = `
+                    <h3>👍 Good Foundation!</h3>
+                    <p>You understand the importance of proper procedures but may need to focus on balancing regulatory consistency with practical problem-solving. Remember that licensing requirements protect public safety and professional standards.</p>
+                `;
+            } else {
+                scoreDisplay.className = 'score-display score-needs-improvement';
+                overallFeedback.innerHTML = `
+                    <h3>📚 Review Needed</h3>
+                    <p>This scenario highlights how licensing standards protect both the public and the integrity of the profession. Review the importance of consistent application of requirements and appropriate channels for addressing procedural questions. Shortcuts in licensing can compromise public safety and professional credibility.</p>
+                `;
+            }
+        }
+
+        function restartScenario() {
+            currentSection = 1;
+            userAnswers = {};
+            correctAnswers = 0;
+            
+            // Reset all options
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Hide all feedback
+            document.querySelectorAll('.feedback-box').forEach(box => {
+                box.style.display = 'none';
+            });
+            
+            showSection(1);
+        }
+
+        // Initialize
+        showSection(1);
+    </script>
+</body>
+</html>
