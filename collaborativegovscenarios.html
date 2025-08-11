@@ -77,7 +77,7 @@
            color: black;
            padding: 5px 20px;
            border-radius: 8px;
-           margin: 15px 0;
+           margin: 15px;
            cursor: pointer;
            transition: all 0.3s ease;
            border-left: 5px solid var(--primary-gold);
@@ -174,7 +174,6 @@
             background: white;
             border-radius: 8px;
             padding: 20px;
-            margin: 15px 0;
             position: relative;
             box-shadow: 0 4px 16px rgba(0,0,0,0.15);
             text-align: justify;
@@ -217,163 +216,165 @@
    </style>
 </head>
 <body>
-   <div class="scenario-accordion">
-       <!-- Scenario 1 -->
-       <div class="accordion-header" onclick="toggleAccordion('scenario1')">
-           <h2>📱 Scenario 1: Technology Integration Challenge ▼</h2>
-       </div>
-       <div class="accordion-content" id="scenario1">
-           <div class="situation-box">
-               <h3>Situation:</h3>
-               <p>A new technology emerges that requires updated practice standards, but different entities have varying perspectives on implementation timelines and requirements. This scenario demonstrates how the same issue can be viewed through completely different lenses depending on each entity's primary mandate and concerns.</p>
+    <div class="container">
+       <div class="scenario-accordion">
+           <!-- Scenario 1 -->
+           <div class="accordion-header" onclick="toggleAccordion('scenario1')">
+               <h2>📱 Scenario 1: Technology Integration Challenge ▼</h2>
+           </div>
+           <div class="accordion-content" id="scenario1">
+               <div class="situation-box">
+                   <h3>Situation:</h3>
+                   <p>A new technology emerges that requires updated practice standards, but different entities have varying perspectives on implementation timelines and requirements. This scenario demonstrates how the same issue can be viewed through completely different lenses depending on each entity's primary mandate and concerns.</p>
+               </div>
+               
+               <div class="entity-grid">
+                   <div class="entity-box government">
+                       <h3>🏛️ Government Perspective</h3>
+                       <p><strong>Primary Concern:</strong> Public safety and rapid implementation</p>
+                       <p><strong>Approach:</strong> May push for immediate regulatory updates</p>
+                       <p><strong>Authority:</strong> Can mandate timeline through legislation</p>
+                       <p><strong>Key Question:</strong> "How can we ensure public safety while maintaining public confidence?"</p>
+                   </div>
+                   
+                   <div class="entity-box regulatory">
+                       <h3>⚖️ Regulatory Body Perspective</h3>
+                       <p><strong>Primary Concern:</strong> Evidence-based standards and public protection</p>
+                       <p><strong>Approach:</strong> Thorough consultation and gradual implementation</p>
+                       <p><strong>Authority:</strong> Create and enforce standards within legislative framework</p>
+                       <p><strong>Key Question:</strong> "What evidence do we need to ensure safe and effective integration?"</p>
+                   </div>
+                   
+                   <div class="entity-box association">
+                       <h3>🎓 Professional Association Perspective</h3>
+                       <p><strong>Primary Concern:</strong> Member competency and professional development</p>
+                       <p><strong>Approach:</strong> Education-focused rollout with certification options</p>
+                       <p><strong>Authority:</strong> Advocate and provide educational resources</p>
+                       <p><strong>Key Question:</strong> "How can we ensure our members are prepared and competitive?"</p>
+                   </div>
+                   
+                   <div class="entity-box union">
+                       <h3>👥 Union Perspective</h3>
+                       <p><strong>Primary Concern:</strong> Member job security and workplace conditions</p>
+                       <p><strong>Approach:</strong> Ensure adequate training time and resources</p>
+                       <p><strong>Authority:</strong> Negotiate implementation conditions with employers</p>
+                       <p><strong>Key Question:</strong> "Will our members have the support they need for this transition?"</p>
+                   </div>
+               </div>
            </div>
            
-           <div class="entity-grid">
-               <div class="entity-box government">
-                   <h3>🏛️ Government Perspective</h3>
-                   <p><strong>Primary Concern:</strong> Public safety and rapid implementation</p>
-                   <p><strong>Approach:</strong> May push for immediate regulatory updates</p>
-                   <p><strong>Authority:</strong> Can mandate timeline through legislation</p>
-                   <p><strong>Key Question:</strong> "How can we ensure public safety while maintaining public confidence?"</p>
+           <!-- Scenario 2 -->
+           <div class="accordion-header" onclick="toggleAccordion('scenario2')">
+               <h2>⚖️ Scenario 2: Professional Misconduct Response ▼</h2>
+           </div>
+           <div class="accordion-content" id="scenario2">
+               <div class="situation-box">
+                   <h3>Situation:</h3>
+                   <p>A high-profile case of professional misconduct has attracted media attention and public concern. Multiple entities are calling for different responses and reforms. This scenario shows how crisis situations can create pressure for immediate action while highlighting the tension between swift response and due process.</p>
                </div>
                
-               <div class="entity-box regulatory">
-                   <h3>⚖️ Regulatory Body Perspective</h3>
-                   <p><strong>Primary Concern:</strong> Evidence-based standards and public protection</p>
-                   <p><strong>Approach:</strong> Thorough consultation and gradual implementation</p>
-                   <p><strong>Authority:</strong> Create and enforce standards within legislative framework</p>
-                   <p><strong>Key Question:</strong> "What evidence do we need to ensure safe and effective integration?"</p>
+               <div class="entity-grid">
+                   <div class="entity-box government">
+                       <h3>🏛️ Government Perspective</h3>
+                       <p><strong>Primary Concern:</strong> Public confidence and swift visible action</p>
+                       <p><strong>Approach:</strong> May demand immediate policy changes and enhanced penalties</p>
+                       <p><strong>Authority:</strong> Can mandate legislative changes and increased oversight</p>
+                       <p><strong>Key Question:</strong> "How can we restore public trust quickly and effectively?"</p>
+                   </div>
+                   
+                   <div class="entity-box regulatory">
+                       <h3>⚖️ Regulatory Body Perspective</h3>
+                       <p><strong>Primary Concern:</strong> Due process and evidence-based disciplinary action</p>
+                       <p><strong>Approach:</strong> Thorough investigation following established procedures</p>
+                       <p><strong>Authority:</strong> Conduct hearings and impose appropriate sanctions within legal framework</p>
+                       <p><strong>Key Question:</strong> "How do we balance public pressure with fair and thorough processes?"</p>
+                   </div>
+                   
+                   <div class="entity-box association">
+                       <h3>🎓 Professional Association Perspective</h3>
+                       <p><strong>Primary Concern:</strong> Protecting profession's reputation while supporting fair treatment</p>
+                       <p><strong>Approach:</strong> Advocate for balanced response and enhanced professional education</p>
+                       <p><strong>Authority:</strong> Provide professional support and continuing education programs</p>
+                       <p><strong>Key Question:</strong> "How can we protect the profession's integrity while ensuring justice?"</p>
+                   </div>
+                   
+                   <div class="entity-box union">
+                       <h3>👥 Union Perspective</h3>
+                       <p><strong>Primary Concern:</strong> Ensuring fair treatment and due process for members</p>
+                       <p><strong>Approach:</strong> Legal representation and protection of member rights</p>
+                       <p><strong>Authority:</strong> Negotiate disciplinary procedures and provide legal support</p>
+                       <p><strong>Key Question:</strong> "Are our members' rights being protected throughout this process?"</p>
+                   </div>
+               </div>
+           </div>
+           
+           <!-- Scenario 3 -->
+           <div class="accordion-header" onclick="toggleAccordion('scenario3')">
+               <h2>👥 Scenario 3: Workforce Shortage Crisis ▼</h2>
+           </div>
+           <div class="accordion-content" id="scenario3">
+               <div class="situation-box">
+                   <h3>Situation:</h3>
+                   <p>A critical shortage of licensed professionals is affecting public services. Pressure mounts to find solutions while maintaining safety standards. This scenario illustrates how competing priorities around access, quality, and workforce sustainability create complex challenges requiring creative solutions.</p>
                </div>
                
-               <div class="entity-box association">
-                   <h3>🎓 Professional Association Perspective</h3>
-                   <p><strong>Primary Concern:</strong> Member competency and professional development</p>
-                   <p><strong>Approach:</strong> Education-focused rollout with certification options</p>
-                   <p><strong>Authority:</strong> Advocate and provide educational resources</p>
-                   <p><strong>Key Question:</strong> "How can we ensure our members are prepared and competitive?"</p>
-               </div>
-               
-               <div class="entity-box union">
-                   <h3>👥 Union Perspective</h3>
-                   <p><strong>Primary Concern:</strong> Member job security and workplace conditions</p>
-                   <p><strong>Approach:</strong> Ensure adequate training time and resources</p>
-                   <p><strong>Authority:</strong> Negotiate implementation conditions with employers</p>
-                   <p><strong>Key Question:</strong> "Will our members have the support they need for this transition?"</p>
+               <div class="entity-grid">
+                   <div class="entity-box government">
+                       <h3>🏛️ Government Perspective</h3>
+                       <p><strong>Primary Concern:</strong> Meeting public service demands and political pressure</p>
+                       <p><strong>Approach:</strong> Push for expedited licensing and temporary practice permits</p>
+                       <p><strong>Authority:</strong> Can mandate emergency measures and funding for recruitment</p>
+                       <p><strong>Key Question:</strong> "How can we ensure services are available to those who need them?"</p>
+                   </div>
+                   
+                   <div class="entity-box regulatory">
+                       <h3>⚖️ Regulatory Body Perspective</h3>
+                       <p><strong>Primary Concern:</strong> Maintaining competency standards while addressing shortage</p>
+                       <p><strong>Approach:</strong> Explore alternative pathways without compromising public safety</p>
+                       <p><strong>Authority:</strong> Modify registration requirements within legislative boundaries</p>
+                       <p><strong>Key Question:</strong> "How do we balance access with safety and competency?"</p>
+                   </div>
+                   
+                   <div class="entity-box association">
+                       <h3>🎓 Professional Association Perspective</h3>
+                       <p><strong>Primary Concern:</strong> Professional recognition and career advancement opportunities</p>
+                       <p><strong>Approach:</strong> Promote profession through recruitment campaigns and improved working conditions</p>
+                       <p><strong>Authority:</strong> Advocate for better compensation and professional development</p>
+                       <p><strong>Key Question:</strong> "How can we make this profession more attractive and sustainable?"</p>
+                   </div>
+                   
+                   <div class="entity-box union">
+                       <h3>👥 Union Perspective</h3>
+                       <p><strong>Primary Concern:</strong> Improving working conditions to retain existing workforce</p>
+                       <p><strong>Approach:</strong> Negotiate better wages, benefits, and workplace safety measures</p>
+                       <p><strong>Authority:</strong> Collective bargaining and work action if necessary</p>
+                       <p><strong>Key Question:</strong> "What working conditions changes will help retain our current members?"</p>
+                   </div>
+                   
+                   <div class="entity-box employer">
+                       <h3>🏢 Employer Board Perspective</h3>
+                       <p><strong>Primary Concern:</strong> Operational continuity and service delivery</p>
+                       <p><strong>Approach:</strong> Seek flexible staffing solutions and alternative service models</p>
+                       <p><strong>Authority:</strong> Implement organizational changes and resource allocation</p>
+                       <p><strong>Key Question:</strong> "How can we maintain operations with limited human resources?"</p>
+                   </div>
                </div>
            </div>
        </div>
        
-       <!-- Scenario 2 -->
-       <div class="accordion-header" onclick="toggleAccordion('scenario2')">
-           <h2>⚖️ Scenario 2: Professional Misconduct Response ▼</h2>
+       <div class="situation-box">
+           <h3>🔍 Key Insights from These Scenarios</h3>
+           <p>Notice how each entity approaches the same situation with fundamentally different priorities and tools. Successful regulatory governance requires:</p>
+           <ul>
+               <li style="color: #64092c;"><span style="color: #000000;"><strong>Understanding Perspectives:</strong> Recognizing that each entity has legitimate concerns based on their mandate</span></li>
+               <li style="color: #64092c;"><span style="color: #000000;"><strong>Finding Common Ground:</strong> Identifying shared goals, particularly around public protection and professional excellence</span></li>
+               <li style="color: #64092c;"><span style="color: #000000;"><strong>Strategic Communication:</strong> Tailoring messages to address each entity's specific concerns</span></li>
+               <li style="color: #64092c;"><span style="color: #000000;"><strong>Collaborative Solutions:</strong> Developing approaches that acknowledge multiple perspectives while maintaining regulatory independence</span></li>
+               <li style="color: #64092c;"><span style="color: #000000;"><strong>Proactive Engagement:</strong> Building relationships before crises emerge to facilitate smoother conflict resolution</span></li>
+           </ul>
        </div>
-       <div class="accordion-content" id="scenario2">
-           <div class="situation-box">
-               <h3>Situation:</h3>
-               <p>A high-profile case of professional misconduct has attracted media attention and public concern. Multiple entities are calling for different responses and reforms. This scenario shows how crisis situations can create pressure for immediate action while highlighting the tension between swift response and due process.</p>
-           </div>
-           
-           <div class="entity-grid">
-               <div class="entity-box government">
-                   <h3>🏛️ Government Perspective</h3>
-                   <p><strong>Primary Concern:</strong> Public confidence and swift visible action</p>
-                   <p><strong>Approach:</strong> May demand immediate policy changes and enhanced penalties</p>
-                   <p><strong>Authority:</strong> Can mandate legislative changes and increased oversight</p>
-                   <p><strong>Key Question:</strong> "How can we restore public trust quickly and effectively?"</p>
-               </div>
-               
-               <div class="entity-box regulatory">
-                   <h3>⚖️ Regulatory Body Perspective</h3>
-                   <p><strong>Primary Concern:</strong> Due process and evidence-based disciplinary action</p>
-                   <p><strong>Approach:</strong> Thorough investigation following established procedures</p>
-                   <p><strong>Authority:</strong> Conduct hearings and impose appropriate sanctions within legal framework</p>
-                   <p><strong>Key Question:</strong> "How do we balance public pressure with fair and thorough processes?"</p>
-               </div>
-               
-               <div class="entity-box association">
-                   <h3>🎓 Professional Association Perspective</h3>
-                   <p><strong>Primary Concern:</strong> Protecting profession's reputation while supporting fair treatment</p>
-                   <p><strong>Approach:</strong> Advocate for balanced response and enhanced professional education</p>
-                   <p><strong>Authority:</strong> Provide professional support and continuing education programs</p>
-                   <p><strong>Key Question:</strong> "How can we protect the profession's integrity while ensuring justice?"</p>
-               </div>
-               
-               <div class="entity-box union">
-                   <h3>👥 Union Perspective</h3>
-                   <p><strong>Primary Concern:</strong> Ensuring fair treatment and due process for members</p>
-                   <p><strong>Approach:</strong> Legal representation and protection of member rights</p>
-                   <p><strong>Authority:</strong> Negotiate disciplinary procedures and provide legal support</p>
-                   <p><strong>Key Question:</strong> "Are our members' rights being protected throughout this process?"</p>
-               </div>
-           </div>
-       </div>
-       
-       <!-- Scenario 3 -->
-       <div class="accordion-header" onclick="toggleAccordion('scenario3')">
-           <h2>👥 Scenario 3: Workforce Shortage Crisis ▼</h2>
-       </div>
-       <div class="accordion-content" id="scenario3">
-           <div class="situation-box">
-               <h3>Situation:</h3>
-               <p>A critical shortage of licensed professionals is affecting public services. Pressure mounts to find solutions while maintaining safety standards. This scenario illustrates how competing priorities around access, quality, and workforce sustainability create complex challenges requiring creative solutions.</p>
-           </div>
-           
-           <div class="entity-grid">
-               <div class="entity-box government">
-                   <h3>🏛️ Government Perspective</h3>
-                   <p><strong>Primary Concern:</strong> Meeting public service demands and political pressure</p>
-                   <p><strong>Approach:</strong> Push for expedited licensing and temporary practice permits</p>
-                   <p><strong>Authority:</strong> Can mandate emergency measures and funding for recruitment</p>
-                   <p><strong>Key Question:</strong> "How can we ensure services are available to those who need them?"</p>
-               </div>
-               
-               <div class="entity-box regulatory">
-                   <h3>⚖️ Regulatory Body Perspective</h3>
-                   <p><strong>Primary Concern:</strong> Maintaining competency standards while addressing shortage</p>
-                   <p><strong>Approach:</strong> Explore alternative pathways without compromising public safety</p>
-                   <p><strong>Authority:</strong> Modify registration requirements within legislative boundaries</p>
-                   <p><strong>Key Question:</strong> "How do we balance access with safety and competency?"</p>
-               </div>
-               
-               <div class="entity-box association">
-                   <h3>🎓 Professional Association Perspective</h3>
-                   <p><strong>Primary Concern:</strong> Professional recognition and career advancement opportunities</p>
-                   <p><strong>Approach:</strong> Promote profession through recruitment campaigns and improved working conditions</p>
-                   <p><strong>Authority:</strong> Advocate for better compensation and professional development</p>
-                   <p><strong>Key Question:</strong> "How can we make this profession more attractive and sustainable?"</p>
-               </div>
-               
-               <div class="entity-box union">
-                   <h3>👥 Union Perspective</h3>
-                   <p><strong>Primary Concern:</strong> Improving working conditions to retain existing workforce</p>
-                   <p><strong>Approach:</strong> Negotiate better wages, benefits, and workplace safety measures</p>
-                   <p><strong>Authority:</strong> Collective bargaining and work action if necessary</p>
-                   <p><strong>Key Question:</strong> "What working conditions changes will help retain our current members?"</p>
-               </div>
-               
-               <div class="entity-box employer">
-                   <h3>🏢 Employer Board Perspective</h3>
-                   <p><strong>Primary Concern:</strong> Operational continuity and service delivery</p>
-                   <p><strong>Approach:</strong> Seek flexible staffing solutions and alternative service models</p>
-                   <p><strong>Authority:</strong> Implement organizational changes and resource allocation</p>
-                   <p><strong>Key Question:</strong> "How can we maintain operations with limited human resources?"</p>
-               </div>
-           </div>
-       </div>
-   </div>
-   
-   <div class="situation-box">
-       <h3>🔍 Key Insights from These Scenarios</h3>
-       <p>Notice how each entity approaches the same situation with fundamentally different priorities and tools. Successful regulatory governance requires:</p>
-       <ul>
-           <li style="color: #64092c;"><span style="color: #000000;"><strong>Understanding Perspectives:</strong> Recognizing that each entity has legitimate concerns based on their mandate</span></li>
-           <li style="color: #64092c;"><span style="color: #000000;"><strong>Finding Common Ground:</strong> Identifying shared goals, particularly around public protection and professional excellence</span></li>
-           <li style="color: #64092c;"><span style="color: #000000;"><strong>Strategic Communication:</strong> Tailoring messages to address each entity's specific concerns</span></li>
-           <li style="color: #64092c;"><span style="color: #000000;"><strong>Collaborative Solutions:</strong> Developing approaches that acknowledge multiple perspectives while maintaining regulatory independence</span></li>
-           <li style="color: #64092c;"><span style="color: #000000;"><strong>Proactive Engagement:</strong> Building relationships before crises emerge to facilitate smoother conflict resolution</span></li>
-       </ul>
-   </div>
-</div>
+    </div>
+
 
    <script>
        function toggleAccordion(scenarioId) {
