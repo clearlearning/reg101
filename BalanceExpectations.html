@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Putting Ethics Into Practice</title>
+    <meta name="description" content="Interactive guide to your daily ethical toolkit">
+     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-text-size-adjust: none;
+            text-size-adjust: none;
+        }
+        
+        body {
+            font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: white;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .button-row {
+                gap: 8px !important;
+                margin-bottom: 8px !important;
+            }
+            
+            .rights-button {
+                min-width: auto !important;
+                padding: 12px 15px !important;
+                font-size: 14px !important;
+            }
+            
+            .rights-button span:first-child {
+                font-size: 24px !important;
+            }
+            
+            .content-container {
+                padding: 1.5rem 1rem !important;
+            }
+            
+            .main-content {
+                padding: 1.5rem 1rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .button-row {
+                flex-direction: column !important;
+                gap: 8px !important;
+            }
+            
+            .rights-button {
+                min-width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); overflow: hidden;">
+        <!-- Content -->
+        <div class="main-content" style="padding: 2.5rem 2rem;">
+            <!-- Main Title Section -->
+            <div style="margin-bottom: 3rem;">
+                <h1 style="text-align: center; margin-bottom: 1.5rem;">Putting It Into Practice</h1>
+                <p style="text-align: justify; margin-bottom: 2rem;">Now that you understand what different groups expect from you, how do you apply this knowledge in your daily work? Here are three essential practices that will help you meet those expectations consistently.</p>
+                <p style="text-align: justify;">These aren't complex theories; they're simple, practical steps that experienced regulators use every day to build trust and maintain professional standards. Think of them as your daily toolkit for ethical regulatory practice. By incorporating these three practices into your routine, you'll be well-equipped to serve the public, licensees, and your colleagues effectively while protecting your professional integrity.</p>
+            </div>
+
+            <!-- Rights Buttons -->
+            <div style="margin-bottom: 2rem;">
+                <!-- First Row -->
+                <div class="button-row" style="display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; justify-content: center;">
+                    <button class="rights-button" onclick="showRight('safety')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">📖</span>
+                        <span style="font-weight: bold; color: black;">Review Ethics Policies</span>
+                    </button>
+                    <button class="rights-button" onclick="showRight('information')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">🚨</span>
+                        <span style="font-weight: bold; color: black;">Disclose Conflicts</span>
+                    </button>
+                    <button class="rights-button" onclick="showRight('choice')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">📝</span>
+                        <span style="font-weight: bold; color: black;">Document Decisions</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content Display Area -->
+            <div id="rightsContent" style="margin-bottom: 0px;">
+                <div style="background: #f8f9fa; border-radius: 15px; padding: 2rem; text-align: center; color: #6c757d; border: 2px dashed #dee2e6;">
+                    <p style="margin: 0; font-style: italic;">Click on a consumer right above to view detailed information</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const rightsData = {
+            safety: {
+                color: '#64092c',
+                lightColor: '#fcf6f8',
+                emoji: '📖',
+                title: 'Why Review Ethics Policies Regularly?',
+                description: '<ul style="margin-left: 20px; padding-bottom: 25px;"><li style="color: #64092c; padding: 5px; line-height: 1.5; font-weight: 700;">Policies change: <span style="color: #000000; font-weight: normal;">New situations arise, regulations get updated, and guidance evolves</span></li><li style="color: #64092c; padding: 5px; line-height: 1.5; font-weight: 700;">Memory fades: <span style="color: #000000; font-weight: normal;">Details you learned months ago may not be fresh when you need them</span></li><li style="color: #64092c; padding: 5px; line-height: 1.5; font-weight: 700;">Prevention is easier than correction: <span style="color: #000000; font-weight: normal;">Staying current prevents costly mistakes and embarrassing situations</span></li><li style="color: #64092c; padding: 5px; line-height: 1.5; font-weight: 700;">Confidence in decisions: <span style="color: #000000; font-weight: normal;">You will feel more secure knowing you are working with the latest guidance</span></li></ul>',
+                example: 'Set a quarterly calendar reminder to re-read your agency ethics handbook, especially before annual performance reviews or when taking on new responsibilities.'
+            },
+            information: {
+                color: '#B4851F',
+                lightColor: '#fefcf7',
+                emoji: '🚨',
+                title: 'Why Disclose Conflicts Immediately?',
+                description: '<ul style="margin-left: 20px; padding-bottom: 25px;"><li style="color: #B4851F; padding: 5px; line-height: 1.5; font-weight: 700;">Protects your reputation: <span style="color: #000000; font-weight: normal;">Proactive disclosure shows integrity; hidden conflicts look like cover-ups</span></li><li style="color: #B4851F; padding: 5px; line-height: 1.5; font-weight: 700;">Protects your agency: <span style="color: #000000; font-weight: normal;">Transparency prevents scandals and maintains public trust</span></li><li style="color: #B4851F; padding: 5px; line-height: 1.5; font-weight: 700;">Legal protection: <span style="color: #000000; font-weight: normal;">Documentation of disclosure can protect you if questions arise later</span></li><li style="color: #B4851F; padding: 5px; line-height: 1.5; font-weight: 700;">Easier to address early: <span style="color: #000000; font-weight: normal;">all conflicts are easier to manage than major problems that develop over time</span></li><li style="color: #B4851F; padding: 5px; line-height: 1.5; font-weight: 700;">Sets good precedent: <span style="color: #000000; font-weight: normal;">Encourages colleagues to be transparent too</span></li></ul>',
+                example: 'Your neighbor applies for a business license in your jurisdiction - immediately inform your supervisor before reviewing the application file and request that a colleague handle the case.'
+            },
+            choice: {
+                color: '#084d78',
+                lightColor: '#f7f9fc',
+                emoji: '📝',
+                title: 'Why Document Decisions?',
+                description: '<ul style="margin-left: 20px; padding-bottom: 25px;"><li style="color: #084d78; padding: 5px; line-height: 1.5; font-weight: 700;">Protects you legally: <span style="color: #000000; font-weight: normal;">Written rationale shows you followed proper procedures and thinking</span></li><li style="color: #084d78; padding: 5px; line-height: 1.5; font-weight: 700;">Enables consistent decisions: <span style="color: #000000; font-weight: normal;">Future cases can reference your reasoning for similar situations</span></li><li style="color: #084d78; padding: 5px; line-height: 1.5; font-weight: 700;">Builds institutional knowledge: <span style="color: #000000; font-weight: normal;">Helps colleagues and successors understand how to handle similar issues</span></li><li style="color: #084d78; padding: 5px; line-height: 1.5; font-weight: 700;">Demonstrates professionalism: <span style="color: #000000; font-weight: normal;">Shows you take your responsibilities seriously</span></li><li style="color: #084d78; padding: 5px; line-height: 1.5; font-weight: 700;">Facilitates appeals/reviews: <span style="color: #000000; font-weight: normal;">Clear documentation makes it easier to explain decisions if challenged</span></li></ul>',
+                example: 'Write in the case file: "Approved application with additional safety inspection requirement because applicant met basic qualifications but facility modifications raised questions not addressed in standard checklist."'
+            },
+        };
+
+        function showRight(rightType) {
+            const contentDiv = document.getElementById('rightsContent');
+            const right = rightsData[rightType];
+            
+            // Reset ALL button styles to original state
+            document.querySelectorAll('.rights-button').forEach(btn => {
+                btn.style.background = 'transparent';
+                btn.style.transform = 'none';
+                // Reset text color to black for all buttons
+                const textSpan = btn.querySelectorAll('span')[1];
+                if (textSpan) {
+                    textSpan.style.color = 'black';
+                }
+            });
+            
+            // Highlight selected button
+            const clickedButton = event.target.closest('button');
+            clickedButton.style.background = right.color;
+            clickedButton.style.transform = 'translateY(-2px)';
+            // Set text to white for selected button only
+            const selectedTextSpan = clickedButton.querySelectorAll('span')[1];
+            if (selectedTextSpan) {
+                selectedTextSpan.style.color = 'white';
+            }
+            
+            // Check if mobile view
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // Mobile layout: emoji above title
+                contentDiv.innerHTML = `
+                    <div class="content-container" style="background: transparent; border-radius: 15px; padding: 2rem; border-left: 5px solid ${right.color}; transition: all 0.3s ease; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+                        <div style="text-align: center; margin-bottom: 20px;">
+                            <div style="font-size: 50px; margin-bottom: 15px;">${right.emoji}</div>
+                            <h3 style="margin: 0 0 20px 0; color: ${right.color}; font-size: 1.4em;">${right.title}</h3>
+                        </div>
+                        <div style="width: 100%;">
+                            <p style="text-align: justify; margin-bottom: 15px; color: #333; line-height: 1.6;">${right.description}</p>
+                            <p style="text-align: justify; margin: 0; color: #333; line-height: 1.6;"><strong style="color: ${right.color};">Example:</strong> ${right.example}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Desktop layout: original side-by-side design
+                contentDiv.innerHTML = `
+                    <div style="background: transparent; border-radius: 15px; padding: 2rem; border-left: 5px solid ${right.color}; transition: all 0.3s ease; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="background: transparent; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 40px; flex-shrink: 0;">${right.emoji}</div>
+                            <div style="flex: 1;">
+                                <h3 style="margin: 0 0 15px 0; color: ${right.color}; font-size: 1.4em;">${right.title}</h3>
+                                <p style="text-align: justify; margin-bottom: 15px; color: #333; line-height: 1.6;">${right.description}</p>
+                                <p style="text-align: justify; margin: 0; color: #333; line-height: 1.6;"><strong style="color: ${right.color};">Example:</strong> ${right.example}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Smooth scroll to content if needed (helpful on mobile)
+            contentDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Add hover effects for better interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.rights-button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    if (this.style.background === 'transparent') {
+                        this.style.transform = 'translateY(-1px)';
+                        this.style.boxShadow = '0 6px 15px rgba(0,0,0,0.2)';
+                    }
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    if (this.style.background === 'transparent') {
+                        this.style.transform = 'none';
+                        this.style.boxShadow = '0 4px 10px rgba(0,0,0,0.15)';
+                    }
+                });
+            });
+        });
+
+        // Add before closing </body> tag in ConsumerRights.html
+function optimizeForIframe() {
+    document.body.style.margin = '0';
+    document.body.style.padding = '10px';
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        body { overflow-x: hidden; }
+        img, video { max-width: 100% !important; height: auto !important; }
+        @media (max-width: 768px) {
+            body { font-size: 14px !important; padding: 5px !important; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+window.addEventListener('load', optimizeForIframe);
+    </script>
+</body>
+</html>
