@@ -16,7 +16,7 @@
        body {
            font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
            margin: 0;
-           padding: 20px;
+           padding: 10px;
            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
            color: var(--primary-gray);
            line-height: 1.6;
@@ -25,7 +25,7 @@
        }
        
        .container {
-           max-width: 1000px;
+           max-width: 800px;
            margin: 0 auto;
            background: white;
            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
@@ -47,7 +47,7 @@
        }
        
        .content {
-           padding: 40px;
+           padding: 20px;
        }
        
        .intro-text {
@@ -61,13 +61,25 @@
        
        .content-box {
            background: white;
-           padding: 25px;
-           margin: 20px 0;
-           border-radius: 10px;
-           box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-           border-left: 5px solid var(--primary-gold);
+           border-radius: 8px;
+           padding: 5px 20px;
+           position: relative;
+           box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+           text-align: justify;
+           margin: 0 15px;
        }
-       
+
+       .content-box::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%);
+            border-radius: 8px 8px 0 0;
+       }
+
        .scenario-accordion {
            margin: 20px 0;
        }
@@ -75,7 +87,7 @@
        .accordion-header {
            background: white;
            color: black;
-           padding: 5px 20px;
+           padding: 10px 20px;
            border-radius: 8px;
            margin: 15px;
            cursor: pointer;
@@ -86,23 +98,22 @@
 
        .accordion-header:hover {
            background: #fcf7ed;
-           transform: translateY(-1px);
+           transform: translateY(-2px);
            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
        }
 
-       .accordion-header h4 {
-           margin: 5px;
-           font-size: 1.1em;
+       .accordion-header h2 {
+           margin: 0px;
+           font-size: 1.4em;
        }
 
        .accordion-content {
            display: none;
-           padding: 20px;
+           padding: 10px;
            background: white;
            border-radius: 8px;
            border: none;
-           margin-top: 10px;
-           margin-bottom: 10px;
+           margin: 10px 0;
        }
 
        .accordion-content.active {
@@ -130,7 +141,8 @@
        
        .entity-box {
            background: white;
-           padding: 20px;
+           margin: 8px;
+           padding: 15px;
            border-radius: 8px;
            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
            border-left: 5px solid;
@@ -152,11 +164,7 @@
            border-left-color: #084d78;
        }
        
-       .employer {
-           border-left-color: #484848;
-       }
-       
-       .entity-box h5 {
+       .entity-box h3 {
            margin-top: 0;
            color: var(--primary-gray);
            font-size: 1.1em;
@@ -173,10 +181,11 @@
        .situation-box {
             background: white;
             border-radius: 8px;
-            padding: 20px;
+            padding: 5px 20px;
             position: relative;
             box-shadow: 0 4px 16px rgba(0,0,0,0.15);
             text-align: justify;
+            margin: 0 10px;
         }
 
         .situation-box::before {
@@ -230,7 +239,7 @@
                
                <div class="entity-grid">
                    <div class="entity-box government">
-                       <h3>🏛️ Government Perspective</h3>
+                       <h3>🏛️ Government</h3>
                        <p><strong>Primary Concern:</strong> Public safety and rapid implementation</p>
                        <p><strong>Approach:</strong> May push for immediate regulatory updates</p>
                        <p><strong>Authority:</strong> Can mandate timeline through legislation</p>
@@ -238,7 +247,7 @@
                    </div>
                    
                    <div class="entity-box regulatory">
-                       <h3>⚖️ Regulatory Body Perspective</h3>
+                       <h3>⚖️ Regulatory Body</h3>
                        <p><strong>Primary Concern:</strong> Evidence-based standards and public protection</p>
                        <p><strong>Approach:</strong> Thorough consultation and gradual implementation</p>
                        <p><strong>Authority:</strong> Create and enforce standards within legislative framework</p>
@@ -246,7 +255,7 @@
                    </div>
                    
                    <div class="entity-box association">
-                       <h3>🎓 Professional Association Perspective</h3>
+                       <h3>🎓 Professional Association</h3>
                        <p><strong>Primary Concern:</strong> Member competency and professional development</p>
                        <p><strong>Approach:</strong> Education-focused rollout with certification options</p>
                        <p><strong>Authority:</strong> Advocate and provide educational resources</p>
@@ -254,7 +263,7 @@
                    </div>
                    
                    <div class="entity-box union">
-                       <h3>👥 Union Perspective</h3>
+                       <h3>👥 Union</h3>
                        <p><strong>Primary Concern:</strong> Member job security and workplace conditions</p>
                        <p><strong>Approach:</strong> Ensure adequate training time and resources</p>
                        <p><strong>Authority:</strong> Negotiate implementation conditions with employers</p>
@@ -275,7 +284,7 @@
                
                <div class="entity-grid">
                    <div class="entity-box government">
-                       <h3>🏛️ Government Perspective</h3>
+                       <h3>🏛️ Government</h3>
                        <p><strong>Primary Concern:</strong> Public confidence and swift visible action</p>
                        <p><strong>Approach:</strong> May demand immediate policy changes and enhanced penalties</p>
                        <p><strong>Authority:</strong> Can mandate legislative changes and increased oversight</p>
@@ -283,7 +292,7 @@
                    </div>
                    
                    <div class="entity-box regulatory">
-                       <h3>⚖️ Regulatory Body Perspective</h3>
+                       <h3>⚖️ Regulatory Body</h3>
                        <p><strong>Primary Concern:</strong> Due process and evidence-based disciplinary action</p>
                        <p><strong>Approach:</strong> Thorough investigation following established procedures</p>
                        <p><strong>Authority:</strong> Conduct hearings and impose appropriate sanctions within legal framework</p>
@@ -291,7 +300,7 @@
                    </div>
                    
                    <div class="entity-box association">
-                       <h3>🎓 Professional Association Perspective</h3>
+                       <h3>🎓 Professional Association</h3>
                        <p><strong>Primary Concern:</strong> Protecting profession's reputation while supporting fair treatment</p>
                        <p><strong>Approach:</strong> Advocate for balanced response and enhanced professional education</p>
                        <p><strong>Authority:</strong> Provide professional support and continuing education programs</p>
@@ -299,7 +308,7 @@
                    </div>
                    
                    <div class="entity-box union">
-                       <h3>👥 Union Perspective</h3>
+                       <h3>👥 Union</h3>
                        <p><strong>Primary Concern:</strong> Ensuring fair treatment and due process for members</p>
                        <p><strong>Approach:</strong> Legal representation and protection of member rights</p>
                        <p><strong>Authority:</strong> Negotiate disciplinary procedures and provide legal support</p>
@@ -320,7 +329,7 @@
                
                <div class="entity-grid">
                    <div class="entity-box government">
-                       <h3>🏛️ Government Perspective</h3>
+                       <h3>🏛️ Government</h3>
                        <p><strong>Primary Concern:</strong> Meeting public service demands and political pressure</p>
                        <p><strong>Approach:</strong> Push for expedited licensing and temporary practice permits</p>
                        <p><strong>Authority:</strong> Can mandate emergency measures and funding for recruitment</p>
@@ -328,7 +337,7 @@
                    </div>
                    
                    <div class="entity-box regulatory">
-                       <h3>⚖️ Regulatory Body Perspective</h3>
+                       <h3>⚖️ Regulatory Body</h3>
                        <p><strong>Primary Concern:</strong> Maintaining competency standards while addressing shortage</p>
                        <p><strong>Approach:</strong> Explore alternative pathways without compromising public safety</p>
                        <p><strong>Authority:</strong> Modify registration requirements within legislative boundaries</p>
@@ -336,7 +345,7 @@
                    </div>
                    
                    <div class="entity-box association">
-                       <h3>🎓 Professional Association Perspective</h3>
+                       <h3>🎓 Professional Association</h3>
                        <p><strong>Primary Concern:</strong> Professional recognition and career advancement opportunities</p>
                        <p><strong>Approach:</strong> Promote profession through recruitment campaigns and improved working conditions</p>
                        <p><strong>Authority:</strong> Advocate for better compensation and professional development</p>
@@ -344,18 +353,18 @@
                    </div>
                    
                    <div class="entity-box union">
-                       <h3>👥 Union Perspective</h3>
+                       <h3>👥 Union</h3>
                        <p><strong>Primary Concern:</strong> Improving working conditions to retain existing workforce</p>
                        <p><strong>Approach:</strong> Negotiate better wages, benefits, and workplace safety measures</p>
                        <p><strong>Authority:</strong> Collective bargaining and work action if necessary</p>
                        <p><strong>Key Question:</strong> "What working conditions changes will help retain our current members?"</p>
                    </div>
-                   
+
                </div>
            </div>
        </div>
        
-       <div class="situation-box">
+       <div class="content-box">
            <h3>🔍 Key Insights from These Scenarios</h3>
            <p>Notice how each entity approaches the same situation with fundamentally different priorities and tools. Successful regulatory governance requires:</p>
            <ul>
