@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Putting Ethics Into Practice</title>
+    <meta name="description" content="Interactive guide to your daily ethical toolkit">
+     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-text-size-adjust: none;
+            text-size-adjust: none;
+        }
+        
+        body {
+            font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: white;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .button-row {
+                gap: 8px !important;
+                margin-bottom: 8px !important;
+            }
+            
+            .rights-button {
+                min-width: auto !important;
+                padding: 12px 15px !important;
+                font-size: 14px !important;
+            }
+            
+            .rights-button span:first-child {
+                font-size: 24px !important;
+            }
+            
+            .content-container {
+                padding: 1.5rem 1rem !important;
+            }
+            
+            .main-content {
+                padding: 1.5rem 1rem !important;
+                margin: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .button-row {
+                flex-direction: column !important;
+                gap: 8px !important;
+            }
+            
+            .rights-button {
+                min-width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="max-width: 800px; margin: 0 auto; background: white; border-radius: 20px;  overflow: hidden;">
+        <!-- Content -->
+        <div class="main-content" style="padding: 2.5rem 2rem;">
+            <!-- Main Title Section -->
+            <div style="margin-bottom: 3rem;">
+                <h1 style="text-align: center; margin-bottom: 1.5rem;">Maintaining Regulatory Independence Framework</h1>
+                <p style="text-align: justify; margin-bottom: 2rem;">Let's dive into the essential components for safeguarding your regulatory independence.</p>
+            </div>
+
+            <!-- Framework Buttons -->
+            <div style="margin-bottom: 2rem;">
+                <!-- First Row -->
+                <div class="button-row" style="display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; justify-content: center;">
+                    <button class="rights-button" onclick="showRight('decision')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">🧭</span>
+                        <span style="font-weight: bold; color: black;">Decision Criteria</span>
+                    </button>
+                    <button class="rights-button" onclick="showRight('documentation')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">📝</span>
+                        <span style="font-weight: bold; color: black;">Documentation Requirements</span>
+                    </button>
+                    <button class="rights-button" onclick="showRight('communication')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">💬</span>
+                        <span style="font-weight: bold; color: black;">Communication Principles</span>
+                    </button>
+                </div>
+            </div>
+                <!-- Second Row -->
+                <div class="button-row" style="display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; justify-content: center;">
+                    <button class="rights-button" onclick="showRight('strategies')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">⚙️</span>
+                        <span style="font-weight: bold; color: black;">Practical Strategies</span>
+                    </button>
+                    <button class="rights-button" onclick="showRight('flag')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">🚨</span>
+                        <span style="font-weight: bold; color: black;">Red Flag Warning System</span>
+                    </button>
+                    <button class="rights-button" onclick="showRight('audits')" style="background: transparent; border: none; border-radius: 15px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                        <span style="font-size: 30px;">📊</span>
+                        <span style="font-weight: bold; color: black;">Regular Independence Audits</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content Display Area -->
+            <div id="rightsContent" style="margin: 15px;">
+                <div style="background: #f8f9fa; border-radius: 15px; padding: 2rem; text-align: center; color: #6c757d; border: 2px dashed #dee2e6;">
+                    <p style="margin: 0; font-style: italic;">Click on a consumer right above to view detailed information</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        const rightsData = {
+            decision: {
+                color: '#64092c',
+                lightColor: '#fcf6f8',
+                emoji: '🧭',
+                title: 'Decision Criteria: Your Independence Compass',
+                description: '<p style="padding-bottom: 10px;">Every regulatory decision should be filtered through these core questions:</p>',
+                example: '<ul style="margin-left: 20px; padding-bottom: 15px;"><li style="color: #64092c; padding: 5px; line-height: 1.5; font-weight: 700;">Public Protection Test: <span style="color: #000000; font-weight: normal;">Does this decision primarily serve public safety and protection?</span></li><li style="color: #64092c; padding: 5px; line-height: 1.5; font-weight: 700;">Evidence Standard: <span style="color: #000000; font-weight: normal;">Is this decision based on credible evidence rather than pressure or convenience?</span></li><li style="color: #64092c; padding: 5px; line-height: 1.5; font-weight: 700;">Legislative Alignment: <span style="color: #000000; font-weight: normal;">Does this fall within our statutory mandate and authority?</span></li><li style="color: #64092c; padding: 5px; line-height: 1.5; font-weight: 700;">Precedent Impact: <span style="color: #000000; font-weight: normal;">What precedent does this set for future decisions and regulatory credibility?</span></li><li style="color: #64092c; padding: 5px; line-height: 1.5; font-weight: 700;">Independence Check: <span style="color: #000000; font-weight: normal;">Are we making this decision because it is right, or because someone wants us to?</span></li></ul>'
+            },
+            documentation: {
+                color: '#B4851F',
+                lightColor: '#fefcf7',
+                emoji: '📝',
+                title: 'Documentation Requirements: Building Your Defense?',
+                description: '<p style="padding-bottom: 10px;">Robust documentation protects independence by creating transparency and accountability:</p>',
+                example: '<ul style="margin-left: 20px; padding-bottom: 15px;"><li style="color: #b4851f; padding: 5px; line-height: 1.5; font-weight: 700;">Decision Rationale Records: <span style="color: #000000; font-weight: normal;">Document the "why" behind every significant decision, including alternatives considered and evidence reviewed</span></li><li style="color: #b4851f; padding: 5px; line-height: 1.5; font-weight: 700;">Consultation Summaries: <span style="color: #000000; font-weight: normal;">Record who was consulted, what input was received, and how it influenced (or not) the final decision</span></li><li style="color: #b4851f; padding: 5px; line-height: 1.5; font-weight: 700;">Risk Assessments: <span style="color: #000000; font-weight: normal;">Document potential risks and how they were weighed against benefits</span></li><li style="color: #b4851f; padding: 5px; line-height: 1.5; font-weight: 700;">Impact Evaluations: <span style="color: #000000; font-weight: normal;">Track outcomes of decisions to build evidence base for future choices</span></li><li style="color: #b4851f; padding: 5px; line-height: 1.5; font-weight: 700;">Pressure Point Logs: <span style="color: #000000; font-weight: normal;">Keep confidential records of external pressure attempts and how they were handled</span></li></ul>'
+            },
+            communication: {
+                color: '#484848',
+                lightColor: '#f8f9fa',
+                emoji: '💬',
+                title: 'Communication Principles: Explaining Without Compromising',
+                description: '<p style="padding-bottom: 10px;">Strategic communication reinforces independence while maintaining relationships:</p>',
+                example: '<ul style="margin-left: 20px; padding-bottom: 15px;"><li style="color: #484848; padding: 5px; line-height: 1.5; font-weight: 700;">Mandate-First Messaging: <span style="color: #000000; font-weight: normal;">Always lead with your public protection mandate when explaining decisions</span></li><li style="color: #484848; padding: 5px; line-height: 1.5; font-weight: 700;">Evidence-Based Language: <span style="color: #000000; font-weight: normal;">Use objective, factual language that focuses on data and outcomes rather than opinions</span></li><li style="color: #484848; padding: 5px; line-height: 1.5; font-weight: 700;">Process Transparency: <span style="color: #000000; font-weight: normal;">Explain how decisions are made, not just what decisions are made</span></li><li style="color: #484848; padding: 5px; line-height: 1.5; font-weight: 700;">Consistent Standards: <span style="color: #000000; font-weight: normal;">Apply the same communication approach regardless of which entity you are addressing</span></li><li style="color: #484848; padding: 5px; line-height: 1.5; font-weight: 700;">Respectful Firmness: <span style="color: #000000; font-weight: normal;">Acknowledge the perspectives of others while maintaining clear boundaries about your role and responsibilities</span></li></ul>'
+            },
+            strategies: {
+                color: '#084d78',
+                lightColor: '#f7f9fc',
+                emoji: '⚙️',
+                title: 'Practical Independence Strategies',
+                description: '<p style="padding-bottom: 10px; font-weight: 700;">Before Meetings:</p><ul style="margin-left: 20px; padding-bottom: 15px;"><li style="color: #084d78; padding: 5px; line-height: 1.5;"><span style="color: #000000;">Set clear agendas that emphasize your regulatory role and mandate</span></li><li style="color: #084d78; padding: 5px; line-height: 1.5;"><span style="color: #000000;">Prepare standard responses for common pressure tactics</span></li><li style="color: #084d78; padding: 5px; line-height: 1.5;"><span style="color: #000000;">Review relevant legislation and policies to ground discussions in your authority</span></li></ul><p style="padding-bottom: 10px; font-weight: 700;">During Interactions:</p><ul style="margin-left: 20px; padding-bottom: 15px;"><li style="color: #084d78; padding: 5px; line-height: 1.5;"><span style="color: #000000;">Use phrases like "Our mandate requires us to..." or "The evidence shows..."</span></li><li style="color: #084d78; padding: 5px; line-height: 1.5;"><span style="color: #000000;">Redirect pressure back to public protection: "Help me understand how this serves public safety"</span></li><li style="color: #084d78; padding: 5px; line-height: 1.5;"><span style="color: #000000;">Take time to consider requests: "We need to review this against our decision criteria"</span></li></ul><p style="padding-bottom: 10px; font-weight: 700;">After Engagements:</p><ul style="margin-left: 20px; padding-bottom: 15px;"><li style="color: #084d78; padding: 5px; line-height: 1.5;"><span style="color: #000000;">Document any pressure attempts or unusual requests</span></li><li style="color: #084d78; padding: 5px; line-height: 1.5;"><span style="color: #000000;">Debrief with your team about maintaining independence</span></li><li style="color: #084d78; padding: 5px; line-height: 1.5;"><span style="color: #000000;">Follow up with evidence-based explanations for your positions</span></li></ul>',
+                example: ' '
+            },
+            flag: {
+                color: '#64092c',
+                lightColor: '#fcf6f8',
+                emoji: '🚨',
+                title: 'Red Flag Warning System',
+                description: '<p style="padding-bottom: 10px;">Watch for these independence threats and have response plans ready:</p>',
+                example: '<ul style="margin-left: 20px; padding-bottom: 15px;"><li style="color: #64092c; padding: 5px; line-height: 1.5; font-weight: 700;">Rushed Timelines: <span style="color: #000000; font-weight: normal;">Pressure to make decisions without proper consultation or evidence review</span></li><li style="color: #64092c; padding: 5px; line-height: 1.5; font-weight: 700;">Off-the-Record Requests: <span style="color: #000000; font-weight: normal;">Attempts to influence decisions through informal channels</span></li><li style="color: #64092c; padding: 5px; line-height: 1.5; font-weight: 700;">Resource Threats: <span style="color: #000000; font-weight: normal;">Implied or explicit consequences for not accommodating requests</span></li><li style="color: #64092c; padding: 5px; line-height: 1.5; font-weight: 700;">Public Campaign Pressure: <span style="color: #000000; font-weight: normal;">Organized efforts to pressure decisions through media or political channels</span></li><li style="color: #64092c; padding: 5px; line-height: 1.5; font-weight: 700;">Relationship Leverage: <span style="color: #000000; font-weight: normal;">Appeals based on personal relationships rather than evidence or mandate</span></li></ul>'
+            },
+            audits: {
+                color: '#B4851F',
+                lightColor: '#fefcf7',
+                emoji: '📊',
+                title: 'Regular Independence Audits',
+                description: '<p style="padding-bottom: 10px;">Quarterly, ask yourself and your team:</p>',
+                example: '<ul style="margin-left: 20px; padding-bottom: 15px;"><li style="color: #B4851F; padding: 5px; line-height: 1.5;"><span style="color: #000000;">Are we making decisions based on our mandate or external pressure?</span></li><li style="color: #B4851F; padding: 5px; line-height: 1.5;"><span style="color: #000000;">Do our recent decisions demonstrate consistent application of our standards?</span></li><li style="color: #B4851F; padding: 5px; line-height: 1.5;"><span style="color: #000000;">Are we documenting and communicating our rationale effectively?</span></li><li style="color: #B4851F; padding: 5px; line-height: 1.5;"><span style="color: #000000;">What independence challenges have we faced and how did we handle them?</span></li><li style="color: #B4851F; padding: 5px; line-height: 1.5;"><span style="color: #000000;">Where do we need to strengthen our independence practices?</span></li></ul>'
+            },
+        };
+
+        function showRight(rightType) {
+            const contentDiv = document.getElementById('rightsContent');
+            const right = rightsData[rightType];
+            
+            // Reset ALL button styles to original state
+            document.querySelectorAll('.rights-button').forEach(btn => {
+                btn.style.background = 'transparent';
+                btn.style.transform = 'none';
+                // Reset text color to black for all buttons
+                const textSpan = btn.querySelectorAll('span')[1];
+                if (textSpan) {
+                    textSpan.style.color = 'black';
+                }
+            });
+            
+            // Highlight selected button
+            const clickedButton = event.target.closest('button');
+            clickedButton.style.background = right.color;
+            clickedButton.style.transform = 'translateY(-2px)';
+            // Set text to white for selected button only
+            const selectedTextSpan = clickedButton.querySelectorAll('span')[1];
+            if (selectedTextSpan) {
+                selectedTextSpan.style.color = 'white';
+            }
+            
+            // Check if mobile view
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // Mobile layout: emoji above title
+                contentDiv.innerHTML = `
+                    <div class="content-container" style="background: transparent; border-radius: 15px; padding: 2rem; border-left: 5px solid ${right.color}; transition: all 0.3s ease; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+                        <div style="text-align: center; margin-bottom: 20px;">
+                            <div style="font-size: 50px; margin-bottom: 15px;">${right.emoji}</div>
+                            <h3 style="margin: 0 0 20px 0; color: ${right.color}; font-size: 1.4em;">${right.title}</h3>
+                        </div>
+                        <div style="width: 100%;">
+                            <p style="text-align: justify; margin-bottom: 15px; color: #333; line-height: 1.6;">${right.description}</p>
+                            <p style="text-align: justify; margin: 0; color: #333; line-height: 1.6;">${right.example}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Desktop layout: original side-by-side design
+                contentDiv.innerHTML = `
+                    <div style="background: transparent; border-radius: 15px; padding: 2rem; border-left: 5px solid ${right.color}; transition: all 0.3s ease; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="background: transparent; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 40px; flex-shrink: 0;">${right.emoji}</div>
+                            <div style="flex: 1;">
+                                <h3 style="margin: 0 0 15px 0; color: ${right.color}; font-size: 1.4em;">${right.title}</h3>
+                                <p style="text-align: justify; margin-bottom: 15px; color: #333; line-height: 1.6;">${right.description}</p>
+                                <p style="text-align: justify; margin: 0; color: #333; line-height: 1.6;">${right.example}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Smooth scroll to content if needed (helpful on mobile)
+            contentDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Add hover effects for better interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.rights-button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    if (this.style.background === 'transparent') {
+                        this.style.transform = 'translateY(-1px)';
+                        this.style.boxShadow = '0 6px 15px rgba(0,0,0,0.2)';
+                    }
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    if (this.style.background === 'transparent') {
+                        this.style.transform = 'none';
+                        this.style.boxShadow = '0 4px 10px rgba(0,0,0,0.15)';
+                    }
+                });
+            });
+        });
+
+        // Add before closing </body> tag in ConsumerRights.html
+function optimizeForIframe() {
+    document.body.style.margin = '0';
+    document.body.style.padding = '10px';
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        body { overflow-x: hidden; }
+        img, video { max-width: 100% !important; height: auto !important; }
+        @media (max-width: 768px) {
+            body { font-size: 14px !important; padding: 5px !important; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+window.addEventListener('load', optimizeForIframe);
+    </script>
+</body>
+</html>
