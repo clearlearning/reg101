@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conflict Resolution Toolkit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: transparent;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: #64092c;
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(100, 9, 44, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intro-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 2.3rem; /* Add extra padding to account for the gradient border */
+        }
+
+        .intro-section::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: linear-gradient(180deg, #64092c 0%, #dda839 50%, #084d78 100%);
+            border-radius: 12px 0 0 12px; /* Matches the parent's border-radius on the left side */
+        }
+
+        .intro-section h2 {
+            color: #64092c;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .process-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 6px solid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .process-card:nth-child(1) { border-top-color: #64092c; }
+        .process-card:nth-child(2) { border-top-color: #dda839; }
+        .process-card:nth-child(3) { border-top-color: #484848; }
+        .process-card:nth-child(4) { border-top-color: #084d78; }
+        .process-card:nth-child(5) { border-top-color: #64092c; }
+        .process-card:nth-child(6) { border-top-color: #dda839; }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+
+        .process-card:nth-child(1) .step-number { background: #64092c; }
+        .process-card:nth-child(2) .step-number { background: #dda839; }
+        .process-card:nth-child(3) .step-number { background: #484848; }
+        .process-card:nth-child(4) .step-number { background: #084d78; }
+        .process-card:nth-child(5) .step-number { background: #64092c; }
+        .process-card:nth-child(6) .step-number { background: #dda839; }
+
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .step-emoji {
+            font-size: 1.8rem;
+        }
+
+        .step-description {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .step-bullets {
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-bullets li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .step-bullets li::before {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 0.7em;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #dda839;
+        }
+
+        .process-card:nth-child(1) .step-bullets li::before { background: #64092c; }
+        .process-card:nth-child(2) .step-bullets li::before { background: #dda839; }
+        .process-card:nth-child(3) .step-bullets li::before { background: #484848; }
+        .process-card:nth-child(4) .step-bullets li::before { background: #084d78; }
+        .process-card:nth-child(5) .step-bullets li::before { background: #64092c; }
+        .process-card:nth-child(6) .step-bullets li::before { background: #dda839; }
+
+        .key-principles {
+            background: linear-gradient(135deg, #084d78, #0a5a8a);
+            color: #000000;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(8, 77, 120, 0.3);
+            margin-top: 2rem;
+        }
+
+        .key-principles h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .key-principles p {
+            font-size: 1.1rem;
+            text-align: center;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .process-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .process-card {
+                padding: 1.5rem;
+            }
+        }
+
+        .animate-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 0.6s ease forwards;
+        }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="intro-section animate-in" style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; overflow: hidden;"><div style="position: absolute; left: 0; top: 0; width: 5px; height: 100%; background: linear-gradient(180deg, #64092c 0%, #dda839 50%, #084d78 100%);">
+            </div>
+            <h2>Strategic Framework</h2>
+            <p style="text-align: justify;">Conflict doesn't have to derail your relationships or compromise your independence. This systematic approach provides a structured pathway through any dispute while keeping you grounded in your regulatory mandate and evidence-based decision-making.</p>
+        </div>
+
+        <div class="process-grid">
+            <div class="process-card animate-in" style="animation-delay: 0.1s">
+                <div class="step-header">
+                <div class="step-number">1</div>
+                <div class="step-title">
+                    <span class="step-emoji">🔍</span>
+                    Assess
+                </div>
+            </div>
+                <div class="step-description">Identify root causes and competing interests</div>
+                <ul class="step-bullets">
+                    <li>Look beyond the surface disagreement to understand underlying concerns</li>
+                    <li>Map out each party's true interests, not just their stated positions</li>
+                    <li>Determine whether this is a values conflict, resource dispute, or misunderstanding</li>
+                </ul>
+            </div>
+
+            <div class="process-card animate-in" style="animation-delay: 0.2s">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                <div class="step-title">
+                    <span class="step-emoji">🤝</span>
+                    Engage
+                </div>
+            </div>
+                <div class="step-description">Facilitate structured dialogue between parties</div>
+                <ul class="step-bullets">
+                    <li>Create safe spaces for all voices to be heard without judgment</li>
+                    <li>Use active listening to ensure each party feels understood</li>
+                    <li>Focus discussions on shared goals, particularly public protection</li>
+                </ul>
+            </div>
+
+            <div class="process-card animate-in" style="animation-delay: 0.3s">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                <div class="step-title">
+                    <span class="step-emoji">⚖️</span>
+                    Evaluate
+                </div>
+            </div>
+                <div class="step-description">Apply regulatory mandate and public interest test</div>
+                <ul class="step-bullets">
+                    <li>Filter all proposed solutions through your statutory responsibilities</li>
+                    <li>Weigh competing interests against your primary mandate of public protection</li>
+                    <li>Consider long-term implications for regulatory credibility and effectiveness</li>
+                </ul>
+            </div>
+
+            <div class="process-card animate-in" style="animation-delay: 0.4s">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                <div class="step-title">
+                    <span class="step-emoji">🎯</span>
+                    Decide
+                </div>
+            </div>
+                <div class="step-description">Make evidence-based decisions with clear rationale</div>
+                <ul class="step-bullets">
+                    <li>Base decisions on objective evidence rather than political pressure or convenience</li>
+                    <li>Document your reasoning process transparently</li>
+                    <li>Ensure decisions are consistent with your established standards and precedents</li>
+                </ul>
+            </div>
+
+            <div class="process-card animate-in" style="animation-delay: 0.5s">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                <div class="step-title">
+                    <span class="step-emoji">📢</span>
+                    Communicate
+                </div>
+            </div>
+                <div class="step-description">Explain decisions to all affected parties</div>
+                <ul class="step-bullets">
+                    <li>Clearly articulate how the decision serves the public interest</li>
+                    <li>Acknowledge the concerns of all parties, even those whose preferences weren't adopted</li>
+                    <li>Use language that demonstrates respect for different perspectives while maintaining firm boundaries</li>
+                </ul>
+            </div>
+
+            <div class="process-card animate-in" style="animation-delay: 0.6s">
+                <div class="step-header">
+                    <div class="step-number">6</div>
+                <div class="step-title">
+                    <span class="step-emoji">📊</span>
+                    Monitor
+                </div>
+            </div>
+                <div class="step-description">Track outcomes and adjust if necessary</div>
+                <ul class="step-bullets">
+                    <li>Evaluate whether the resolution achieved its intended goals</li>
+                    <li>Watch for unintended consequences or new tensions</li>
+                    <li>Be prepared to refine your approach based on lessons learned</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="key-principles animate-in" style="animation-delay: 0.7s; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.25); position: relative; overflow: hidden;"><div style="position: absolute; left: 0; top: 0; width: 5px; height: 100%; background: linear-gradient(180deg, #64092c 0%, #dda839 50%, #084d78 100%);">
+            </div>
+            <h2>Remember</h2>
+            <p>The goal isn't to make everyone happy—it's to make decisions that serve the public interest while maintaining the collaborative relationships you need to be effective. Sometimes the best long-term relationship building comes from respectfully standing firm on principle.</p>
+        </div>
+    </div>
+
+    <script>
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Interactive workflow indicator
+        const cards = document.querySelectorAll('.process-card');
+        const dots = document.querySelectorAll('.workflow-dot');
+
+        cards.forEach((card, index) => {
+            card.addEventListener('mouseenter', () => {
+                dots.forEach(dot => dot.classList.remove('active'));
+                if (dots[index]) {
+                    dots[index].classList.add('active');
+                }
+            });
+        });
+
+        // Reset to first dot when not hovering over any card
+        document.addEventListener('mousemove', (e) => {
+            const isHoveringCard = Array.from(cards).some(card => 
+                card.matches(':hover')
+            );
+            
+            if (!isHoveringCard) {
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[0].classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
