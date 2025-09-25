@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Professional Regulation Systems</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', Aptos, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: transparent;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 5px solid;
+            border-image: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%) 1;
+            color: black;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.728em;
+            font-weight: 700;
+            line-height: 1.2;
+            color: black;
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1em;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .interactive-area {
+            padding: 30px;
+            position: relative;
+        }
+
+        .world-map {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background-image: url('https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/oldmap1.svg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow: hidden;
+        }
+
+        .hotspot {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 3px solid white;
+        }
+
+        .hotspot:hover {
+            transform: scale(1.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .hotspot.active {
+            transform: scale(1.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .german { background: #dda839; top: 36%; left: 27%; }
+        .italian { background: #ff7f00; top: 47%; left: 24%; }
+        .french { background: #64092c; top: 40%; left: 20%; }
+        .islamic { background: #008000; top: 60%; left: 36%; }
+        .chinese { background: #084d78; top: 40%; left: 63%; }
+        .japanese { background: #4b0082; top: 51%; left: 70%; }
+
+        .info-panel {
+            margin-top: 30px;
+            min-height: 375px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px 30px 10px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-left: 5px solid transparent;
+        }
+
+        /* Change panel border color based on active content */
+        .info-panel:has(#german.active) { border-left-color: #dda839; }
+        .info-panel:has(#italian.active) { border-left-color: #ff7f00; }
+        .info-panel:has(#french.active) { border-left-color: #64092c; }
+        .info-panel:has(#islamic.active) { border-left-color: #008000; }
+        .info-panel:has(#chinese.active) { border-left-color: #084d78; }
+        .info-panel:has(#japanese.active) { border-left-color: #4b0082; }
+
+        .info-content {
+            display: none;
+        }
+
+        .info-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .info-content h2 {
+            color: #black;
+            margin-top: 0;
+            font-size: 1.44em;
+            font-weight: 700;
+            border-bottom: 5px solid #64092c;
+            padding-bottom: 10px;
+        }
+
+        #german h2 {border-bottom-color: #dda839;}
+        #italian h2 {border-bottom-color: #ff7f00;}
+        #french h2 {border-bottom-color: #64092c;}
+        #islamic h2 {border-bottom-color: #008000;}
+        #chinese h2 {border-bottom-color: #084d78;}
+        #japanese h2 {border-bottom-color: #4b0082;}        
+
+        .info-content h3 {
+            color: #black;
+            margin-top: 5px;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .info-content p {
+            line-height: 1.5;
+            color: #black;
+            font-size: 1em;
+            font-weight: 400;
+        }
+
+        .default-message {
+            display: none;
+            text-align: center;
+            color: #555;
+            padding: 60px 20px;
+        }
+
+        .default-message.active {
+            display: block;
+        }
+
+        .default-message h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.44em;
+            font-weight: 700;
+            border-bottom: none;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+            50% { box-shadow: 0 4px 25px rgba(0,0,0,0.6); }
+            100% { box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        }
+
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(1, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .legend-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.5em;
+            }
+            
+            .header p {
+                font-size: 0.9em;
+            }
+            
+            .interactive-area {
+                padding: 15px;
+            }
+            
+            .world-map {
+                height: 300px;
+            }
+            
+            .hotspot {
+                width: 44px;
+                height: 44px;
+                font-size: 20px;
+            }
+            
+            .legend {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                gap: 10px;
+            }
+            
+            .legend-item {
+                font-size: 0.8em;
+                gap: 8px;
+            }
+            
+            .legend-dot {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .info-panel {
+                padding: 20px 15px 10px 15px;
+                margin-top: 20px;
+                min-height: 300px;
+            }
+            
+            .info-content h2 {
+                font-size: 1.3em;
+            }
+            
+            .info-content h3 {
+                font-size: 1.1em;
+                margin-top: 15px;
+            }
+            
+            .info-content p {
+                font-size: 0.95em;
+            }
+            
+            .default-message {
+                padding: 40px 15px;
+            }
+            
+            .default-message h2 {
+                font-size: 1.3em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.3em;
+            }
+            
+            .world-map {
+                height: 250px;
+            }
+            
+            .hotspot {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .legend {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(6, 1fr);
+                gap: 8px;
+            }
+            
+            .info-content h2 {
+                font-size: 1.2em;
+            }
+            
+            .info-content h3 {
+                font-size: 1.05em;
+            }
+            
+            .info-content p {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Global Variations in Professional Regulation</h1>
+            <p>Explore how different cultures and regions developed unique approaches to professional oversight</p>
+            <p style="font-style: italic; font-weight: 600;">Click on any hotspot above to learn about different approaches to professional regulation that developed across cultures and time periods. Each system contributed unique innovations that continue to influence modern professional oversight.</p>
+        </div>
+        
+        <div class="interactive-area">
+            <div class="world-map">
+                <div class="hotspot german pulse" data-target="german" title="German & Austrian Systems"></div>
+                <div class="hotspot italian pulse" data-target="italian" title="Italian City-States"></div>
+                <div class="hotspot french pulse" data-target="french" title="French Royal Charters"></div>
+                <div class="hotspot islamic pulse" data-target="islamic" title="Islamic Hisbah System"></div>
+                <div class="hotspot chinese pulse" data-target="chinese" title="Chinese Gongsuo"></div>
+                <div class="hotspot japanese pulse" data-target="japanese" title="Japanese Za System"></div>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-dot french"></div>
+                    <span>French Corporate Privileges</span>
+
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot italian"></div>
+                    <span>Italian City-States</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot german"></div>
+                    <span>German & Austrian Zunft</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot islamic"></div>
+                    <span>Islamic Hisbah System</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot chinese"></div>
+                    <span>Chinese Gongsuo</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot japanese"></div>
+                    <span>Japanese Za System</span>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div class="default-message active">
+                    <h2>Select a Region to Explore</h2>
+                    <p style="font-style: italic; font-weight: 600;">Click on any hotspot above to learn about different approaches to professional regulation that developed across cultures and time periods. Each system contributed unique innovations that continue to influence modern professional oversight.</p>
+                </div>
+
+                <div class="info-content" id="german">
+                    <h2 style="color: #dda839;">German & Austrian Guild Systems</h2>
+                    <h3>The Zunft Tradition</h3>
+                    <p>German-speaking regions developed particularly sophisticated guild structures, featuring elaborate hierarchies and specialized sub-guilds for various aspects of individual trades. The German <em>Zunft</em> system had a profound influence on professional organizations throughout Central Europe.</p>
+                    <h3>Modern Legacy</h3>
+                    <p>These systems established many practices that were later adopted by modern trade unions, including detailed apprenticeship programs, worker representation, and collective bargaining structures. The emphasis on specialized training and hierarchical advancement became a model for professional development across Europe.</p>
+                </div>
+
+                <div class="info-content" id="italian">
+                    <h2 style="color: #ff7f00;">Italian City-State Models</h2>
+                    <h3>Commercial Innovation Centers</h3>
+                    <p>Italian commercial centers such as Venice, Florence, and Genoa developed guild systems closely integrated with banking and international trade. These guilds pioneered sophisticated financial regulations and quality certifications that facilitated long-distance commerce.</p>
+                    <h3>Financial Services Precedent</h3>
+                    <p>Their innovations represented early versions of modern professional licensing for financial services, establishing standards for banking practices, currency exchange, and commercial law that influenced trade throughout the Mediterranean and beyond.</p>
+                </div>
+
+                <div class="info-content" id="french">
+                    <h2 style="color: #64092c;">French Corporate Privileges</h2>
+                    <h3>Royal Charter System</h3>
+                    <p>French guilds operated under royal charters that granted specific legal privileges and monopolies. This system created a direct relationship between professional organizations and state authority, with the crown formally recognizing and protecting guild rights.</p>
+                    <h3>Government Regulation Model</h3>
+                    <p>This system of state-sanctioned professional control became a model for later government-regulated licensing schemes, establishing the principle that professional practice requires formal government approval and oversight.</p>
+                </div>
+
+                <div class="info-content" id="islamic">
+                    <h2 style="color: #008000;">Islamic Hisbah System</h2>
+                    <h3>Comprehensive Market Regulation</h3>
+                    <p>The Islamic world developed the <em>hisbah</em> system, a comprehensive approach to market regulation that combined religious principles with practical commercial oversight. Market inspectors (<em>muhtasib</em>) enforced standards for weights, measures, product quality, and ethical business practices.</p>
+                    <h3>Enduring Influence</h3>
+                    <p>This system influenced professional regulation throughout the Middle East, North Africa, and Islamic Spain, creating regulatory traditions that persisted long after medieval guilds had declined elsewhere. The integration of ethical and practical standards became a hallmark of professional regulation.</p>
+                    </div>
+
+                <div class="info-content" id="chinese">
+                    <h2 style="color: #084d78;">Chinese Gongsuo Associations</h2>
+                    <h3>Community-Integrated Regulation</h3>
+                    <p>Chinese merchant and craft associations (<em>gongsuo</em>) developed complex systems for regulating trades, especially in major commercial centers. These organizations combined professional oversight with social welfare functions and religious observances.</p>
+                    <h3>Holistic Approach</h3>
+                    <p>By creating comprehensive community institutions that influenced professional organizations throughout East Asia, the <em>gongsuo</em> system demonstrated how professional regulation could serve broader social functions beyond simple trade control.</p>
+                </div>
+
+                <div class="info-content" id="japanese">
+                    <h2 style="color: #4b0082;">Japanese Za System</h2>
+                    <h3>Institutional Patronage</h3>
+                    <p>In medieval Japan, <em>za</em> associations controlled specific trades under the patronage of temples, nobles, or the imperial court. These organizations established professional standards while maintaining close relationships with political and religious authorities.</p>
+                    <h3>Authority Integration</h3>
+                    <p>The <em>za</em> system created a model where professional regulation was deeply integrated with existing power structures, ensuring that trade standards aligned with broader social and political goals while maintaining professional autonomy within defined boundaries.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const hotspots = document.querySelectorAll('.hotspot');
+          const infoContents = document.querySelectorAll('.info-content, .default-message');
+          const infoPanel = document.querySelector('.info-panel'); // Add this line
+          
+          hotspots.forEach(hotspot => {
+              hotspot.addEventListener('click', function() {
+                  // Remove active class from all hotspots and content
+                  hotspots.forEach(h => h.classList.remove('active'));
+                  infoContents.forEach(content => content.classList.remove('active'));
+                  
+                  // Add active class to clicked hotspot
+                  this.classList.add('active');
+                  
+                  // Show the info panel
+                  infoPanel.classList.add('visible'); // Add this line
+                  
+                  // Show corresponding content
+                  const targetId = this.getAttribute('data-target');
+                  const targetContent = document.getElementById(targetId);
+                  if (targetContent) {
+                      targetContent.classList.add('active');
+                  }
+                  
+                  // Remove pulse animation after first click
+                  this.classList.remove('pulse');
+              });
+              
+              // Add hover effects
+              hotspot.addEventListener('mouseenter', function() {
+                  if (!this.classList.contains('active')) {
+                      this.style.transform = 'scale(1.1)';
+                  }
+              });
+              
+              hotspot.addEventListener('mouseleave', function() {
+                  if (!this.classList.contains('active')) {
+                      this.style.transform = 'scale(1)';
+                  }
+              });
+          });
+      });
+    </script>
+</body>
+</html>
