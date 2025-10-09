@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Communication Goals to Audiences</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Aptos, Arial, sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 40px;
+        }
+
+        h2 {
+            color: black;
+            margin-bottom: 10px;
+            font-size: 1.44em;
+            font-weight: 700;
+            border-bottom: 5px solid;
+            border-image: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%) 1;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: black;
+            margin: 20px 0 10px;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        h4 {
+            color: black;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        p {
+            line-height: 1.8;
+            color: black;
+            margin: 15px 0;
+            font-size: 1em;
+            font-weight: 400;
+        }
+
+        .instruction-box {
+            position: relative;
+            background: #fffff1;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden; /* Ensures the pseudo-element respects border-radius */
+        }
+
+        .instruction-box::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: linear-gradient(180deg, #64092c 0%, #dda839 50%, #084d78 100%);
+            border-radius: 10px 0 0 10px; /* Matches the left side radius */
+        }
+
+        .instruction-box strong {
+            color: black;
+            font-weight: 700;
+        }
+
+        .drag-drop-container {
+            display: flex;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .drag-items {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .drop-zones {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .drag-item {
+            background: #64092c;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            cursor: move;
+            transition: transform 0.2s ease;
+            font-weight: 400;
+        }
+
+        .drag-item:hover {
+            transform: scale(1.05);
+        }
+
+        .drag-item.dragging {
+            opacity: 0.5;
+        }
+
+        .drop-zone {
+            background: #f8f9fa;
+            border: 2px dashed #64092c;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+            min-height: 60px;
+        }
+
+        .drop-zone.drag-over {
+            background: #e7eaf6;
+            border-color: #084d78;
+        }
+
+        .drop-zone h4 {
+            margin-bottom: 10px;
+            color: #64092c;
+            font-weight: 700;
+        }
+
+        .btn {
+            background: #64092c;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 0 10px 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(100, 9, 44, 0.4);
+        }
+
+        .feedback {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            display: none;
+            font-weight: 400;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            h3 {
+                font-size: 1.1em;
+            }
+
+            .drag-drop-container {
+                flex-direction: column;
+            }
+
+            .drag-items, .drop-zones {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.2em;
+            }
+
+            h3 {
+                font-size: 1.05em;
+            }
+
+            p {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Activity: Match Communication Goals to Audiences</h2>
+
+        <div class="instruction-box">
+            <p><strong>Activity Instructions:</strong> Match each communication goal below to the most appropriate audience. Think about what each audience needs most from the regulator. Drag the colored boxes on the left to the appropriate audience zone on the right.</p>
+        </div>
+
+        <h3>🎯 Drag and Drop</h3>
+        <p><strong>Drag each communication goal to the appropriate audience:</strong></p>
+
+        <div class="drag-drop-container">
+            <div class="drag-items">
+                <h4>Communication Goals:</h4>
+                <div class="drag-item" draggable="true" data-goal="compliance">
+                    Ensure compliance and policy alignment
+                </div>
+                <div class="drag-item" draggable="true" data-goal="transparency">
+                    Build trust through transparency
+                </div>
+                <div class="drag-item" draggable="true" data-goal="guidance">
+                    Provide technical guidance and support
+                </div>
+                <div class="drag-item" draggable="true" data-goal="collaboration">
+                    Foster collaboration and partnerships
+                </div>
+            </div>
+
+            <div class="drop-zones">
+                <div class="drop-zone" data-audience="government">
+                    <h4>🏛️ Government Officials</h4>
+                </div>
+                <div class="drop-zone" data-audience="public">
+                    <h4>👨‍👩‍👧‍👦 General Public</h4>
+                </div>
+                <div class="drop-zone" data-audience="professionals">
+                    <h4>👔 Industry Professionals</h4>
+                </div>
+                <div class="drop-zone" data-audience="partners">
+                    <h4>🤝 Partners & Others</h4>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn" onclick="checkDragDrop()">Check Answers</button>
+        <div class="feedback" id="dragDropFeedback"></div>
+    </div>
+
+    <script>
+        let draggedElement = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const dragItems = document.querySelectorAll('.drag-item');
+            const dropZones = document.querySelectorAll('.drop-zone');
+
+            // Set up drag events for draggable items
+            dragItems.forEach(item => {
+                item.addEventListener('dragstart', function(e) {
+                    draggedElement = this;
+                    this.classList.add('dragging');
+                });
+
+                item.addEventListener('dragend', function(e) {
+                    this.classList.remove('dragging');
+                });
+            });
+
+            // Set up drop zones
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.classList.add('drag-over');
+                });
+
+                zone.addEventListener('dragleave', function(e) {
+                    this.classList.remove('drag-over');
+                });
+
+                zone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
+                    if (draggedElement) {
+                        this.appendChild(draggedElement);
+                    }
+                });
+            });
+        });
+
+        function checkDragDrop() {
+            // Define correct answers
+            const correctAnswers = {
+                'compliance': 'government',
+                'transparency': 'public',
+                'guidance': 'professionals',
+                'collaboration': 'partners'
+            };
+
+            let correct = 0;
+            let total = 0;
+
+            // Check each drop zone
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                const audience = zone.dataset.audience;
+                const items = zone.querySelectorAll('.drag-item');
+                
+                items.forEach(item => {
+                    total++;
+                    const goal = item.dataset.goal;
+                    
+                    // Check if the item is in the correct zone
+                    if (correctAnswers[goal] === audience) {
+                        correct++;
+                        item.style.background = '#28a745'; // Green for correct
+                    } else {
+                        item.style.background = '#dc3545'; // Red for incorrect
+                    }
+                });
+            });
+
+            // Display feedback
+            const feedback = document.getElementById('dragDropFeedback');
+            feedback.classList.add('show');
+            
+            if (correct === total && total === 4) {
+                feedback.style.background = '#d4edda';
+                feedback.style.borderColor = '#c3e6cb';
+                feedback.style.color = '#155724';
+                feedback.textContent = `🎉 Perfect! You correctly matched all ${correct} communication goals. Government needs policy alignment, the public needs transparency, professionals need technical guidance, and partners need collaboration.`;
+            } else if (total === 0) {
+                feedback.style.background = '#fff3cd';
+                feedback.style.borderColor = '#ffeeba';
+                feedback.style.color = '#856404';
+                feedback.textContent = '⚠️ Please drag the communication goals to the audience zones before checking your answers.';
+            } else {
+                feedback.style.background = '#fff3cd';
+                feedback.style.borderColor = '#ffeeba';
+                feedback.style.color = '#856404';
+                feedback.textContent = `You got ${correct} out of ${total} correct. Green items are correctly placed. Review the incorrect matches (in red) and consider what each audience primarily needs from the regulator. Try dragging them to different zones!`;
+            }
+        }
+    </script>
+</body>
+</html>
