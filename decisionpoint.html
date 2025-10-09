@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branching Scenario: Crisis Communication</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Aptos, Arial, sans-serif;
+            background: transparent;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+        }
+
+        h2 {
+            color: black;
+            margin-bottom: 10px;
+            font-size: 1.44em;
+            font-weight: 700;
+            border-bottom: 5px solid;
+            border-image: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%) 1;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: black;
+            margin: 20px 0 10px;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        p {
+            line-height: 1.8;
+            color: black;
+            margin: 15px 0;
+            font-size: 1em;
+            font-weight: 400;
+        }
+
+        .instruction-box {
+            position: relative;
+            background: #fffff1;
+            padding: 20px;
+            padding-left: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .instruction-box::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: linear-gradient(180deg, #64092c 0%, #dda839 50%, #084d78 100%);
+            border-radius: 10px 0 0 10px;
+        }
+
+        .instruction-box strong {
+            color: black;
+            font-weight: 700;
+        }
+
+        .branching-scenario {
+            position: relative;
+            background: #fffff1;
+            padding: 20px;
+            padding-left: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .branching-scenario::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%);
+            border-radius: 10px 0 0 10px;
+        }
+
+        .scenario-choices {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .scenario-choice {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 400;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .scenario-choice:hover {
+            background: #64092c;
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(100, 9, 44, 0.3);
+        }
+
+        .feedback {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            display: none;
+            font-weight: 400;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            h3 {
+                font-size: 1.1em;
+            }
+
+            .scenario-choices {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.2em;
+            }
+
+            h3 {
+                font-size: 1.05em;
+            }
+
+            p {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Decision Point: Crisis Communication</h2>
+
+        <p>In crisis situations, regulators must communicate quickly while ensuring all audiences receive appropriate information. The approach you take can significantly impact trust, compliance, and public safety.</p>
+
+        <div class="instruction-box">
+            <p><strong>Scenario Instructions:</strong> You're about to face a crisis situation. Apply what you know about different audiences to make the best communication decision. Consider the needs of all four audience groups: Government officials, the general public, regulated professionals, and partners.</p>
+        </div>
+
+        <h3>🚨 Crisis Communication Decision</h3>
+        
+        <div class="branching-scenario">
+            <p><strong>Situation:</strong> A health and safety issue has been identified that affects regulated professionals. Immediate action is required. You need to communicate quickly while ensuring all audiences receive appropriate information.</p>
+            
+            <p><strong>How do you approach communication?</strong></p>
+            
+            <div class="scenario-choices">
+                <div class="scenario-choice" onclick="showBranchOutcome('immediate')">
+                    Issue immediate public alert via all channels first
+                </div>
+                <div class="scenario-choice" onclick="showBranchOutcome('sequential')">
+                    Contact professionals first, then inform the public later
+                </div>
+                <div class="scenario-choice" onclick="showBranchOutcome('comprehensive')">
+                    Coordinate simultaneous targeted messages to all groups
+                </div>
+            </div>
+            <div class="feedback" id="branchFeedback"></div>
+        </div>
+    </div>
+
+    <script>
+        function showBranchOutcome(choice) {
+            const feedback = document.getElementById('branchFeedback');
+            feedback.classList.add('show');
+
+            const outcomes = {
+                'immediate': {
+                    color: '#fff3cd',
+                    border: '#ffeeba',
+                    text: '#856404',
+                    message: '⚠️ Partial approach. While quick public notification shows transparency, you risk creating confusion without first ensuring professionals understand their responsibilities and can respond to inquiries. Consider the needs of all four audience groups.'
+                },
+                'sequential': {
+                    color: '#f8d7da',
+                    border: '#f5c6cb',
+                    text: '#721c24',
+                    message: '✗ Problematic approach. While professionals need information first, delaying public communication can erode trust and leave people uninformed about safety concerns. In crisis situations, transparency with all audiences is critical.'
+                },
+                'comprehensive': {
+                    color: '#d4edda',
+                    border: '#c3e6cb',
+                    text: '#155724',
+                    message: '✓ Excellent choice! Coordinated simultaneous communication ensures: (1) professionals receive detailed guidance to take action, (2) the public is informed about the issue and what to expect, (3) government partners are kept in the loop, and (4) other partners can coordinate their response. This approach maintains trust across all audiences.'
+                }
+            };
+
+            const outcome = outcomes[choice];
+            feedback.style.background = outcome.color;
+            feedback.style.borderColor = outcome.border;
+            feedback.style.color = outcome.text;
+            feedback.innerHTML = outcome.message;
+        }
+    </script>
+</body>
+</html>
