@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Channel Explorer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Aptos, Arial, sans-serif;
+            background: transparent;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+        }
+
+        h2 {
+            color: black;
+            margin-bottom: 10px;
+            font-size: 1.44em;
+            font-weight: 700;
+            border-bottom: 5px solid #64092c;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: black;
+            margin: 20px 0 10px;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        p {
+            line-height: 1.8;
+            color: black;
+            margin: 15px 0;
+            font-size: 1em;
+            font-weight: 400;
+        }
+
+        .instruction-box {
+            position: relative;
+            background: #fff9e6;
+            padding: 20px;
+            padding-left: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .instruction-box::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: linear-gradient(180deg, #64092c 0%, #dda839 50%, #084d78 100%);
+            border-radius: 10px 0 0 10px;
+        }
+
+        .instruction-box strong {
+            color: #d4950a;
+            font-weight: 700;
+        }
+
+        .channels-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+            justify-content: center;
+        }
+
+        .channel-hotspot {
+            width: 300px;
+            flex-shrink: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 3px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .channel-hotspot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 10%, rgba(0,0,0,0.5) 100%);
+            z-index: 1;
+        }
+
+        .channel-hotspot:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(100, 9, 44, 0.4);
+            border-color: #64092c;
+        }
+
+        .channel-label {
+            margin: 0 0 0 0;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: white;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin: 20px;
+        }
+
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-close {
+            float: right;
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+            line-height: 0.8;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        .modal-content h2 {
+            clear: both;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .modal-content h3 {
+            margin-top: 20px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            h3 {
+                font-size: 1.1em;
+            }
+
+            .channels-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .channel-hotspot {
+                min-height: 150px;
+            }
+
+            .channel-hotspot img {
+                max-width: 100px;
+            }
+
+            .modal-content {
+                padding: 20px;
+                margin: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.2em;
+            }
+
+            h3 {
+                font-size: 1.05em;
+            }
+
+            p {
+                font-size: 0.95em;
+            }
+
+            .channels-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .channel-hotspot {
+                padding: 15px;
+                min-height: 130px;
+            }
+
+            .channel-hotspot img {
+                max-width: 80px;
+            }
+
+            .channel-label {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Interactive Channel Explorer</h2>
+
+        <p>Different communication channels serve different purposes. Understanding the strengths and limitations of each helps you reach your audience effectively.</p>
+
+        <h3>🔍 Explore Communication Channels</h3>
+        <p>Click on each communication channel below to learn about its specific advantages, limitations, and best uses. Understanding these details will help you select the right channels for different situations.</p>
+
+        <div class="channels-grid">
+            <div class="channel-hotspot" style="background-image: url('https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/Reg101M10/WEBSITE.jpeg');" onclick="showChannelInfo('website')">
+                <div class="channel-label">Website</div>
+            </div>
+            <div class="channel-hotspot" style="background-image: url('https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/Reg101M10/NEWSLETTER.jpeg');" onclick="showChannelInfo('newsletter')">
+                <div class="channel-label">Newsletter</div>
+            </div>
+            <div class="channel-hotspot" style="background-image: url('https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/Reg101M10/TOWNHALLS.jpeg');" onclick="showChannelInfo('meeting')">
+                <div class="channel-label">Town Hall</div>
+            </div>
+            <div class="channel-hotspot" style="background-image: url('https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/Reg101M10/ADVERTISING.jpeg');" onclick="showChannelInfo('advertising')">
+                <div class="channel-label">Advertising</div>
+            </div>
+            <div class="channel-hotspot" style="background-image: url('https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/Reg101M10/SOCIALMEDIA.jpeg');" onclick="showChannelInfo('social')">
+                <div class="channel-label">Social Media</div>
+            </div>
+            <div class="channel-hotspot" style="background-image: url('https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/Reg101M10/webinar.jpeg');" onclick="showChannelInfo('webinar')">
+                <div class="channel-label">Webinar</div>
+            </div>
+            <div class="channel-hotspot" style="background-image: url('https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/Reg101M10/PRESSRELEASE.jpeg');" onclick="showChannelInfo('press')">
+                <div class="channel-label">Press Release</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Channel Info -->
+    <div class="modal" id="channelModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        function showChannelInfo(channel) {
+            const channelInfo = {
+                'website': {
+                    title: '<img src="https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/Reg101M10/WEBSITE.jpeg" alt="Website" style="max-width: 200px;">',
+                    description: 'Websites are the primary sources of information from the regulator to the public and must be easy to navigate.',
+                    pros: 'Central information hub | Always accessible | Searchable archive | Detailed content possible | Professional credibility',
+                    cons: 'Requires proactive visits | May not reach all audiences quickly | Needs regular maintenance and updates',
+                    best: 'Publishing regulations and standards | Resource libraries | Official announcements | FAQs | Archived materials'
+                },
+                'newsletter': {
+                    title: '<img src="https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/Reg101M10/NEWSLETTER.jpeg" alt="Newsletter" style="max-width: 200px;">',
+                    description: 'Newsletters can be tailored to professionals, the public, or partners.',
+                    pros: 'Direct delivery | Personalized content | Scheduled updates | Can include detailed information | Trackable engagement',
+                    cons: 'Requires subscription list | May be overlooked in inbox | One-way communication | Delivery timing constraints',
+                    best: 'Regular updates to professionals | Compliance reminders | Highlighting new resources | Sharing success stories | Quarterly bulletins'
+                },
+                'meeting': {
+                    title: '<img src="https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/Reg101M10/TOWNHALLS.jpeg" alt="Town Hall" style="max-width: 200px;">',
+                    description: 'Town Halls provide opportunities for open discussion and Q&A.',
+                    pros: 'Two-way dialogue | Immediate feedback | Relationship building | Can address complex topics | Demonstrates accessibility',
+                    cons: 'Limited reach | Time-intensive | Scheduling challenges | Geographic barriers | Resource requirements',
+                    best: 'Stakeholder consultation | Policy development input | Crisis coordination | Building partnerships | Training sessions'
+                },
+                'advertising': {
+                    title: '<img src="https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/Reg101M10/ADVERTISING.jpeg" alt="Advertising" style="max-width: 200px;">',
+                    description: 'Advertising allows regulators to raise awareness about issues or the regulator\'s role.',
+                    pros: 'Wide reach | Controlled messaging | Raises visibility | Can target specific demographics | Builds awareness',
+                    cons: 'Costly | Limited detail possible | One-way communication | May require repeated exposure | Requires creative development',
+                    best: 'Public awareness campaigns | Explaining regulator\'s role | Warning about unlicensed practice | Promoting public protection'
+                },
+                'social': {
+                    title: '<img src="https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/Reg101M10/SOCIALMEDIA.jpeg" alt="Social Media" style="max-width: 200px;">',
+                    description: 'Social Media allows for real-time engagement.',
+                    pros: 'Immediate reach | Interactive | Shareable content | Two-way engagement | Cost-effective | Real-time updates',
+                    cons: 'Character limits | Information overload | Requires active monitoring | Not suitable for complex details | Potential for misinformation',
+                    best: 'Quick updates | Public alerts | Awareness campaigns | Community engagement | Directing to detailed resources | Crisis communication'
+                },
+                'webinar': {
+                    title: '<img src="https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/Reg101M10/webinar.jpeg" alt="Webinar" style="max-width: 200px;">',
+                    description: 'Webinars provide flexible learning and outreach tools.',
+                    pros: 'Accessible remotely | Can be recorded | Interactive Q&A | Detailed presentations possible | Cost-effective reach',
+                    cons: 'Requires technology access | Scheduling challenges | Limited personal interaction | May need technical support',
+                    best: 'Training professionals | Explaining new standards | Educational content | Professional development | Policy updates with Q&A'
+                },
+                'press': {
+                    title: '<img src="https://assets-002.noviams.com/novi-file-uploads/clear/TalentLMS/Reg101M10/PRESSRELEASE.jpeg" alt="Press Release" style="max-width: 200px;">',
+                    description: 'Press releases provide a formal way to inform the wider public.',
+                    pros: 'Wide public reach | Third-party credibility | Media amplification | Official record | Professional format',
+                    cons: 'Media gatekeepers control publication | Less control over final message | May require media training | Timing uncertainties',
+                    best: 'Major announcements | Crisis communication | Public interest stories | Policy changes | Building public awareness'
+                }
+            };
+
+            const info = channelInfo[channel];
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <h2 style="border-bottom: 5px solid #64092c;">${info.title}</h2>
+                <p style="font-style: italic; color: #666;">${info.description}</p>
+                <h3 style="color: #DDA839; margin-top: 20px;">Advantages</h3>
+                <p style="text-align: center;">${info.pros}</p>
+                <h3 style="color: #64092C;">Limitations</h3>
+                <p style="text-align: center;">${info.cons}</p>
+                <h3 style="color: #084d78;">Best Use</h3>
+                <p style="text-align: center;">${info.best}</p>
+            `;
+
+            document.getElementById('channelModal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('channelModal').classList.remove('show');
+        }
+
+        // Close modal when clicking outside the modal content
+        document.getElementById('channelModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
