@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Four Primary Audiences</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Aptos, Arial, sans-serif;
+            background: transparent;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+        }
+
+        h2 {
+            color: black;
+            margin-bottom: 10px;
+            font-size: 1.44em;
+            font-weight: 700;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: black;
+            margin: 20px 0 10px;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        p {
+            line-height: 1.8;
+            color: black;
+            margin: 15px 0;
+            font-size: 1em;
+            font-weight: 400;
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .audience-card {
+            position: relative;
+            background: white;
+            border: 2px solid #e0e0e0;
+            padding: 20px;
+            padding-top: 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .audience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%);
+        }
+
+        .audience-card h4 {
+            color: #64092c;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .audience-card p {
+            margin: 10px 0;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .audience-card strong {
+            color: #64092c;
+            font-weight: 600;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            h3 {
+                font-size: 1.1em;
+            }
+
+            .audience-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.2em;
+            }
+
+            h3 {
+                font-size: 1.05em;
+            }
+
+            p {
+                font-size: 0.95em;
+            }
+
+            .audience-card h4 {
+                font-size: 1.1em;
+            }
+
+            .audience-card p {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="text-align: center;">The Four Primary Audiences</h2>
+
+        <div class="audience-grid">
+            <div class="audience-card">
+                <h4>🏛️ Government</h4>
+                <p><strong>Why communicate:</strong> Engagement keeps policy-makers informed and aligned.</p>
+                <p><strong>Key need:</strong> Policy alignment and compliance reporting.</p>
+            </div>
+
+            <div class="audience-card">
+                <h4>👨‍👩‍👧‍👦 Public</h4>
+                <p><strong>Why communicate:</strong> Communication ensures they know when and how to reach the regulator and why it exists.</p>
+                <p><strong>Key need:</strong> Transparency and accessible information.</p>
+            </div>
+
+            <div class="audience-card">
+                <h4>👔 Professionals</h4>
+                <p><strong>Why communicate:</strong> Those regulated must be kept up to date with standards and expectations.</p>
+                <p><strong>Key need:</strong> Technical guidance and compliance requirements.</p>
+            </div>
+
+            <div class="audience-card">
+                <h4>🤝 Other Partners</h4>
+                <p><strong>Why communicate:</strong> Associations, industry groups, and other regulators need coordination.</p>
+                <p><strong>Key need:</strong> Collaboration and information sharing.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
