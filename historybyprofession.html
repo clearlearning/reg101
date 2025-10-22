@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collapsible Accordion</title>
+    <title>Tabbed Content</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -13,15 +13,37 @@
             margin: 0;
         }
 
-        .accordion-item {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tabs-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .tab-header {
             background: white;
-            padding: 10px 20px;
-            margin: 20px auto;
-            max-width: 900px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            cursor: pointer;
+            text-align: center;
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .tab-header:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .tab-header.active {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
         }
 
         .gradient-border {
@@ -33,93 +55,143 @@
             background: linear-gradient(180deg, #64092c 0%, #dda839 50%, #084d78 100%);
         }
 
-        .accordion-header {
-            margin-bottom: 15px;
-            cursor: pointer;
-            margin-left: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #484848;
+        .tab-header h2 {
+            margin: 0;
             font-size: 1.2em;
             font-weight: 700;
+            color: #484848;
+            position: relative;
+            z-index: 1;
         }
 
-        .accordion-header:hover {
-            color: #64092c;
+        .tab-header.active h2 {
+            color: black;
         }
 
-        .arrow {
-            font-size: 0.8em;
-            transition: transform 0.3s ease;
+        .content-area {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
         }
 
-        .accordion-content {
+        .content-area .gradient-border {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, #64092c 0%, #dda839 50%, #084d78 100%);
+        }
+
+        .placeholder-message {
+            color: #999;
+            font-style: italic;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .tab-content {
             display: none;
             margin-left: 10px;
+            animation: fadeIn 0.5s ease;
         }
 
-        .accordion-content.active {
+        .tab-content.active {
             display: block;
         }
 
-        .accordion-content p {
-            margin-bottom: 10px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-content p {
+            margin-bottom: 15px;
             text-align: justify;
             color: #484848;
-            line-height: 1.6;
+            line-height: 1.8;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .tabs-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="accordion-item">
-        <div class="gradient-border"></div>
-        <h2 class="accordion-header" onclick="toggleAccordion('medical')">
-            <span>⚕️ Medical Regulation</span>
-            <span class="arrow" id="arrow-medical">▼</span>
-        </h2>
-        <div class="accordion-content" id="medical">
-            <p>Medical practice regulation has ancient origins, dating back to the Hippocratic Oath in ancient Greece (circa 400 BCE), which established ethical principles that continue to influence medical practice today. Medieval Islamic scholars, such as Rhazes and Avicenna, developed systematic approaches to medical education and practice standards that influenced European medical schools.</p>
-            <p>In medieval Europe, medical practice gradually came under the regulation of both guilds and ecclesiastical oversight, as healing was often considered closely related to religious practice. The establishment of medical schools at universities like Salerno, Bologna, and Montpellier created formal degree requirements that became precursors to modern medical licensing systems.</p>
-        </div>
-    </div>
+    <div class="container">
+        <div class="tabs-row">
+            <div class="tab-header" onclick="showTab('medical')">
+                <div class="gradient-border"></div>
+                <h2>⚕️ Medical Regulation</h2>
+            </div>
 
-    <div class="accordion-item">
-        <div class="gradient-border"></div>
-        <h2 class="accordion-header" onclick="toggleAccordion('legal')">
-            <span>👩‍⚖️ Legal Profession Development</span>
-            <span class="arrow" id="arrow-legal">▼</span>
-        </h2>
-        <div class="accordion-content" id="legal">
-            <p>Legal practice regulation emerged from the need to ensure competent representation in increasingly complex legal systems. Roman law established early precedents for legal advocacy standards, while medieval canon law developed sophisticated procedures for the authorization of legal training and practice.</p>
-            <p>The English Inns of Court, established in the 14th century, created a unique model that combined legal education, professional training, and regulatory oversight, directly influencing modern bar admission systems. These institutions established the principle that legal practice requires both formal education and practical training under the guidance of experienced practitioners.</p>
-        </div>
-    </div>
+            <div class="tab-header" onclick="showTab('legal')">
+                <div class="gradient-border"></div>
+                <h2>👩‍⚖️ Legal Profession Development</h2>
+            </div>
 
-    <div class="accordion-item">
-        <div class="gradient-border"></div>
-        <h2 class="accordion-header" onclick="toggleAccordion('religious')">
-            <span>🏫 Religious and Academic Precedents</span>
-            <span class="arrow" id="arrow-religious">▼</span>
-        </h2>
-        <div class="accordion-content" id="religious">
-            <p>Religious orders provided early models for professional codes of conduct, disciplinary procedures, and hierarchical organization that influenced the development of secular professional regulation. Medieval universities developed degree-granting systems, academic standards, and faculty governance structures that became templates for professional credentialing across various fields.</p>
-            <p>The concept of "learned professions" originated from these academic traditions, distinguishing occupations that require extensive formal education from traditional trades. This distinction influenced the development of different regulatory approaches for various types of professional practice.</p>
+            <div class="tab-header" onclick="showTab('religious')">
+                <div class="gradient-border"></div>
+                <h2>🏫 Religious and Academic Precedents</h2>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="gradient-border"></div>
+            
+            <div class="placeholder-message" id="placeholder">
+                Click a section above to view its content
+            </div>
+
+            <div class="tab-content" id="medical">
+                <p>Medical practice regulation has ancient origins, dating back to the Hippocratic Oath in ancient Greece (circa 400 BCE), which established ethical principles that continue to influence medical practice today. Medieval Islamic scholars, such as Rhazes and Avicenna, developed systematic approaches to medical education and practice standards that influenced European medical schools.</p>
+                <p>In medieval Europe, medical practice gradually came under the regulation of both guilds and ecclesiastical oversight, as healing was often considered closely related to religious practice. The establishment of medical schools at universities like Salerno, Bologna, and Montpellier created formal degree requirements that became precursors to modern medical licensing systems.</p>
+            </div>
+
+            <div class="tab-content" id="legal">
+                <p>Legal practice regulation emerged from the need to ensure competent representation in increasingly complex legal systems. Roman law established early precedents for legal advocacy standards, while medieval canon law developed sophisticated procedures for the authorization of legal training and practice.</p>
+                <p>The English Inns of Court, established in the 14th century, created a unique model that combined legal education, professional training, and regulatory oversight, directly influencing modern bar admission systems. These institutions established the principle that legal practice requires both formal education and practical training under the guidance of experienced practitioners.</p>
+            </div>
+
+            <div class="tab-content" id="religious">
+                <p>Religious orders provided early models for professional codes of conduct, disciplinary procedures, and hierarchical organization that influenced the development of secular professional regulation. Medieval universities developed degree-granting systems, academic standards, and faculty governance structures that became templates for professional credentialing across various fields.</p>
+                <p>The concept of "learned professions" originated from these academic traditions, distinguishing occupations that require extensive formal education from traditional trades. This distinction influenced the development of different regulatory approaches for various types of professional practice.</p>
+            </div>
         </div>
     </div>
 
     <script>
-        function toggleAccordion(id) {
-            const content = document.getElementById(id);
-            const arrow = document.getElementById('arrow-' + id);
-            
-            if (content.classList.contains('active')) {
-                content.classList.remove('active');
-                arrow.textContent = '▼';
-            } else {
-                content.classList.add('active');
-                arrow.textContent = '▲';
+        function showTab(tabId) {
+            // Hide placeholder message completely
+            const placeholder = document.getElementById('placeholder');
+            if (placeholder) {
+                placeholder.remove(); // Completely remove from DOM
             }
+
+            // Hide all tab contents
+            const allContents = document.querySelectorAll('.tab-content');
+            allContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active state from all headers
+            const allHeaders = document.querySelectorAll('.tab-header');
+            allHeaders.forEach(header => {
+                header.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+
+            // Add active state to clicked header
+            event.currentTarget.classList.add('active');
         }
     </script>
 </body>
