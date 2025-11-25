@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branching Scenario: Crisis Communication</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Aptos, Arial, sans-serif;
+            background: transparent;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .interactive-section {
+            background: white;
+            border-left: 5px solid #64092c;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+        }
+
+        .interactive-section h4 {
+            color: #000000;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .drag-drop-area {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .drag-source, .drop-zone {
+            flex: 1;
+            min-height: 200px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .drag-source {
+            background: white;
+            border-left: 5px solid #dda839;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+        }
+
+        .drop-zone {
+            background: transparent;
+            border-left: 5px solid transparent;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+        }
+
+        .drop-zone h3 {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .draggable-item {
+            background: #f7eace;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            cursor: move;
+            transition: all 0.3s;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+        }
+
+        .draggable-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .draggable-item.dragging {
+            opacity: 0.5;
+        }
+
+        .feedback {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideDown 0.3s;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 200px; }
+        }
+
+        .btn {
+            background: #084d78;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            background: #0a5d92;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: #64092c;
+        }
+
+        .btn-primary:hover {
+            background: #84093c;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .drag-drop-area {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 4: Interactive Drag & Drop -->
+<div class="slide" data-slide-num="4">
+    <h2>Interactive Activity: Governance or Operations?</h2>
+    
+    <div class="interactive-section">
+        <h4>Instructions: Drag each task to the correct category</h4>
+        <p>Drag items from the list below into either "Governance (Board)" or "Operations (Staff)"</p>
+        
+        <div class="drag-drop-area">
+            <div class="drag-source" id="drag-source">
+                <h3 style="color: #484848; margin-bottom: 15px;">Tasks to Categorize:</h3>
+                <div class="draggable-item" draggable="true" data-category="governance">
+                    Approving the annual budget
+                </div>
+                <div class="draggable-item" draggable="true" data-category="operations">
+                    Processing a license renewal
+                </div>
+                <div class="draggable-item" draggable="true" data-category="governance">
+                    Setting five-year strategic plan
+                </div>
+                <div class="draggable-item" draggable="true" data-category="operations">
+                    Investigating a complaint
+                </div>
+                <div class="draggable-item" draggable="true" data-category="governance">
+                    Establishing new CE policy
+                </div>
+                <div class="draggable-item" draggable="true" data-category="operations">
+                    Sending renewal reminders
+                </div>
+            </div>
+            
+            <div style="flex: 2; display: flex; gap: 10px;">
+                <div class="drop-zone" id="governance-zone" data-zone="governance" style="flex: 1; border-left: 5px solid #084d78; border-radius: 8px; padding: 25px; margin: 25px 0; box-shadow: 4px 0 20px rgba(0,0,0,0.1); background-color: #D2ECFC;">
+                    <h3 style="color: #084d78;">Governance (Board)</h3>
+                    <p style="font-size: 0.9em; color: #666;">Drop governance items here</p>
+                </div>
+                <div class="drop-zone" id="operations-zone" data-zone="operations" style="flex: 1; border-left: 5px solid #484848; border-radius: 8px; padding: 25px; margin: 25px 0; box-shadow: 4px 0 20px rgba(0,0,0,0.1); background-color: #e8e8e8;">
+                    <h3 style="color: #484848">Operations (Staff)</h3>
+                    <p style="font-size: 0.9em; color: #666;">Drop operations items here</p>
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn btn-primary" id="check-drag-drop" style="margin-top: 20px;">Check My Answers</button>
+        <div class="feedback" id="drag-drop-feedback"></div>
+    </div>
+</div>
+
+    <script>
+        // Initialize drag and drop functionality when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDragAndDrop();
+            setupCheckButton();
+        });
+
+        function initializeDragAndDrop() {
+            const draggables = document.querySelectorAll('.draggable-item');
+            const dropZones = document.querySelectorAll('.drop-zone');
+
+            // Set up draggable items
+            draggables.forEach(draggable => {
+                draggable.addEventListener('dragstart', (e) => {
+                    draggable.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+
+                draggable.addEventListener('dragend', () => {
+                    draggable.classList.remove('dragging');
+                    // Reset any background colors when dragging ends
+                    draggable.style.background = 'white';
+                });
+            });
+
+            // Set up drop zones
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                    zone.style.background = '#d4e9ff'; // Highlight when dragging over
+                });
+
+                zone.addEventListener('dragleave', () => {
+                    zone.style.background = '#f8f9fa'; // Reset background
+                });
+
+                zone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    zone.style.background = '#f8f9fa'; // Reset background
+                    const dragging = document.querySelector('.dragging');
+                    if (dragging) {
+                        zone.appendChild(dragging);
+                        // Reset feedback when items are moved
+                        resetFeedback();
+                    }
+                });
+            });
+        }
+
+        function setupCheckButton() {
+            const checkButton = document.getElementById('check-drag-drop');
+            if (checkButton) {
+                checkButton.addEventListener('click', checkDragDropAnswers);
+            }
+        }
+
+        function checkDragDropAnswers() {
+            const governanceZone = document.getElementById('governance-zone');
+            const operationsZone = document.getElementById('operations-zone');
+            const dragSource = document.getElementById('drag-source');
+            
+            let correct = 0;
+            let total = 0;
+            let unanswered = 0;
+            
+            // Check if there are still items in the source (not placed)
+            unanswered = dragSource.querySelectorAll('.draggable-item').length;
+            
+            // Check items in governance zone
+            governanceZone.querySelectorAll('.draggable-item').forEach(item => {
+                total++;
+                if (item.dataset.category === 'governance') {
+                    correct++;
+                    item.style.background = '#d4edda'; // Light green
+                    item.style.borderColor = '#28a745'; // Dark green border
+                } else {
+                    item.style.background = '#f8d7da'; // Light red
+                    item.style.borderColor = '#dc3545'; // Dark red border
+                }
+            });
+            
+            // Check items in operations zone
+            operationsZone.querySelectorAll('.draggable-item').forEach(item => {
+                total++;
+                if (item.dataset.category === 'operations') {
+                    correct++;
+                    item.style.background = '#d4edda'; // Light green
+                    item.style.borderColor = '#28a745'; // Dark green border
+                } else {
+                    item.style.background = '#f8d7da'; // Light red
+                    item.style.borderColor = '#dc3545'; // Dark red border
+                }
+            });
+            
+            // Display feedback
+            const feedback = document.getElementById('drag-drop-feedback');
+            feedback.classList.add('show');
+            
+            if (unanswered > 0) {
+                // Some items haven't been placed yet
+                feedback.innerHTML = `<strong>Not quite ready yet!</strong> You still have ${unanswered} item(s) that haven't been placed in a category. Please drag all items before checking your answers.`;
+                feedback.style.background = '#fff3cd';
+                feedback.style.borderColor = '#ffc107';
+            } else if (correct === total) {
+                // All correct!
+                feedback.innerHTML = '<strong>Excellent work!</strong> You correctly categorized all items. Notice how governance items are about setting direction and policies, while operations items are about implementing and executing work.';
+                feedback.style.background = '#d4edda';
+                feedback.style.borderColor = '#28a745';
+            } else {
+                // Some incorrect
+                feedback.innerHTML = `<strong>You got ${correct} out of ${total} correct.</strong> Remember: Governance is about WHAT and WHY (strategic decisions), while Operations is about HOW and WHEN (day-to-day work). Items highlighted in <span style="color: #dc3545; font-weight: bold;">red</span> are in the wrong category. Try moving them!`;
+                feedback.style.background = '#fff3cd';
+                feedback.style.borderColor = '#ffc107';
+            }
+        }
+
+        function resetFeedback() {
+            const feedback = document.getElementById('drag-drop-feedback');
+            if (feedback) {
+                feedback.classList.remove('show');
+                feedback.innerHTML = '';
+            }
+            
+            // Reset all item backgrounds to white
+            document.querySelectorAll('.draggable-item').forEach(item => {
+                item.style.background = 'white';
+                item.style.borderColor = '#084d78';
+            });
+        }
+    </script>
+</body>
+</html>
