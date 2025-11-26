@@ -183,8 +183,14 @@
 
         /* Responsive design */
         @media (max-width: 992px) {
+            .reasons-row {
+                flex-direction: column;
+                align-items: center;
+            }
+
             .reason-card {
-                flex: 0 1 calc(50% - 10px);
+                flex: 0 1 100%;
+                max-width: 500px;
             }
         }
 
@@ -193,12 +199,105 @@
                 padding: 20px;
             }
 
+            .header {
+                padding: 20px;
+            }
+
             .header h1 {
                 font-size: 1.5em;
             }
 
+            .header p {
+                font-size: 1em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .intro-text {
+                font-size: 1em;
+            }
+
             .reason-card {
-                flex: 0 1 100%;
+                padding: 20px;
+                max-width: 100%;
+            }
+
+            .reason-card h4 {
+                font-size: 1.1em;
+            }
+
+            .highlight-box {
+                padding: 15px;
+            }
+
+            .highlight-box p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .header {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.3em;
+            }
+
+            .header p {
+                font-size: 0.9em;
+            }
+
+            h2 {
+                font-size: 1.3em;
+                margin-bottom: 15px;
+            }
+
+            .intro-text {
+                font-size: 0.95em;
+                margin-bottom: 20px;
+            }
+
+            .reasons-container {
+                margin: 20px 0;
+            }
+
+            .reasons-row {
+                gap: 15px;
+                margin-bottom: 15px;
+            }
+
+            .reason-card {
+                padding: 18px;
+            }
+
+            .reason-card h4 {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+
+            .reason-card p {
+                font-size: 0.95em;
+            }
+
+            .highlight-box {
+                padding: 12px;
+                margin-top: 20px;
+            }
+
+            .highlight-box p {
+                font-size: 0.95em;
             }
         }
     </style>
