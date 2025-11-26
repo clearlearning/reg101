@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action Planning Activity: Which Strategy Would You Use?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: transparent;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+        }
+
+        .header {
+            background: white;
+            color: #484848;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .header h1 {
+            color: #000000;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #484848;
+            font-size: 1.1em;
+        }
+
+        h2 {
+            color: #000000;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .instructions {
+            background: #fef7fa;
+            border-left: 4px solid #64092c;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .instructions h3 {
+            color: #000000;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instructions p {
+            line-height: 1.6;
+            color: #484848;
+            margin-bottom: 10px;
+        }
+
+        .strategy-list {
+            background: #fef7fa;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .strategy-list h4 {
+            color: #000000;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .strategy-list ol {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        .strategy-list li {
+            color: #484848;
+        }
+
+        .scenario-container {
+            margin: 30px 0;
+        }
+
+        .scenario-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-left: 5px solid #484848;
+            transition: all 0.3s;
+        }
+
+        .scenario-card:hover {
+            box-shadow: 0 12px 45px rgba(0,0,0,0.15);
+        }
+
+        .scenario-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .scenario-number {
+            background: #484848;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+
+        .scenario-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #000000;
+        }
+
+        .scenario-text {
+            background: #fffcf7;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #484848;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-button {
+            background: white;
+            border: 2px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            font-size: 1em;
+            color: #484848;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .option-button:hover {
+            border-color: #084d78;
+            background: #f7fbfe;
+            transform: translateX(5px);
+        }
+
+        .option-button.selected {
+            border-color: #084d78;
+            background: #f7fbfe;
+            font-weight: 600;
+        }
+
+        .option-button.correct {
+            border-color: #28a745;
+            background: #d4edda;
+            font-weight: 600;
+        }
+
+        .option-button.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+            font-weight: 600;
+        }
+
+        .option-button:disabled {
+            cursor: not-allowed;
+        }
+
+        .feedback-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            display: none;
+            animation: slideDown 0.3s;
+        }
+
+        .feedback-box.show {
+            display: block;
+        }
+
+        .feedback-box.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .feedback-box.incorrect {
+            background: #fff3cd;
+            border-color: #ffc107;
+        }
+
+        .feedback-box strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        @keyframes slideDown {
+            from { 
+                opacity: 0; 
+                transform: translateY(-10px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        .btn {
+            background: #084d78;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            margin: 20px 5px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #0a5d92;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-primary {
+            background: #64092c;
+        }
+
+        .btn-primary:hover {
+            background: #84093c;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .summary-box {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .summary-box.show {
+            display: block;
+        }
+
+        .summary-box h3 {
+            color: #000000;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, #64092c 0%, #84093c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .summary-text {
+            line-height: 1.8;
+            color: #484848;
+        }
+
+        .progress-indicator {
+            background: white;
+            border-radius: 8px;
+            padding: 15px 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .progress-text {
+            color: #484848;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .progress-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .progress-dot.active {
+            background: #64092c;
+            transform: scale(1.3);
+        }
+
+        .progress-dot.completed {
+            background: #28a745;
+        }
+
+        .scenario-card {
+            display: none;
+        }
+
+        .scenario-card.active {
+            display: block;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #5a6268;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn.submit-btn:hover:not(:disabled) {
+            background: #218838;
+        }
+
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .scenario-card {
+                padding: 20px;
+            }
+
+            .btn {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Action Planning Activity</h1>
+            <p>Which Strategy Would You Use?</p>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 Instructions</h3>
+            <p>Read each scenario and select the strategy that would work <strong>best</strong> to address the boundary issue. Think about what would most directly address the root cause of the problem.</p>
+            
+            <div class="strategy-list">
+                <h4>The Five Strategies:</h4>
+                <ol>
+                    <li><strong>Provide comprehensive reporting</strong> - Give board regular, detailed reports</li>
+                    <li><strong>Create space for questions</strong> - Include time for board to ask about operations</li>
+                    <li><strong>Establish feedback mechanism</strong> - Create respectful way to signal boundary crossings</li>
+                    <li><strong>Provide regular training</strong> - Offer ongoing education with scenarios</li>
+                    <li><strong>Put it in writing</strong> - Document boundaries in bylaws and policies</li>
+                </ol>
+            </div>
+        </div>
+
+        <h2>Select the Best Strategy</h2>
+
+        <div class="progress-indicator">
+            <div class="progress-text">Question <span id="current-question">1</span> of <span id="total-questions">4</span></div>
+            <div class="progress-dots" id="progress-dots">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+            </div>
+        </div>
+
+        <div class="scenario-container" id="scenario-container">
+            <!-- Scenario 1 -->
+            <div class="scenario-card active" data-scenario="1">
+                <div class="scenario-header">
+                    <div class="scenario-number">1</div>
+                    <div class="scenario-title">Scenario 1: Time-Consuming Questions</div>
+                </div>
+                <div class="scenario-text">
+                    Your board members frequently ask detailed questions about individual license applications during board meetings, using up a lot of meeting time.
+                </div>
+                <div class="options-container">
+                    <button class="option-button" onclick="selectOption(1, 'A', true)">
+                        A) Provide comprehensive reporting
+                    </button>
+                    <button class="option-button" onclick="selectOption(1, 'B', false)">
+                        B) Establish feedback mechanism
+                    </button>
+                    <button class="option-button" onclick="selectOption(1, 'C', false)">
+                        C) Provide regular training
+                    </button>
+                </div>
+                <div class="feedback-box" id="feedback-1"></div>
+            </div>
+
+            <!-- Scenario 2 -->
+            <div class="scenario-card" data-scenario="2">
+                <div class="scenario-header">
+                    <div class="scenario-number">2</div>
+                    <div class="scenario-title">Scenario 2: Overstepping New Member</div>
+                </div>
+                <div class="scenario-text">
+                    A new board member keeps offering suggestions to staff about how to reorganize the filing system and restructure work processes.
+                </div>
+                <div class="options-container">
+                    <button class="option-button" onclick="selectOption(2, 'A', false)">
+                        A) Create space for questions
+                    </button>
+                    <button class="option-button" onclick="selectOption(2, 'B', true)">
+                        B) Establish feedback mechanism
+                    </button>
+                    <button class="option-button" onclick="selectOption(2, 'C', false)">
+                        C) Put it in writing
+                    </button>
+                </div>
+                <div class="feedback-box" id="feedback-2"></div>
+            </div>
+
+            <!-- Scenario 3 -->
+            <div class="scenario-card" data-scenario="3">
+                <div class="scenario-header">
+                    <div class="scenario-number">3</div>
+                    <div class="scenario-title">Scenario 3: Unclear Decision Authority</div>
+                </div>
+                <div class="scenario-text">
+                    There's confusion about which decisions the board makes and which the Registrar can make independently.
+                </div>
+                <div class="options-container">
+                    <button class="option-button" onclick="selectOption(3, 'A', false)">
+                        A) Provide comprehensive reporting
+                    </button>
+                    <button class="option-button" onclick="selectOption(3, 'B', false)">
+                        B) Create space for questions
+                    </button>
+                    <button class="option-button" onclick="selectOption(3, 'C', true)">
+                        C) Put it in writing
+                    </button>
+                </div>
+                <div class="feedback-box" id="feedback-3"></div>
+            </div>
+
+            <!-- Scenario 4 -->
+            <div class="scenario-card" data-scenario="4">
+                <div class="scenario-header">
+                    <div class="scenario-number">4</div>
+                    <div class="scenario-title">Scenario 4: Former Staff on Board</div>
+                </div>
+                <div class="scenario-text">
+                    The board has never discussed the difference between governance and operations, and several members are former staff who struggle with the role shift.
+                </div>
+                <div class="options-container">
+                    <button class="option-button" onclick="selectOption(4, 'A', false)">
+                        A) Provide comprehensive reporting
+                    </button>
+                    <button class="option-button" onclick="selectOption(4, 'B', false)">
+                        B) Establish feedback mechanism
+                    </button>
+                    <button class="option-button" onclick="selectOption(4, 'C', true)">
+                        C) Provide regular training
+                    </button>
+                </div>
+                <div class="feedback-box" id="feedback-4"></div>
+            </div>
+        </div>
+
+        <div class="navigation-buttons">
+            <button class="nav-btn" id="prev-btn" onclick="previousQuestion()" disabled>
+                ← Previous
+            </button>
+            <button class="nav-btn" id="next-btn" onclick="nextQuestion()">
+                Next →
+            </button>
+        </div>
+
+        <div class="summary-box" id="summary-box">
+            <h3>Your Results</h3>
+            <div class="score-display" id="score-display"></div>
+            <div class="summary-text">
+                <p><strong>Great thinking!</strong> Often you'll use multiple strategies together. The key is to be proactive—don't wait for problems to address these boundaries.</p>
+                <p style="margin-top: 15px;"><strong>Remember:</strong> Different situations call for different strategies, and combining approaches often works best. The most important thing is recognizing when boundaries need attention and taking action to clarify roles and expectations.</p>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-secondary" onclick="resetActivity()">🔄 Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let answers = {};
+        let totalScenarios = 4;
+        let currentScenario = 1;
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateNavigationButtons();
+        });
+
+        function selectOption(scenarioNum, option, isCorrect) {
+            // Store the answer
+            answers[scenarioNum] = { option, isCorrect };
+
+            // Update button styling
+            const card = document.querySelector(`[data-scenario="${scenarioNum}"]`);
+            const buttons = card.querySelectorAll('.option-button');
+            
+            buttons.forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            event.target.classList.add('selected');
+
+            // Update progress dot for this question
+            updateProgressDots();
+
+            // Show individual feedback
+            const feedbackBox = document.getElementById(`feedback-${scenarioNum}`);
+            feedbackBox.classList.add('show');
+            
+            if (isCorrect) {
+                feedbackBox.className = 'feedback-box show correct';
+                feedbackBox.innerHTML = '<strong>✓ Correct!</strong> This is the most appropriate strategy for this situation.';
+            } else {
+                feedbackBox.className = 'feedback-box show incorrect';
+                feedbackBox.innerHTML = '<strong>Not quite.</strong> Think about what would most directly address the root cause of this boundary issue.';
+            }
+
+            // Update navigation buttons to enable Submit on last question
+            updateNavigationButtons();
+        }
+
+        function nextQuestion() {
+            if (currentScenario < totalScenarios) {
+                // Hide current scenario
+                document.querySelector(`[data-scenario="${currentScenario}"]`).classList.remove('active');
+                
+                // Show next scenario
+                currentScenario++;
+                document.querySelector(`[data-scenario="${currentScenario}"]`).classList.add('active');
+                
+                // Update UI
+                updateProgressIndicator();
+                updateNavigationButtons();
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function previousQuestion() {
+            if (currentScenario > 1) {
+                // Hide current scenario
+                document.querySelector(`[data-scenario="${currentScenario}"]`).classList.remove('active');
+                
+                // Show previous scenario
+                currentScenario--;
+                document.querySelector(`[data-scenario="${currentScenario}"]`).classList.add('active');
+                
+                // Update UI
+                updateProgressIndicator();
+                updateNavigationButtons();
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function updateProgressIndicator() {
+            document.getElementById('current-question').textContent = currentScenario;
+            updateProgressDots();
+        }
+
+        function updateProgressDots() {
+            const dots = document.querySelectorAll('.progress-dot');
+            dots.forEach((dot, index) => {
+                const questionNum = index + 1;
+                dot.classList.remove('active', 'completed');
+                
+                if (questionNum === currentScenario) {
+                    dot.classList.add('active');
+                } else if (answers[questionNum]) {
+                    dot.classList.add('completed');
+                }
+            });
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const answeredCount = Object.keys(answers).length;
+            
+            // Disable/enable previous button
+            prevBtn.disabled = currentScenario === 1;
+            
+            // On last question, transform Next into Submit
+            if (currentScenario === totalScenarios) {
+                if (answeredCount === totalScenarios) {
+                    nextBtn.textContent = '✓ Submit Answers';
+                    nextBtn.onclick = checkAllAnswers;
+                    nextBtn.disabled = false;
+                    nextBtn.style.background = '#28a745';
+                    nextBtn.classList.add('submit-btn');
+                } else {
+                    nextBtn.textContent = 'Next →';
+                    nextBtn.onclick = nextQuestion;
+                    nextBtn.disabled = true;
+                    nextBtn.style.background = '';
+                    nextBtn.classList.remove('submit-btn');
+                }
+            } else {
+                nextBtn.textContent = 'Next →';
+                nextBtn.onclick = nextQuestion;
+                nextBtn.disabled = false;
+                nextBtn.style.background = '';
+                nextBtn.classList.remove('submit-btn');
+            }
+        }
+
+        function checkAllAnswers() {
+            // Disable all buttons and show correct/incorrect styling
+            document.querySelectorAll('.option-button').forEach(btn => {
+                btn.disabled = true;
+            });
+
+            // Update all feedback boxes to show final status
+            for (let i = 1; i <= totalScenarios; i++) {
+                const card = document.querySelector(`[data-scenario="${i}"]`);
+                const buttons = card.querySelectorAll('.option-button');
+                const selectedButton = card.querySelector('.option-button.selected');
+                
+                if (selectedButton) {
+                    if (answers[i].isCorrect) {
+                        selectedButton.classList.add('correct');
+                        selectedButton.classList.remove('selected');
+                    } else {
+                        selectedButton.classList.add('incorrect');
+                        selectedButton.classList.remove('selected');
+                    }
+                }
+            }
+
+            // Calculate score
+            let correct = 0;
+            for (let key in answers) {
+                if (answers[key].isCorrect) correct++;
+            }
+
+            // Show summary
+            const summaryBox = document.getElementById('summary-box');
+            const scoreDisplay = document.getElementById('score-display');
+            
+            scoreDisplay.textContent = `You got ${correct} out of ${totalScenarios} correct!`;
+            summaryBox.classList.add('show');
+
+            // Hide navigation buttons
+            document.querySelector('.navigation-buttons').style.display = 'none';
+            document.querySelector('.progress-indicator').style.display = 'none';
+
+            // Scroll to summary
+            summaryBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function resetActivity() {
+            // Reset answers
+            answers = {};
+            currentScenario = 1;
+
+            // Show all scenarios and activate first one
+            document.querySelectorAll('.scenario-card').forEach((card, index) => {
+                card.classList.remove('active');
+                if (index === 0) {
+                    card.classList.add('active');
+                }
+            });
+
+            // Reset all buttons
+            document.querySelectorAll('.option-button').forEach(btn => {
+                btn.disabled = false;
+                btn.classList.remove('selected', 'correct', 'incorrect');
+            });
+
+            // Hide all feedback
+            document.querySelectorAll('.feedback-box').forEach(box => {
+                box.classList.remove('show');
+            });
+
+            // Hide summary
+            document.getElementById('summary-box').classList.remove('show');
+
+            // Show navigation and progress
+            document.querySelector('.navigation-buttons').style.display = 'flex';
+            document.querySelector('.progress-indicator').style.display = 'block';
+
+            // Update UI
+            updateProgressIndicator();
+            updateNavigationButtons();
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
