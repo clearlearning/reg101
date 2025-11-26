@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Activity: Match the Responsibility</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+
+        .header {
+            background: white;
+            color: #484848;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #64092c 0%, #dda839 50%, #084d78 100%);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .header h1 {
+            color: #000000;
+        }
+
+        .header p {
+            color: #484848;
+        }
+
+        h2 {
+            color: #000000;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .instructions {
+            background: #fffcf7;
+            border-left: 4px solid #dda839;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .instructions h3 {
+            color: #000000;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instructions p {
+            line-height: 1.6;
+            color: #484848;
+        }
+
+        .instructions li {
+            color: #dda839;
+        }
+
+        .matching-container {
+            display: grid;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .matching-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .matching-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .matching-number {
+            background: #484848;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .matching-scenario {
+            flex: 1;
+            font-weight: 500;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        .matching-select {
+            padding: 10px 15px;
+            border: 2px solid #084d78;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            background: white;
+            color: #484848;
+            transition: all 0.3s;
+            min-width: 200px;
+        }
+
+        .matching-select:hover {
+            border-color: #484848;
+            background: #f8f9fa;
+        }
+
+        .matching-select:focus {
+            outline: none;
+            border-color: #084d78;
+            box-shadow: 0 0 0 3px rgba(100, 9, 44, 0.1);
+        }
+
+        .matching-item.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .matching-item.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .btn {
+            background: #084d78;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            margin: 20px 0;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #0a5d92;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-primary {
+            background: #64092c;
+        }
+
+        .btn-primary:hover {
+            background: #84093c;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            margin-left: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .feedback {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            display: none;
+            animation: slideDown 0.3s;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback > strong:first-child {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .feedback strong {
+            display: inline;
+        }
+
+        .feedback.success {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #484848;
+        }
+
+        .feedback.warning {
+            background: #fff3cd;
+            border-color: #ffc107;
+            color: #484848;
+        }
+
+        .feedback.error {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #484848;
+        }
+
+        @keyframes slideDown {
+            from { 
+                opacity: 0; 
+                transform: translateY(-10px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        .score-badge {
+            display: inline-block;
+            background: #dda838;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .legend {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .legend.show {
+            display: block;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 5px 0;
+        }
+
+        .legend-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+        }
+
+        .legend-box.correct {
+            background: #d4edda;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);;
+        }
+
+        .legend-box.incorrect {
+            background: #f8d7da;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .matching-item {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .matching-select {
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Interactive Matching Activity</h1>
+            <p>Match the Responsibility: Board or Staff?</p>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 Instructions</h3>
+            <p>Read each scenario carefully and select whether it's a <strong>Board Responsibility</strong> or a <strong>Staff Responsibility</strong>. Remember:</p>
+            <ul style="margin: 10px 0 0 20px; line-height: 1.8;">
+                <li><span style="color: #000000;"><strong>Board:</strong> Sets strategic direction, approves policies, monitors performance</span></li>
+                <li><span style="color: #000000;"><strong>Staff:</strong> Implements policies, handles day-to-day operations, processes applications</span></li>
+            </ul>
+        </div>
+
+        <h2>Match Each Scenario</h2>
+
+        <div class="matching-container" id="matching-container">
+            <div class="matching-item" data-question="1">
+                <div class="matching-number">1</div>
+                <div class="matching-scenario">
+                    A professional's license is up for renewal and all requirements have been met. Who approves the renewal?
+                </div>
+                <select class="matching-select" data-correct="staff">
+                    <option value="">Select...</option>
+                    <option value="board">Board Responsibility</option>
+                    <option value="staff">Staff Responsibility</option>
+                </select>
+            </div>
+            
+            <div class="matching-item" data-question="2">
+                <div class="matching-number">2</div>
+                <div class="matching-scenario">
+                    The organization is considering whether to add a new category of license. Who makes this decision?
+                </div>
+                <select class="matching-select" data-correct="board">
+                    <option value="">Select...</option>
+                    <option value="board">Board Responsibility</option>
+                    <option value="staff">Staff Responsibility</option>
+                </select>
+            </div>
+            
+            <div class="matching-item" data-question="3">
+                <div class="matching-number">3</div>
+                <div class="matching-scenario">
+                    A complaint comes in about a professional's conduct. Who conducts the initial investigation?
+                </div>
+                <select class="matching-select" data-correct="staff">
+                    <option value="">Select...</option>
+                    <option value="board">Board Responsibility</option>
+                    <option value="staff">Staff Responsibility</option>
+                </select>
+            </div>
+            
+            <div class="matching-item" data-question="4">
+                <div class="matching-number">4</div>
+                <div class="matching-scenario">
+                    The organization needs to decide how much money to allocate to technology upgrades next year. Who approves this?
+                </div>
+                <select class="matching-select" data-correct="board">
+                    <option value="">Select...</option>
+                    <option value="board">Board Responsibility</option>
+                    <option value="staff">Staff Responsibility</option>
+                </select>
+            </div>
+
+            <div class="matching-item" data-question="5">
+                <div class="matching-number">5</div>
+                <div class="matching-scenario">
+                    A registrant calls with questions about the renewal process. Who answers their questions?
+                </div>
+                <select class="matching-select" data-correct="staff">
+                    <option value="">Select...</option>
+                    <option value="board">Board Responsibility</option>
+                    <option value="staff">Staff Responsibility</option>
+                </select>
+            </div>
+
+            <div class="matching-item" data-question="6">
+                <div class="matching-number">6</div>
+                <div class="matching-scenario">
+                    The organization's Registrar has completed their first year. Who evaluates their performance?
+                </div>
+                <select class="matching-select" data-correct="board">
+                    <option value="">Select...</option>
+                    <option value="board">Board Responsibility</option>
+                    <option value="staff">Staff Responsibility</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <button class="btn btn-primary" id="check-matching">🔍 Check My Answers</button>
+            <button class="btn btn-secondary" id="reset-matching" style="display: none;">🔄 Try Again</button>
+        </div>
+
+        <div class="legend" id="legend">
+            <strong style="display: block; margin-bottom: 10px;">Legend:</strong>
+            <div class="legend-item">
+                <div class="legend-box correct"></div>
+                <span>Correct Answer</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box incorrect"></div>
+                <span>Incorrect Answer</span>
+            </div>
+        </div>
+
+        <div class="feedback" id="matching-feedback"></div>
+    </div>
+
+    <script>
+        // Wait for page to load
+        document.addEventListener('DOMContentLoaded', function() {
+            setupMatchingActivity();
+        });
+
+        function setupMatchingActivity() {
+            const checkButton = document.getElementById('check-matching');
+            const resetButton = document.getElementById('reset-matching');
+            
+            if (checkButton) {
+                checkButton.addEventListener('click', checkMatchingAnswers);
+            }
+            
+            if (resetButton) {
+                resetButton.addEventListener('click', resetActivity);
+            }
+        }
+
+        function checkMatchingAnswers() {
+            const selects = document.querySelectorAll('.matching-select');
+            let correct = 0;
+            let answered = 0;
+            const totalQuestions = selects.length;
+            
+            // Check each answer
+            selects.forEach(select => {
+                const item = select.closest('.matching-item');
+                
+                if (select.value !== '') {
+                    answered++;
+                    const isCorrect = select.value === select.dataset.correct;
+                    
+                    if (isCorrect) {
+                        correct++;
+                        item.classList.add('correct');
+                        item.classList.remove('incorrect');
+                    } else {
+                        item.classList.add('incorrect');
+                        item.classList.remove('correct');
+                    }
+                    
+                    // Disable the select after checking
+                    select.disabled = true;
+                } else {
+                    // Reset styling for unanswered questions
+                    item.classList.remove('correct', 'incorrect');
+                }
+            });
+            
+            // Display feedback
+            const feedback = document.getElementById('matching-feedback');
+            const legend = document.getElementById('legend');
+            feedback.classList.add('show');
+            
+            if (answered < totalQuestions) {
+                // Not all questions answered
+                feedback.className = 'feedback show warning';
+                feedback.innerHTML = `<strong>⚠️ Please answer all questions before checking.</strong>You've answered ${answered} out of ${totalQuestions} questions. Please complete all scenarios.`;
+            } else if (correct === totalQuestions) {
+                // All correct!
+                feedback.className = 'feedback show success';
+                feedback.innerHTML = `<strong>🎉 Perfect! You got all ${totalQuestions} correct!</strong>You correctly matched all responsibilities. Notice that boards make decisions about policies, budgets, and strategic direction, while staff handle the implementation and day-to-day work with registrants and stakeholders.`;
+                legend.classList.add('show');
+                document.getElementById('check-matching').style.display = 'none';
+                document.getElementById('reset-matching').style.display = 'inline-block';
+            } else {
+                // Some incorrect
+                const percentage = Math.round((correct / totalQuestions) * 100);
+                feedback.className = 'feedback show warning';
+                feedback.innerHTML = `<strong>You got ${correct} out of ${totalQuestions} correct <span class="score-badge">${percentage}%</span></strong> Review the scenarios highlighted in <strong style="color: #dc3545;">red</strong>. Remember the key distinction: boards decide <strong>WHAT</strong> should happen (policies, budgets, strategic decisions), while staff decide <strong>HOW</strong> to make it happen (implementation, day-to-day operations).`;
+                legend.classList.add('show');
+                document.getElementById('check-matching').style.display = 'none';
+                document.getElementById('reset-matching').style.display = 'inline-block';
+            }
+        }
+
+        function resetActivity() {
+            // Reset all selects
+            const selects = document.querySelectorAll('.matching-select');
+            selects.forEach(select => {
+                select.value = '';
+                select.disabled = false;
+                const item = select.closest('.matching-item');
+                item.classList.remove('correct', 'incorrect');
+            });
+            
+            // Hide feedback and legend
+            const feedback = document.getElementById('matching-feedback');
+            const legend = document.getElementById('legend');
+            feedback.classList.remove('show');
+            legend.classList.remove('show');
+            
+            // Show check button, hide reset button
+            document.getElementById('check-matching').style.display = 'inline-block';
+            document.getElementById('reset-matching').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
