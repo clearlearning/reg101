@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benefits of Licensure - Interactive Exploration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: transparent;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: transparent;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: white;
+            color: white;
+            padding: 10px 10px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.728em;
+            line-height: 1.5;
+            font-weight: 700;
+            color: #000000;
+            text-transform: none;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1em;
+            font-weight: 400;
+            color: black;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        /* Hotspot styles */
+        .hotspot-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .hotspot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 30px;
+            background: #fbfbfb;
+            border-radius: 12px;
+        }
+
+        .hotspot-item {
+            background: #FFFFFF; 
+            border-radius: 8px; 
+            padding: 25px; 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+            border-left: 5px solid; 
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .hotspot-item.red {
+            background: #fbf3f6;
+            border-left: 5px solid #64092c;
+        } 
+
+        .hotspot-item.gold {
+            background: #fffdf9;
+            border-left: 5px solid #dda839;
+        }
+
+        .hotspot-item.grey {
+            background: #fbfbfb;
+            border-left: 5px solid #484848;
+        }
+
+        .hotspot-item.blue {
+            background: #f7fbfd;
+            border-left: 5px solid #084d78;
+        }
+
+        .hotspot-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(8,77,120,0.3);
+        }
+
+        .hotspot-item.red.clicked {
+            background: #efcfdb;
+            color: black;
+            border-color: #370411;
+        }
+
+        .hotspot-item.gold.clicked {
+            background: #fff7e7;
+            color: black;
+            border-color: #7a571d;
+        }
+
+        .hotspot-item.grey.clicked {
+            background: #efefef;
+            color: black;
+            border-color: #242424;
+        }
+
+        .hotspot-item.blue.clicked {
+            background: #dfeff7;
+            color: black;
+            border-color: #042942;
+        }
+
+        .hotspot-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+        }
+
+        .hotspot-title {
+            font-weight: 600;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .hotspot-prompt {
+            font-size: 0.95em;
+            opacity: 0.8;
+        }
+
+        .hotspot-item.clicked .hotspot-prompt {
+            opacity: 1;
+        }
+
+        .hotspot-detail.red {
+            display: none;
+            margin-top: 25px;
+            padding: 30px;
+            background: #fbf3f6;
+            border-radius: 12px;
+            border-left: 5px solid #64092c;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            animation: slideDown 0.4s;
+        }
+
+        .hotspot-detail.gold {
+            display: none;
+            margin-top: 25px;
+            padding: 30px;
+            background: #fffdf9;
+            border-radius: 12px;
+            border-left: 5px solid #dda839;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            animation: slideDown 0.4s;
+        }
+
+        .hotspot-detail.grey {
+            display: none;
+            margin-top: 25px;
+            padding: 30px;
+            background: #fbfbfb;
+            border-radius: 12px;
+            border-left: 5px solid #484848;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            animation: slideDown 0.4s;
+        }
+
+        .hotspot-detail.blue {
+            display: none;
+            margin-top: 25px;
+            padding: 30px;
+            background: #f7fbfd;
+            border-radius: 12px;
+            border-left: 5px solid #084d78;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            animation: slideDown 0.4s;
+        }
+
+        .hotspot-detail.show {
+            display: block;
+        }
+
+        .hotspot-detail.red h4 {
+            color: #64092c;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .hotspot-detail.gold h4 {
+            color: #7a571d;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .hotspot-detail.grey h4 {
+            color: #242424;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .hotspot-detail.blue h4 {
+            color: #084d78;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .hotspot-detail p {
+            color: black;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .hotspot-detail strong {
+            color: #000000;
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        @keyframes slideDown {
+            from { 
+                opacity: 0; 
+                transform: translateY(-20px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        .progress-indicator {
+            text-align: center;
+            margin-top: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 0.95em;
+            color: #484848;
+        }
+
+        .progress-indicator strong {
+            color: #084d78;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+
+            .hotspot-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 20px;
+            }
+
+            .hotspot-item {
+                min-height: 150px;
+                padding: 25px;
+            }
+
+            .hotspot-icon {
+                font-size: 2.5em;
+            }
+
+            .hotspot-title {
+                font-size: 1.1em;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .hotspot-detail {
+                padding: 20px;
+            }
+
+            .hotspot-detail h4 {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Benefits of Licensure</h1>
+            <p>Click each benefit to explore how licensure protects the public</p>
+        </div>
+
+        <div class="content">
+            <div class="hotspot-container">
+                <div class="hotspot-grid">
+                    <div class="hotspot-item red" onclick="showHotspot(1)">
+                        <div class="hotspot-icon">🛡️</div>
+                        <div class="hotspot-title">Consumer Protection</div>
+                        <p class="hotspot-prompt">Click to explore</p>
+                    </div>
+                    <div class="hotspot-item gold" onclick="showHotspot(2)">
+                        <div class="hotspot-icon">📋</div>
+                        <div class="hotspot-title">Adherence to Standards</div>
+                        <p class="hotspot-prompt">Click to explore</p>
+                    </div>
+                    <div class="hotspot-item grey" onclick="showHotspot(3)">
+                        <div class="hotspot-icon">⚖️</div>
+                        <div class="hotspot-title">Accountability & Oversight</div>
+                        <p class="hotspot-prompt">Click to explore</p>
+                    </div>
+                    <div class="hotspot-item blue" onclick="showHotspot(4)">
+                        <div class="hotspot-icon">🤝</div>
+                        <div class="hotspot-title">Public Trust</div>
+                        <p class="hotspot-prompt">Click to explore</p>
+                    </div>
+                </div>
+
+                <div class="hotspot-detail red" id="hotspot-1">
+                    <h4>🛡️ Consumer Protection</h4>
+                    <p><strong>What it means:</strong> Licensure exists to protect the public from risk. It provides verification that an applicant has met defined minimum standards before they can practice.</p>
+                    <p><strong>How it protects:</strong> When you hire a licensed professional, you know they've been vetted. Their credentials have been checked, their competence has been assessed, and their background has been reviewed. You're not just trusting them—you're trusting a regulatory system that has verified they meet standards.</p>
+                    <p><strong>Example:</strong> Before a contractor can work on your home, their license confirms they've demonstrated knowledge of building codes, safety practices, and professional standards. This protects you from unqualified individuals who might do unsafe or substandard work.</p>
+                </div>
+
+                <div class="hotspot-detail gold" id="hotspot-2">
+                    <h4>📋 Adherence to Standards</h4>
+                    <p><strong>What it means:</strong> Regulators set standards of practice, ethics, and conduct. A licensee is required to adhere to these standards throughout their career, ensuring the public understands the minimum level of standards required by the profession or role.</p>
+                    <p><strong>Why this matters:</strong> Standards create consistency. The public knows what to expect from a licensed professional regardless of where they trained or how long they've been practicing. Everyone must meet the same baseline requirements.</p>
+                    <p><strong>Example:</strong> All licensed nurses must follow the same standards of care, infection control, and patient safety—whether they graduated last year or 30 years ago, whether they work in a big city hospital or a small rural clinic.</p>
+                </div>
+
+                <div class="hotspot-detail grey" id="hotspot-3">
+                    <h4>⚖️ Accountability and Regulatory Oversight</h4>
+                    <p><strong>What it means:</strong> A license indicates that the licensee is accountable to a regulatory organization for their behavior and their work. If problems arise, there's a system in place to address them.</p>
+                    <p><strong>What accountability means:</strong> Licensed professionals can be investigated, disciplined, and have their licenses suspended or revoked if they violate standards. This creates a powerful incentive to practice competently and ethically.</p>
+                    <p><strong>Example:</strong> If a licensed plumber does faulty work that causes property damage, you can file a complaint with the licensing board. The board can investigate and take action—potentially including fines, required remedial work, or license suspension. An unlicensed person faces no such regulatory accountability.</p>
+                </div>
+
+                <div class="hotspot-detail blue" id="hotspot-4">
+                    <h4>🤝 Public Trust</h4>
+                    <p><strong>What it means:</strong> The existence of licensing builds public trust. People recognize a license as a symbol that minimum standards have been met. Many regulators provide a public register of licensed members and information about any regulatory history.</p>
+                    <p><strong>Trust in action:</strong> Public registers allow consumers to verify someone's license status and check for disciplinary findings before choosing a service provider. This transparency builds confidence in the regulatory system.</p>
+                    <p><strong>Example:</strong> Before hiring a financial advisor, you can check their license status online, see if they're in good standing, and view any disciplinary history. This transparency helps you make informed decisions and trust that the regulatory system is working to protect you.</p>
+                </div>
+
+                <div class="progress-indicator" id="progress-indicator">
+                    <strong>Progress:</strong> <span id="progress-text">Click any benefit above to begin exploring</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Track which hotspots have been clicked
+        let hotspotClicks = [false, false, false, false];
+        let currentHotspot = null;
+
+        function showHotspot(num) {
+            // Hide all hotspot details
+            document.querySelectorAll('.hotspot-detail').forEach(detail => {
+                detail.classList.remove('show');
+            });
+            
+            // Show the selected hotspot detail
+            const detailElement = document.getElementById('hotspot-' + num);
+            detailElement.classList.add('show');
+            
+            // Mark this hotspot as clicked
+            const hotspotItems = document.querySelectorAll('.hotspot-item');
+            hotspotItems[num - 1].classList.add('clicked');
+            
+            // Track that this hotspot has been explored
+            if (!hotspotClicks[num - 1]) {
+                hotspotClicks[num - 1] = true;
+                updateProgress();
+            }
+            
+            // Smooth scroll to the detail
+            detailElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            currentHotspot = num;
+        }
+
+        function updateProgress() {
+            const totalClicked = hotspotClicks.filter(clicked => clicked).length;
+            const progressText = document.getElementById('progress-text');
+            
+            if (totalClicked === 0) {
+                progressText.textContent = 'Click any benefit above to begin exploring';
+            } else if (totalClicked < 4) {
+                progressText.textContent = `You've explored ${totalClicked} of 4 benefits. Keep going!`;
+            } else {
+                progressText.innerHTML = '🎉 <strong>Complete!</strong> You\'ve explored all four benefits of licensure';
+                document.getElementById('progress-indicator').style.background = '#d4edda';
+                document.getElementById('progress-indicator').style.border = '2px solid #28a745';
+            }
+        }
+
+        // Initialize progress on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
