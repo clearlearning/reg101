@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Licensure - Enhanced Interactive Module</title>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: transparent;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            font-weight: 700;
+            color: #000000;
+            line-height: 1.5;
+            font-size: 1.728em;
+            padding-bottom: 10px;
+        }
+
+        /* Timeline interactive */
+        .timeline-container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #64092c 0%, #dda838 50%, #084d78 100%);
+            transform: translateX(-50%);
+        }
+
+        .timeline-step {
+            position: relative;
+            margin: 40px 0;
+            padding: 0 60px;
+        }
+
+        .timeline-step:nth-child(odd) {
+            text-align: left;
+            padding-right: calc(50% + 40px);
+            padding-left: 0;
+        }
+
+        .timeline-step:nth-child(even) {
+            text-align: left;
+            padding-left: calc(50% + 40px);
+            padding-right: 0;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: 5px solid #64092c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 2;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #64092c;
+        }
+
+        .timeline-marker:hover {
+            transform: translateX(-50%) scale(1.2);
+            background: #dda839;
+            border: 5px solid #dda839;
+            color: #333;
+            box-shadow: 0 6px 20px rgba(8,77,120,0.4);
+        }
+
+        .timeline-marker.completed {
+            background: #084d78;
+            border-color: #084d78;
+            color: white;
+        }
+
+        .timeline-content {
+            background: #f7f7f7;
+            padding: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .timeline-content h2 {
+            color: #000000;
+            margin-bottom: 10px;
+            font-size: 1.44em;
+            line-height: 1.5;
+            font-weight: 700;
+        }
+
+        .timeline-detail {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #64092c;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .timeline-detail.show {
+            display: block;
+            animation: slideDown 0.3s;
+        }
+
+
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-step {
+                padding-left: 60px !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+            }
+
+            .timeline-marker {
+                left: 20px !important;
+                transform: translateX(0) !important;
+            }
+
+            .timeline-marker:hover {
+                transform: scale(1.2) !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1 style="margin-top: 40px;">⏱️ The Application Timeline</h1>
+<p style="margin-bottom: 20px;"><i>Click each step to explore the typical licensure application process. Follow Maria's journey as she applies for her nursing license!</i></p>
+
+<div class="timeline-container">
+    <div class="timeline">
+        <div class="timeline-step">
+            <div class="timeline-marker" onclick="toggleTimeline(1)">1</div>
+            <div class="timeline-content" onclick="toggleTimeline(1)">
+                <h2>Complete Required Education</h2>
+                <p>Maria graduates from an accredited nursing program</p>
+                <div class="timeline-detail" id="timeline-1">
+                    <p><strong>What happens:</strong> Maria completes a Bachelor of Science in Nursing (BSN) at State University. The program is accredited by the appropriate nursing education accrediting body.</p>
+                    <p style="margin-top: 10px;"><strong>Why it matters:</strong> Graduation from an accredited program ensures Maria has received education that meets professional standards. Her transcript will be verified directly by the licensing board.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-step">
+            <div class="timeline-marker" onclick="toggleTimeline(2)">2</div>
+            <div class="timeline-content" onclick="toggleTimeline(2)">
+                <h2>Submit Application & Documents</h2>
+                <p>Maria applies and provides required documentation</p>
+                <div class="timeline-detail" id="timeline-2">
+                    <p style="padding-bottom: 8px;"><strong>What Maria submits:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li style="color: #64092c; padding-bottom: 4px;"><span style="color: #000000;">Completed application form</span></li>
+                        <li style="color: #64092c; padding-bottom: 4px;"><span style="color: #000000;">Official transcripts (sent directly from university)</span></li>
+                        <li style="color: #64092c; padding-bottom: 4px;"><span style="color: #000000;">Application fee payment</span></li>
+                        <li style="color: #64092c; padding-bottom: 4px;"><span style="color: #000000;">Passport photo and ID verification</span></li>
+                        <li style="color: #64092c; padding-bottom: 4px;"><span style="color: #000000;">Self-declaration form about criminal history</span></li>
+                    </ul>
+                    <p style="margin-top: 10px;"><strong>Processing time:</strong> Typically 2-4 weeks for initial review.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-step">
+            <div class="timeline-marker" onclick="toggleTimeline(3)">3</div>
+            <div class="timeline-content" onclick="toggleTimeline(3)">
+                <h2>Credential Verification</h2>
+                <p>The board verifies Maria's education is authentic</p>
+                <div class="timeline-detail" id="timeline-3">
+                    <p><strong>What happens:</strong> The nursing board contacts State University directly to verify that Maria completed her BSN program, the dates of attendance, and that the degree was properly awarded.</p>
+                    <p style="margin-top: 10px;"><strong>Additional checks:</strong> The board verifies the program was accredited at the time Maria attended. If Maria had attended school outside the country, this would involve additional credential evaluation services.</p>
+                    <p style="margin-top: 10px;"><strong>Timeline:</strong> 1-3 weeks depending on institution response time.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-step">
+            <div class="timeline-marker" onclick="toggleTimeline(4)">4</div>
+            <div class="timeline-content" onclick="toggleTimeline(4)">
+                <h2>Criminal Background Check</h2>
+                <p>Suitability assessment through background screening</p>
+                <div class="timeline-detail" id="timeline-4">
+                    <p><strong>What happens:</strong> Maria submits fingerprints for a criminal background check. The board receives results showing any criminal convictions.</p>
+                    <p style="margin-top: 10px;"><strong>Assessment:</strong> The board reviews any findings to determine if they relate to Maria's suitability to practice nursing. Not all criminal history automatically disqualifies someone—the board considers the nature, severity, and time elapsed.</p>
+                    <p style="margin-top: 10px;"><strong>Maria's case:</strong> Her background check comes back clear with no criminal history.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-step">
+            <div class="timeline-marker" onclick="toggleTimeline(5)">5</div>
+            <div class="timeline-content" onclick="toggleTimeline(5)">
+                <h2>Pass Licensing Examination</h2>
+                <p>Maria takes and passes the NCLEX-RN exam</p>
+                <div class="timeline-detail" id="timeline-5">
+                    <p><strong>The examination:</strong> Maria takes the  standardized test that assesses the knowledge, skills, and abilities essential for safe, effective nursing practice.</p>
+                    <p style="margin-top: 10px;"><strong>Format:</strong> Computerized adaptive test that adjusts difficulty based on Maria's responses. She must demonstrate minimum competency across all areas of nursing practice.</p>
+                    <p style="margin-top: 10px;"><strong>Results:</strong> Maria receives her results within 48 hours and has passed!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-step">
+            <div class="timeline-marker" onclick="toggleTimeline(6)">6</div>
+            <div class="timeline-content" onclick="toggleTimeline(6)">
+                <h2>License Issued!</h2>
+                <p>Maria receives her nursing license and can begin practice</p>
+                <div class="timeline-detail" id="timeline-6">
+                    <p><strong>Final step:</strong> With all requirements met—education verified, background check complete, and examination passed—the nursing board issues Maria her license.</p>
+                    <p style="margin-top: 10px;"><strong>What Maria receives:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li style="color: #64092c; padding-bottom: 4px;"><span style="color: #000000;">License number</span></li>
+                        <li style="color: #64092c; padding-bottom: 4px;"><span style="color: #000000;">License certificate</span></li>
+                        <li style="color: #64092c; padding-bottom: 4px;"><span style="color: #000000;">Confirmation that she's listed on the public registry</span></li>
+                        <li style="color: #64092c; padding-bottom: 4px;"><span style="color: #000000;">Information about renewal requirements</span></li>
+                    </ul>
+                    <p style="margin-top: 10px;"><strong>Total time from application to license:</strong> Approximately 8-12 weeks.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSlide();
+            initializeDragAndDrop();
+        });
+
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const slideNum = parseInt(this.getAttribute('data-slide'));
+                currentSlide = slideNum;
+                updateSlide();
+                document.querySelector('.main-content').scrollTop = 0;
+            });
+        });
+
+        // Timeline activity
+        function toggleTimeline(num) {
+            const detail = document.getElementById('timeline-' + num);
+            const marker = document.querySelectorAll('.timeline-marker')[num-1];
+            
+            if (detail.classList.contains('show')) {
+                detail.classList.remove('show');
+            } else {
+                document.querySelectorAll('.timeline-detail').forEach(d => {
+                    d.classList.remove('show');
+                });
+                detail.classList.add('show');
+                marker.classList.add('completed');
+            }
+        }
+
+    </script>
+</body>
+</html>
